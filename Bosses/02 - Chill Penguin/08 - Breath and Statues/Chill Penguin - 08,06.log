@@ -1,0 +1,311 @@
+80D4F6 20 30 D5    JSR $D530     [80D530] A:0E01 X:0000 Y:0027 S:0133 D:0E68 DB:86 nvMXdizC V:  3 H:308 F:12
+
+	80D530 C2 20       REP #$20               A:0E01 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvMXdizC V:  3 H:318 F:12
+	80D532 A5 05       LDA $05       [000E6D] A:0E01 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvmXdizC V:  3 H:322 F:12
+	80D534 85 22       STA $22       [000E8A] A:1ED0 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvmXdizC V:  3 H:330 F:12
+	80D536 A5 08       LDA $08       [000E70] A:1ED0 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvmXdizC V:  3 H:338 F:12
+	80D538 85 24       STA $24       [000E8C] A:01AC X:0000 Y:0027 S:0131 D:0E68 DB:86 nvmXdizC V:  4 H:  7 F:12
+	80D53A E2 20       SEP #$20               A:01AC X:0000 Y:0027 S:0131 D:0E68 DB:86 nvmXdizC V:  4 H: 15 F:12
+	80D53C A9 80       LDA #$80               A:01AC X:0000 Y:0027 S:0131 D:0E68 DB:86 nvMXdizC V:  4 H: 20 F:12
+	80D53E 14 0E       TRB $0E       [000E76] A:0180 X:0000 Y:0027 S:0131 D:0E68 DB:86 NvMXdizC V:  4 H: 23 F:12
+	80D540 A5 0A       LDA $0A       [000E72] A:0180 X:0000 Y:0027 S:0131 D:0E68 DB:86 NvMXdizC V:  4 H: 33 F:12
+	80D542 0A          ASL A                  A:0102 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvMXdizC V:  4 H: 39 F:12
+	80D543 AA          TAX                    A:0104 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvMXdizc V:  4 H: 42 F:12
+	80D544 7C DD F8    JMP ($F8DD,X) [80F8E1] A:0104 X:0004 Y:0027 S:0131 D:0E68 DB:86 nvMXdizc V:  4 H: 45 F:12
+
+	80F9BB 22 16 B5 81 JSL $81B516   [81B516] A:0104 X:0004 Y:0027 S:0131 D:0E68 DB:86 nvMXdizc V:  4 H: 54 F:12
+
+		81B516 A6 01       LDX $01       [000E69] A:0104 X:0004 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:  4 H: 68 F:12
+		81B518 7C 1B B5    JMP ($B51B,X) [81B51F] A:0104 X:0004 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:  4 H: 74 F:12
+
+		81B629 A5 33       LDA $33       [000E9B] A:0104 X:0004 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:  4 H: 83 F:12
+		81B62B 04 11       TSB $11       [000E79] A:0108 X:0004 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:  4 H: 90 F:12
+		81B62D C2 20       REP #$20               A:0108 X:0004 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:  4 H:100 F:12
+		81B62F A9 2D C4    LDA #$C42D             A:0108 X:0004 Y:0027 S:012E D:0E68 DB:86 nvmXdizc V:  4 H:104 F:12
+		81B632 85 20       STA $20       [000E88] A:C42D X:0004 Y:0027 S:012E D:0E68 DB:86 NvmXdizc V:  4 H:109 F:12
+		81B634 E2 20       SEP #$20               A:C42D X:0004 Y:0027 S:012E D:0E68 DB:86 NvmXdizc V:  4 H:117 F:12
+		81B636 A6 02       LDX $02       [000E6A] A:C42D X:0004 Y:0027 S:012E D:0E68 DB:86 NvMXdizc V:  4 H:122 F:12
+		81B638 FC F3 B6    JSR ($B6F3,X) [81B6FB] A:C42D X:0008 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:  4 H:128 F:12
+
+			81B9FC A6 03       LDX $03       [000E6B] A:C42D X:0008 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:  4 H:151 F:12
+			81B9FE 7C 01 BA    JMP ($BA01,X) [81BA05] A:C42D X:0004 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:  4 H:158 F:12			JMP ($81BA01,Subaction) = ($81BA05) = $81BA6B
+
+			81BA6B 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:0004 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:  4 H:167 F:12			JSL $848EEA --> Countdown routine
+
+				848EEA 08          PHP                    A:C42D X:0004 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V:  4 H:180 F:12
+				848EEB 8B          PHB                    A:C42D X:0004 Y:0027 S:0128 D:0E68 DB:86 nvMXdizc V:  4 H:185 F:12
+				848EEC E2 30       SEP #$30               A:C42D X:0004 Y:0027 S:0127 D:0E68 DB:86 nvMXdizc V:  4 H:190 F:12
+				848EEE C6 13       DEC $13       [000E7B] A:C42D X:0004 Y:0027 S:0127 D:0E68 DB:86 nvMXdizc V:  4 H:195 F:12
+				848EF0 D0 5D       BNE $005D     [848F4F] A:C42D X:0004 Y:0027 S:0127 D:0E68 DB:86 nvMXdiZc V:  4 H:205 F:12
+				848EF2 A9 AF       LDA #$AF               A:C42D X:0004 Y:0027 S:0127 D:0E68 DB:86 nvMXdiZc V:  4 H:208 F:12
+				848EF4 48          PHA                    A:C4AF X:0004 Y:0027 S:0127 D:0E68 DB:86 NvMXdizc V:  4 H:211 F:12
+				848EF5 AB          PLB                    A:C4AF X:0004 Y:0027 S:0126 D:0E68 DB:86 NvMXdizc V:  4 H:216 F:12
+				848EF6 C2 21       REP #$21               A:C4AF X:0004 Y:0027 S:0127 D:0E68 DB:AF NvMXdizc V:  4 H:222 F:12
+				848EF8 A5 14       LDA $14       [000E7C] A:C4AF X:0004 Y:0027 S:0127 D:0E68 DB:AF NvmXdizc V:  4 H:227 F:12
+				848EFA 69 03 00    ADC #$0003             A:D0B1 X:0004 Y:0027 S:0127 D:0E68 DB:AF NvmXdizc V:  4 H:235 F:12
+				848EFD A4 0F       LDY $0F       [000E77] A:D0B4 X:0004 Y:0027 S:0127 D:0E68 DB:AF NvmXdizc V:  4 H:240 F:12
+				848EFF 10 37       BPL $0037     [848F38] A:D0B4 X:0004 Y:0000 S:0127 D:0E68 DB:AF nvmXdiZc V:  4 H:246 F:12
+				848F38 85 14       STA $14       [000E7C] A:D0B4 X:0004 Y:0000 S:0127 D:0E68 DB:AF nvmXdiZc V:  4 H:251 F:12
+				848F3A E2 30       SEP #$30               A:D0B4 X:0004 Y:0000 S:0127 D:0E68 DB:AF nvmXdiZc V:  4 H:259 F:12
+				848F3C B2 14       LDA ($14)     [AFD0B4] A:D0B4 X:0004 Y:0000 S:0127 D:0E68 DB:AF nvMXdiZc V:  4 H:264 F:12
+				848F3E 85 13       STA $13       [000E7B] A:D004 X:0004 Y:0000 S:0127 D:0E68 DB:AF nvMXdizc V:  4 H:274 F:12
+				848F40 A0 01       LDY #$01               A:D004 X:0004 Y:0000 S:0127 D:0E68 DB:AF nvMXdizc V:  4 H:280 F:12
+				848F42 B1 14       LDA ($14),Y   [AFD0B5] A:D004 X:0004 Y:0001 S:0127 D:0E68 DB:AF nvMXdizc V:  4 H:283 F:12
+				848F44 85 0F       STA $0F       [000E77] A:D080 X:0004 Y:0001 S:0127 D:0E68 DB:AF NvMXdizc V:  4 H:293 F:12
+				848F46 C8          INY                    A:D080 X:0004 Y:0001 S:0127 D:0E68 DB:AF NvMXdizc V:  4 H:300 F:12
+				848F47 B1 14       LDA ($14),Y   [AFD0B6] A:D080 X:0004 Y:0002 S:0127 D:0E68 DB:AF nvMXdizc V:  4 H:303 F:12
+				848F49 85 17       STA $17       [000E7F] A:D007 X:0004 Y:0002 S:0127 D:0E68 DB:AF nvMXdizc V:  4 H:313 F:12
+				848F4B A9 80       LDA #$80               A:D007 X:0004 Y:0002 S:0127 D:0E68 DB:AF nvMXdizc V:  4 H:319 F:12
+				848F4D 04 17       TSB $17       [000E7F] A:D080 X:0004 Y:0002 S:0127 D:0E68 DB:AF NvMXdizc V:  4 H:322 F:12
+				848F4F AB          PLB                    A:D080 X:0004 Y:0002 S:0127 D:0E68 DB:AF NvMXdiZc V:  4 H:331 F:12
+				848F50 28          PLP                    A:D080 X:0004 Y:0002 S:0128 D:0E68 DB:86 NvMXdizc V:  4 H:338 F:12
+				848F51 6B          RTL                    A:D080 X:0004 Y:0002 S:0129 D:0E68 DB:86 nvMXdizc V:  5 H:  4 F:12
+
+			81BA6F 20 16 BF    JSR $BF16     [81BF16] A:D080 X:0004 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:  5 H: 15 F:12			JSR $81BF16 --> If CDAction is not positive, Spawn Breath
+
+				81BF16 A5 17       LDA $17       [000E7F] A:D080 X:0004 Y:0002 S:012A D:0E68 DB:86 nvMXdizc V:  5 H: 25 F:12
+				81BF18 10 41       BPL $0041     [81BF5B] A:D087 X:0004 Y:0002 S:012A D:0E68 DB:86 NvMXdizc V:  5 H: 31 F:12
+				81BF1A 29 7F       AND #$7F               A:D087 X:0004 Y:0002 S:012A D:0E68 DB:86 NvMXdizc V:  5 H: 34 F:12
+				81BF1C 85 17       STA $17       [000E7F] A:D007 X:0004 Y:0002 S:012A D:0E68 DB:86 nvMXdizc V:  5 H: 37 F:12
+				81BF1E A5 0F       LDA $0F       [000E77] A:D007 X:0004 Y:0002 S:012A D:0E68 DB:86 nvMXdizc V:  5 H: 44 F:12
+				81BF20 10 39       BPL $0039     [81BF5B] A:D080 X:0004 Y:0002 S:012A D:0E68 DB:86 NvMXdizc V:  5 H: 50 F:12
+				81BF22 22 58 83 82 JSL $828358   [828358] A:D080 X:0004 Y:0002 S:012A D:0E68 DB:86 NvMXdizc V:  5 H: 53 F:12
+
+					828358 C2 30       REP #$30               A:D080 X:0004 Y:0002 S:0127 D:0E68 DB:86 NvMXdizc V:  5 H: 67 F:12
+					82835A A2 28 14    LDX #$1428             A:D080 X:0004 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  5 H: 71 F:12
+					82835D BD 00 00    LDA $0000,X   [861428] A:D080 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  5 H: 76 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0201 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  5 H: 86 F:12
+					828362 8A          TXA                    A:0201 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  5 H: 89 F:12
+					828363 18          CLC                    A:1428 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  5 H: 92 F:12
+					828364 69 40 00    ADC #$0040             A:1428 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  5 H: 95 F:12
+					828367 AA          TAX                    A:1468 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  5 H: 99 F:12
+					828368 E0 28 16    CPX #$1628             A:1468 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  5 H:102 F:12
+					82836B 90 F0       BCC $00F0     [82835D] A:1468 X:1468 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  5 H:107 F:12
+					82835D BD 00 00    LDA $0000,X   [861468] A:1468 X:1468 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  5 H:111 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0000 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdiZc V:  5 H:121 F:12
+					82833B E2 22       SEP #$22               A:0000 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdiZc V:  5 H:126 F:12
+					82833D 6B          RTL                    A:0000 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvMxdiZc V:  5 H:130 F:12
+
+				81BF26 D0 31       BNE $0031     [81BF59] A:0000 X:1468 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  5 H:151 F:12
+				81BF28 FE 00 00    INC $0000,X   [861468] A:0000 X:1468 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  5 H:154 F:12
+				81BF2B A9 1A       LDA #$1A               A:0000 X:1468 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  5 H:165 F:12
+				81BF2D 9D 0A 00    STA $000A,X   [861472] A:001A X:1468 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  5 H:168 F:12
+				81BF30 9E 0B 00    STZ $000B,X   [861473] A:001A X:1468 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  5 H:176 F:12
+				81BF33 A5 11       LDA $11       [000E79] A:001A X:1468 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  5 H:184 F:12
+				81BF35 29 40       AND #$40               A:0029 X:1468 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  5 H:191 F:12
+				81BF37 9D 11 00    STA $0011,X   [861479] A:0000 X:1468 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  5 H:194 F:12
+				81BF3A 0A          ASL A                  A:0000 X:1468 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  5 H:202 F:12
+				81BF3B 0A          ASL A                  A:0000 X:1468 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  5 H:205 F:12
+				81BF3C C2 20       REP #$20               A:0000 X:1468 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  5 H:208 F:12
+				81BF3E A9 1A 00    LDA #$001A             A:0000 X:1468 Y:0002 S:012A D:0E68 DB:86 nvmxdiZc V:  5 H:212 F:12
+				81BF41 B0 03       BCS $0003     [81BF46] A:001A X:1468 Y:0002 S:012A D:0E68 DB:86 nvmxdizc V:  5 H:217 F:12
+				81BF43 A9 E6 FF    LDA #$FFE6             A:001A X:1468 Y:0002 S:012A D:0E68 DB:86 nvmxdizc V:  5 H:220 F:12
+				81BF46 18          CLC                    A:FFE6 X:1468 Y:0002 S:012A D:0E68 DB:86 Nvmxdizc V:  5 H:224 F:12
+				81BF47 65 05       ADC $05       [000E6D] A:FFE6 X:1468 Y:0002 S:012A D:0E68 DB:86 Nvmxdizc V:  5 H:227 F:12
+				81BF49 9D 05 00    STA $0005,X   [86146D] A:1EB6 X:1468 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  5 H:236 F:12
+				81BF4C A5 08       LDA $08       [000E70] A:1EB6 X:1468 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  5 H:246 F:12
+				81BF4E 38          SEC                    A:01AC X:1468 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  5 H:254 F:12
+				81BF4F E9 02 00    SBC #$0002             A:01AC X:1468 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  5 H:257 F:12
+				81BF52 9D 08 00    STA $0008,X   [861470] A:01AA X:1468 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  5 H:262 F:12
+				81BF55 7B          TDC                    A:01AA X:1468 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  5 H:272 F:12
+				81BF56 9D 0C 00    STA $000C,X   [861474] A:0E68 X:1468 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  5 H:275 F:12
+				81BF59 E2 30       SEP #$30               A:0E68 X:1468 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  5 H:285 F:12
+				81BF5B 60          RTS                    A:0E68 X:0068 Y:0002 S:012A D:0E68 DB:86 nvMXdizC V:  5 H:289 F:12
+
+			81BA72 C6 34       DEC $34       [000E9C] A:0E68 X:0068 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  5 H:299 F:12			Decrease Countdown2
+			81BA74 D0 1E       BNE $001E     [81BA94] A:0E68 X:0068 Y:0002 S:012C D:0E68 DB:86 nvMXdiZC V:  5 H:309 F:12			Branch if Countdown2 <> #$00
+			81BA76 A9 30       LDA #$30               A:0E68 X:0068 Y:0002 S:012C D:0E68 DB:86 nvMXdiZC V:  5 H:312 F:12			|$0000 = #$0030
+			81BA78 8D 00 00    STA $0000     [860000] A:0E30 X:0068 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  5 H:315 F:12			|
+			81BA7B 9C 01 00    STZ $0001     [860001] A:0E30 X:0068 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  5 H:322 F:12			|
+			81BA7E 20 5C BF    JSR $BF5C     [81BF5C] A:0E30 X:0068 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  5 H:327 F:12			JSR $81BF5C --> Spawn Ice Statue with ES-X-Pos = E-X-Pos + $0000
+
+				81BF5C 22 58 83 82 JSL $828358   [828358] A:0E30 X:0068 Y:0002 S:012A D:0E68 DB:86 nvMXdizC V:  5 H:337 F:12		JSL $828358 --> Loads X with first empty EnemyShot
+
+					828358 C2 30       REP #$30               A:0E30 X:0068 Y:0002 S:0127 D:0E68 DB:86 nvMXdizC V:  6 H: 11 F:12
+					82835A A2 28 14    LDX #$1428             A:0E30 X:0068 Y:0002 S:0127 D:0E68 DB:86 nvmxdizC V:  6 H: 15 F:12
+					82835D BD 00 00    LDA $0000,X   [861428] A:0E30 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizC V:  6 H: 20 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0201 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizC V:  6 H: 30 F:12
+					828362 8A          TXA                    A:0201 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizC V:  6 H: 33 F:12
+					828363 18          CLC                    A:1428 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizC V:  6 H: 36 F:12
+					828364 69 40 00    ADC #$0040             A:1428 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H: 39 F:12
+					828367 AA          TAX                    A:1468 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H: 43 F:12
+					828368 E0 28 16    CPX #$1628             A:1468 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H: 46 F:12
+					82836B 90 F0       BCC $00F0     [82835D] A:1468 X:1468 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  6 H: 51 F:12
+					82835D BD 00 00    LDA $0000,X   [861468] A:1468 X:1468 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  6 H: 55 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0001 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H: 65 F:12
+					828362 8A          TXA                    A:0001 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H: 68 F:12
+					828363 18          CLC                    A:1468 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H: 71 F:12
+					828364 69 40 00    ADC #$0040             A:1468 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H: 74 F:12
+					828367 AA          TAX                    A:14A8 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H: 79 F:12
+					828368 E0 28 16    CPX #$1628             A:14A8 X:14A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H: 82 F:12
+					82836B 90 F0       BCC $00F0     [82835D] A:14A8 X:14A8 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  6 H: 86 F:12
+					82835D BD 00 00    LDA $0000,X   [8614A8] A:14A8 X:14A8 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  6 H: 91 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0201 X:14A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:101 F:12
+					828362 8A          TXA                    A:0201 X:14A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:104 F:12
+					828363 18          CLC                    A:14A8 X:14A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:107 F:12
+					828364 69 40 00    ADC #$0040             A:14A8 X:14A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:110 F:12
+					828367 AA          TAX                    A:14E8 X:14A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:114 F:12
+					828368 E0 28 16    CPX #$1628             A:14E8 X:14E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:117 F:12
+					82836B 90 F0       BCC $00F0     [82835D] A:14E8 X:14E8 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  6 H:122 F:12
+					82835D BD 00 00    LDA $0000,X   [8614E8] A:14E8 X:14E8 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  6 H:126 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0201 X:14E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:146 F:12
+					828362 8A          TXA                    A:0201 X:14E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:149 F:12
+					828363 18          CLC                    A:14E8 X:14E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:152 F:12
+					828364 69 40 00    ADC #$0040             A:14E8 X:14E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:155 F:12
+					828367 AA          TAX                    A:1528 X:14E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:160 F:12
+					828368 E0 28 16    CPX #$1628             A:1528 X:1528 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:163 F:12
+					82836B 90 F0       BCC $00F0     [82835D] A:1528 X:1528 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  6 H:167 F:12
+					82835D BD 00 00    LDA $0000,X   [861528] A:1528 X:1528 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  6 H:172 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0201 X:1528 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:182 F:12
+					828362 8A          TXA                    A:0201 X:1528 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:185 F:12
+					828363 18          CLC                    A:1528 X:1528 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:188 F:12
+					828364 69 40 00    ADC #$0040             A:1528 X:1528 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:191 F:12
+					828367 AA          TAX                    A:1568 X:1528 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:195 F:12
+					828368 E0 28 16    CPX #$1628             A:1568 X:1568 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:198 F:12
+					82836B 90 F0       BCC $00F0     [82835D] A:1568 X:1568 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  6 H:203 F:12
+					82835D BD 00 00    LDA $0000,X   [861568] A:1568 X:1568 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  6 H:207 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0201 X:1568 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:217 F:12
+					828362 8A          TXA                    A:0201 X:1568 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:220 F:12
+					828363 18          CLC                    A:1568 X:1568 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:223 F:12
+					828364 69 40 00    ADC #$0040             A:1568 X:1568 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:226 F:12
+					828367 AA          TAX                    A:15A8 X:1568 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:231 F:12
+					828368 E0 28 16    CPX #$1628             A:15A8 X:15A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  6 H:234 F:12
+					82836B 90 F0       BCC $00F0     [82835D] A:15A8 X:15A8 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  6 H:238 F:12
+					82835D BD 00 00    LDA $0000,X   [8615A8] A:15A8 X:15A8 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  6 H:243 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0000 X:15A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdiZc V:  6 H:253 F:12
+					82833B E2 22       SEP #$22               A:0000 X:15A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdiZc V:  6 H:257 F:12
+					82833D 6B          RTL                    A:0000 X:15A8 Y:0002 S:0127 D:0E68 DB:86 nvMxdiZc V:  6 H:262 F:12
+
+				81BF60 D0 34       BNE $0034     [81BF96] A:0000 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  6 H:272 F:12		Branch if there's no empty EnemyShot
+				81BF62 FE 00 00    INC $0000,X   [8615A8] A:0000 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  6 H:275 F:12		ES-Exist = #$01
+				81BF65 A9 1A       LDA #$1A               A:0000 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  6 H:287 F:12		ES-ID = #$1A
+				81BF67 9D 0A 00    STA $000A,X   [8615B2] A:001A X:15A8 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  6 H:290 F:12
+				81BF6A A9 01       LDA #$01               A:001A X:15A8 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  6 H:298 F:12		ES-SubID = #$01 (Statue)
+				81BF6C 9D 0B 00    STA $000B,X   [8615B3] A:0001 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  6 H:301 F:12
+				81BF6F A5 11       LDA $11       [000E79] A:0001 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  6 H:309 F:12		|ES-Status = ES-Status AND #$40 (Facing)
+				81BF71 29 40       AND #$40               A:0029 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  6 H:315 F:12		|
+				81BF73 9D 11 00    STA $0011,X   [8615B9] A:0000 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  6 H:318 F:12		|
+				81BF76 0A          ASL A                  A:0000 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  6 H:326 F:12		
+				81BF77 0A          ASL A                  A:0000 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  6 H:328 F:12
+				81BF78 C2 20       REP #$20               A:0000 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  6 H:331 F:12		A:2B
+				81BF7A AD 00 00    LDA $0000     [860000] A:0000 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvmxdiZc V:  6 H:336 F:12		|ES-X-Pos = E-X-Pos + $0000
+				81BF7D B0 04       BCS $0004     [81BF83] A:0030 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvmxdizc V:  7 H:  4 F:12		|Branch if Facing = Right
+				81BF7F 49 FF FF    EOR #$FFFF             A:0030 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvmxdizc V:  7 H:  7 F:12		|
+				81BF82 1A          INC                    A:FFCF X:15A8 Y:0002 S:012A D:0E68 DB:86 Nvmxdizc V:  7 H: 12 F:12		|
+				81BF83 18          CLC                    A:FFD0 X:15A8 Y:0002 S:012A D:0E68 DB:86 Nvmxdizc V:  7 H: 15 F:12		|
+				81BF84 65 05       ADC $05       [000E6D] A:FFD0 X:15A8 Y:0002 S:012A D:0E68 DB:86 Nvmxdizc V:  7 H: 18 F:12		|
+				81BF86 9D 05 00    STA $0005,X   [8615AD] A:1EA0 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  7 H: 26 F:12		|
+				81BF89 A5 08       LDA $08       [000E70] A:1EA0 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  7 H: 36 F:12		|ES-Y-Pos = E-Y-Pos - #$0010
+				81BF8B 38          SEC                    A:01AC X:15A8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  7 H: 45 F:12		|
+				81BF8C E9 10 00    SBC #$0010             A:01AC X:15A8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  7 H: 48 F:12		|
+				81BF8F 9D 08 00    STA $0008,X   [8615B0] A:019C X:15A8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  7 H: 52 F:12		|
+				81BF92 7B          TDC                    A:019C X:15A8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  7 H: 62 F:12		
+				81BF93 9D 0C 00    STA $000C,X   [8615B4] A:0E68 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  7 H: 65 F:12		ES-Parent = EnemyData
+				81BF96 E2 30       SEP #$30               A:0E68 X:15A8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  7 H: 75 F:12
+				81BF98 60          RTS                    A:0E68 X:00A8 Y:0002 S:012A D:0E68 DB:86 nvMXdizC V:  7 H: 80 F:12		Return
+
+			81BA81 A9 50       LDA #$50               A:0E68 X:00A8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  7 H: 90 F:12			|$0000 = #$0050
+			81BA83 8D 00 00    STA $0000     [860000] A:0E50 X:00A8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  7 H: 93 F:12			|
+			81BA86 9C 01 00    STZ $0001     [860001] A:0E50 X:00A8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  7 H: 99 F:12			|
+			81BA89 20 5C BF    JSR $BF5C     [81BF5C] A:0E50 X:00A8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  7 H:106 F:12			JSR $81BF5C --> Spawn Ice Statue with ES-X-Pos = E-X-Pos + $0000 
+
+				81BF5C 22 58 83 82 JSL $828358   [828358] A:0E50 X:00A8 Y:0002 S:012A D:0E68 DB:86 nvMXdizC V:  7 H:116 F:12
+
+					828358 C2 30       REP #$30               A:0E50 X:00A8 Y:0002 S:0127 D:0E68 DB:86 nvMXdizC V:  7 H:129 F:12
+					82835A A2 28 14    LDX #$1428             A:0E50 X:00A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizC V:  7 H:144 F:12
+					82835D BD 00 00    LDA $0000,X   [861428] A:0E50 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizC V:  7 H:148 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0201 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizC V:  7 H:158 F:12
+					828362 8A          TXA                    A:0201 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizC V:  7 H:161 F:12
+					828363 18          CLC                    A:1428 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizC V:  7 H:164 F:12
+					828364 69 40 00    ADC #$0040             A:1428 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:167 F:12
+					828367 AA          TAX                    A:1468 X:1428 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:172 F:12
+					828368 E0 28 16    CPX #$1628             A:1468 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:175 F:12
+					82836B 90 F0       BCC $00F0     [82835D] A:1468 X:1468 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  7 H:179 F:12
+					82835D BD 00 00    LDA $0000,X   [861468] A:1468 X:1468 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  7 H:184 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0001 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:194 F:12
+					828362 8A          TXA                    A:0001 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:197 F:12
+					828363 18          CLC                    A:1468 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:200 F:12
+					828364 69 40 00    ADC #$0040             A:1468 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:203 F:12
+					828367 AA          TAX                    A:14A8 X:1468 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:207 F:12
+					828368 E0 28 16    CPX #$1628             A:14A8 X:14A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:210 F:12
+					82836B 90 F0       BCC $00F0     [82835D] A:14A8 X:14A8 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  7 H:215 F:12
+					82835D BD 00 00    LDA $0000,X   [8614A8] A:14A8 X:14A8 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  7 H:219 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0201 X:14A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:229 F:12
+					828362 8A          TXA                    A:0201 X:14A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:232 F:12
+					828363 18          CLC                    A:14A8 X:14A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:235 F:12
+					828364 69 40 00    ADC #$0040             A:14A8 X:14A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:238 F:12
+					828367 AA          TAX                    A:14E8 X:14A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:243 F:12
+					828368 E0 28 16    CPX #$1628             A:14E8 X:14E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:246 F:12
+					82836B 90 F0       BCC $00F0     [82835D] A:14E8 X:14E8 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  7 H:250 F:12
+					82835D BD 00 00    LDA $0000,X   [8614E8] A:14E8 X:14E8 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  7 H:255 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0201 X:14E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:265 F:12
+					828362 8A          TXA                    A:0201 X:14E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:268 F:12
+					828363 18          CLC                    A:14E8 X:14E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:271 F:12
+					828364 69 40 00    ADC #$0040             A:14E8 X:14E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:274 F:12
+					828367 AA          TAX                    A:1528 X:14E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:278 F:12
+					828368 E0 28 16    CPX #$1628             A:1528 X:1528 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:281 F:12
+					82836B 90 F0       BCC $00F0     [82835D] A:1528 X:1528 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  7 H:286 F:12
+					82835D BD 00 00    LDA $0000,X   [861528] A:1528 X:1528 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  7 H:290 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0201 X:1528 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:300 F:12
+					828362 8A          TXA                    A:0201 X:1528 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:303 F:12
+					828363 18          CLC                    A:1528 X:1528 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:306 F:12
+					828364 69 40 00    ADC #$0040             A:1528 X:1528 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:309 F:12
+					828367 AA          TAX                    A:1568 X:1528 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:314 F:12
+					828368 E0 28 16    CPX #$1628             A:1568 X:1568 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:317 F:12
+					82836B 90 F0       BCC $00F0     [82835D] A:1568 X:1568 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  7 H:321 F:12
+					82835D BD 00 00    LDA $0000,X   [861568] A:1568 X:1568 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  7 H:325 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0201 X:1568 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:335 F:12
+					828362 8A          TXA                    A:0201 X:1568 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  7 H:338 F:12
+					828363 18          CLC                    A:1568 X:1568 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  8 H:  1 F:12
+					828364 69 40 00    ADC #$0040             A:1568 X:1568 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  8 H:  4 F:12
+					828367 AA          TAX                    A:15A8 X:1568 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  8 H:  8 F:12
+					828368 E0 28 16    CPX #$1628             A:15A8 X:15A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  8 H: 11 F:12
+					82836B 90 F0       BCC $00F0     [82835D] A:15A8 X:15A8 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  8 H: 16 F:12
+					82835D BD 00 00    LDA $0000,X   [8615A8] A:15A8 X:15A8 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  8 H: 20 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0001 X:15A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  8 H: 30 F:12
+					828362 8A          TXA                    A:0001 X:15A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  8 H: 33 F:12
+					828363 18          CLC                    A:15A8 X:15A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  8 H: 36 F:12
+					828364 69 40 00    ADC #$0040             A:15A8 X:15A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  8 H: 39 F:12
+					828367 AA          TAX                    A:15E8 X:15A8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  8 H: 44 F:12
+					828368 E0 28 16    CPX #$1628             A:15E8 X:15E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdizc V:  8 H: 47 F:12
+					82836B 90 F0       BCC $00F0     [82835D] A:15E8 X:15E8 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  8 H: 51 F:12
+					82835D BD 00 00    LDA $0000,X   [8615E8] A:15E8 X:15E8 Y:0002 S:0127 D:0E68 DB:86 Nvmxdizc V:  8 H: 56 F:12
+					828360 F0 D9       BEQ $00D9     [82833B] A:0000 X:15E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdiZc V:  8 H: 66 F:12
+					82833B E2 22       SEP #$22               A:0000 X:15E8 Y:0002 S:0127 D:0E68 DB:86 nvmxdiZc V:  8 H: 70 F:12
+					82833D 6B          RTL                    A:0000 X:15E8 Y:0002 S:0127 D:0E68 DB:86 nvMxdiZc V:  8 H: 75 F:12
+
+				81BF60 D0 34       BNE $0034     [81BF96] A:0000 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  8 H: 85 F:12
+				81BF62 FE 00 00    INC $0000,X   [8615E8] A:0000 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  8 H: 88 F:12
+				81BF65 A9 1A       LDA #$1A               A:0000 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  8 H:100 F:12
+				81BF67 9D 0A 00    STA $000A,X   [8615F2] A:001A X:15E8 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  8 H:103 F:12
+				81BF6A A9 01       LDA #$01               A:001A X:15E8 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  8 H:111 F:12
+				81BF6C 9D 0B 00    STA $000B,X   [8615F3] A:0001 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  8 H:114 F:12
+				81BF6F A5 11       LDA $11       [000E79] A:0001 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  8 H:122 F:12
+				81BF71 29 40       AND #$40               A:0029 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvMxdizc V:  8 H:128 F:12
+				81BF73 9D 11 00    STA $0011,X   [8615F9] A:0000 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  8 H:131 F:12
+				81BF76 0A          ASL A                  A:0000 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  8 H:149 F:12
+				81BF77 0A          ASL A                  A:0000 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  8 H:152 F:12
+				81BF78 C2 20       REP #$20               A:0000 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvMxdiZc V:  8 H:155 F:12
+				81BF7A AD 00 00    LDA $0000     [860000] A:0000 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvmxdiZc V:  8 H:160 F:12
+				81BF7D B0 04       BCS $0004     [81BF83] A:0050 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvmxdizc V:  8 H:168 F:12
+				81BF7F 49 FF FF    EOR #$FFFF             A:0050 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvmxdizc V:  8 H:171 F:12
+				81BF82 1A          INC                    A:FFAF X:15E8 Y:0002 S:012A D:0E68 DB:86 Nvmxdizc V:  8 H:176 F:12
+				81BF83 18          CLC                    A:FFB0 X:15E8 Y:0002 S:012A D:0E68 DB:86 Nvmxdizc V:  8 H:179 F:12
+				81BF84 65 05       ADC $05       [000E6D] A:FFB0 X:15E8 Y:0002 S:012A D:0E68 DB:86 Nvmxdizc V:  8 H:182 F:12
+				81BF86 9D 05 00    STA $0005,X   [8615ED] A:1E80 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  8 H:190 F:12
+				81BF89 A5 08       LDA $08       [000E70] A:1E80 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  8 H:200 F:12
+				81BF8B 38          SEC                    A:01AC X:15E8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  8 H:209 F:12
+				81BF8C E9 10 00    SBC #$0010             A:01AC X:15E8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  8 H:212 F:12
+				81BF8F 9D 08 00    STA $0008,X   [8615F0] A:019C X:15E8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  8 H:216 F:12
+				81BF92 7B          TDC                    A:019C X:15E8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  8 H:226 F:12
+				81BF93 9D 0C 00    STA $000C,X   [8615F4] A:0E68 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  8 H:229 F:12
+				81BF96 E2 30       SEP #$30               A:0E68 X:15E8 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  8 H:239 F:12
+				81BF98 60          RTS                    A:0E68 X:00E8 Y:0002 S:012A D:0E68 DB:86 nvMXdizC V:  8 H:244 F:12
+
+			81BA8C A9 06       LDA #$06               A:0E68 X:00E8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:254 F:12			Subaction = #$06
+			81BA8E 85 03       STA $03       [000E6B] A:0E06 X:00E8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:257 F:12
+			81BA90 A9 3C       LDA #$3C               A:0E06 X:00E8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:263 F:12			Countdown2 = #$3C
+			81BA92 85 34       STA $34       [000E9C] A:0E3C X:00E8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:266 F:12
+			81BA94 60          RTS                    A:0E3C X:00E8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:273 F:12			Return
+
+		81B63B A9 09       LDA #$09               A:0E3C X:00E8 Y:0002 S:012E D:0E68 DB:86 nvMXdizC V:  8 H:283 F:12

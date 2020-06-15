@@ -1,0 +1,155 @@
+Action 08
+
+Switch and wind
+
+Wind is a constant object in 7E1628-7E1667, persists before and after the subaction
+7E1628		7E1667
+
+First statue:
+7E15A8
+X-Velocity: 7E15C2
+
+Second statue:
+7E15E8
+X-Velocity: 7E1602
+
+X's:
+7E0BA8
+
+X-Coordinate: 7E0BAD
+Y-Coordinate: 7E0BB0
+
+
+Statues X-Velocity:
+$81/BC85 A0 27       LDY #$27                A:0134 X:0034 Y:00CD P:envMXdizc
+$81/BC87 B1 0C       LDA ($0C),y[$86:0E8F]   A:0134 X:0034 Y:0027 P:envMXdizc
+$81/BC89 29 7F       AND #$7F                A:0120 X:0034 Y:0027 P:envMXdizc
+$81/BC8B D0 04       BNE $04    [$BC91]      A:0120 X:0034 Y:0027 P:envMXdizc
+$81/BC91 A6 01       LDX $01    [$00:15A9]   A:0120 X:0034 Y:0027 P:envMXdizc
+$81/BC93 7C 96 BC    JMP ($BC96,x)[$81:BDC5] A:0120 X:000A Y:0027 P:envMXdizc
+$81/BDC5 AD 3F 1F    LDA $1F3F  [$86:1F3F]   A:0120 X:000A Y:0027 P:envMXdizc
+$81/BDC8 F0 17       BEQ $17    [$BDE1]      A:0178 X:000A Y:0027 P:envMXdizc
+$81/BDCA AD 40 1F    LDA $1F40  [$86:1F40]   A:0178 X:000A Y:0027 P:envMXdizc
+$81/BDCD 0A          ASL A                   A:0100 X:000A Y:0027 P:envMXdiZc
+$81/BDCE 0A          ASL A                   A:0100 X:000A Y:0027 P:envMXdiZc
+$81/BDCF C2 20       REP #$20                A:0100 X:000A Y:0027 P:envMXdiZc
+$81/BDD1 A9 00 02    LDA #$0200              A:0100 X:000A Y:0027 P:envmXdiZc	Right Velocity
+$81/BDD4 B0 03       BCS $03    [$BDD9]      A:0200 X:000A Y:0027 P:envmXdizc
+$81/BDD6 A9 00 FE    LDA #$FE00              A:0200 X:000A Y:0027 P:envmXdizc	Left Velocity
+$81/BDD9 85 1A       STA $1A    [$00:15C2]   A:FE00 X:000A Y:0027 P:eNvmXdizc	Store X-Velocity
+$81/BDDB E2 20       SEP #$20                A:FE00 X:000A Y:0027 P:eNvmXdizc
+$81/BDDD 22 3E 82 82 JSL $82823E[$82:823E]   A:FE00 X:000A Y:0027 P:eNvMXdizc
+
+X's X-Velocity:
+$87/F04F A5 11       LDA $11    [$00:1639]   A:20FF X:0008 Y:0007 P:envMXdizc
+$87/F051 0A          ASL A                   A:2029 X:0008 Y:0007 P:envMXdizc
+$87/F052 0A          ASL A                   A:2052 X:0008 Y:0007 P:envMXdizc
+$87/F053 C2 20       REP #$20                A:20A4 X:0008 Y:0007 P:eNvMXdizc
+$87/F055 A9 02 00    LDA #$0002              A:20A4 X:0008 Y:0007 P:eNvmXdizc	Adds an artificial value to his position
+$87/F058 B0 03       BCS $03    [$F05D]      A:0002 X:0008 Y:0007 P:envmXdizc
+$87/F05A A9 FE FF    LDA #$FFFE              A:0002 X:0008 Y:0007 P:envmXdizc
+$87/F05D 18          CLC                     A:FFFE X:0008 Y:0007 P:eNvmXdizc
+$87/F05E 6D AD 0B    ADC $0BAD  [$86:0BAD]   A:FFFE X:0008 Y:0007 P:eNvmXdizc
+$87/F061 8D AD 0B    STA $0BAD  [$86:0BAD]   A:1E27 X:0008 Y:0007 P:envmXdizC
+$87/F064 E2 20       SEP #$20                A:1E27 X:0008 Y:0007 P:envmXdizC
+$87/F066 4C F5 F0    JMP $F0F5  [$87:F0F5]   A:1E27 X:0008 Y:0007 P:envMXdizC
+$87/F0F5 A0 27       LDY #$27                A:1E27 X:0008 Y:0007 P:envMXdizC
+$87/F0F7 B1 0C       LDA ($0C),y[$86:0E8F]   A:1E27 X:0008 Y:0027 P:envMXdizC
+$87/F0F9 29 7F       AND #$7F                A:1E20 X:0008 Y:0027 P:envMXdizC
+$87/F0FB D0 12       BNE $12    [$F10F]      A:1E20 X:0008 Y:0027 P:envMXdizC
+$87/F10F 60          RTS                     A:1E20 X:0008 Y:0027 P:envMXdizC
+
+Make wind pull X towards the ground:
+$87/F061:
+20 E0 FE
+
+$87/FEE0:
+8D AD 0B
+A9 01 00
+18
+6D B0 0B
+8D B0 0B
+60
+
+Modify wind values for statues:
+$81/BDD1:
+A9 80 02
+B0 03
+A9 80 FD
+
+Modify MMX X-velocity with the wind:
+$87/F055:
+A9 01 00
+B0 03
+A9 FF FF
+________________________________________________________
+
+Duration of wind:
+
+***NOT USED
+If wind is blowing:
+$87/EF92 A6 01       LDX $01    [$00:1629]   A:0124 X:0024 Y:00AD P:envMXdizc
+$87/EF94 FC 9B EF    JSR ($EF9B,x)[$87:EFF6] A:0124 X:0004 Y:00AD P:envMXdizc
+
+
+$87/EFF6 A5 1B       LDA $1B    [$00:1643]   A:0124 X:0004 Y:00AD P:envMXdizc	?
+$87/EFF8 F0 33       BEQ $33    [$F02D]      A:0101 X:0004 Y:00AD P:envMXdizc	If wind is on?
+$87/EFFA 64 1B       STZ $1B    [$00:1643]   A:0101 X:0004 Y:00AD P:envMXdizc
+$87/EFFC A9 78       LDA #$78                A:0101 X:0004 Y:00AD P:envMXdizc	Duration of wind
+$87/EFFE 8D 3F 1F    STA $1F3F  [$86:1F3F]   A:0178 X:0004 Y:00AD P:envMXdizc
+$87/F001 29 03       AND #$03                A:0178 X:0004 Y:00AD P:envMXdizc
+$87/F003 18          CLC                     A:0100 X:0004 Y:00AD P:envMXdiZc
+$87/F004 69 30       ADC #$30                A:0100 X:0004 Y:00AD P:envMXdiZc
+$87/F006 0A          ASL A                   A:0130 X:0004 Y:00AD P:envMXdizc
+$87/F007 A8          TAY                     A:0160 X:0004 Y:00AD P:envMXdizc
+$87/F008 22 7B 8A 80 JSL $808A7B[$80:8A7B]   A:0160 X:0004 Y:0060 P:envMXdizc
+
+
+If wind is not blowing:
+$87/EF92 A6 01       LDX $01    [$00:1629]   A:0124 X:0024 Y:00AD P:envMXdizc
+$87/EF94 FC 9B EF    JSR ($EF9B,x)[$87:EFF6] A:0124 X:0004 Y:00AD P:envMXdizc
+
+
+$87/EFF6 A5 1B       LDA $1B    [$00:1643]   A:0124 X:0004 Y:00AD P:envMXdizc
+$87/EFF8 F0 33       BEQ $33    [$F02D]      A:0100 X:0004 Y:00AD P:envMXdiZc
+$87/F02D 4C F5 F0    JMP $F0F5  [$87:F0F5]   A:0100 X:0004 Y:00AD P:envMXdiZc
+$87/F0F5 A0 27       LDY #$27                A:0100 X:0004 Y:00AD P:envMXdiZc
+$87/F0F7 B1 0C       LDA ($0C),y[$86:0E8F]   A:0100 X:0004 Y:0027 P:envMXdizc
+$87/F0F9 29 7F       AND #$7F                A:0120 X:0004 Y:0027 P:envMXdizc
+$87/F0FB D0 12       BNE $12    [$F10F]      A:0120 X:0004 Y:0027 P:envMXdizc
+$87/F10F 60          RTS                     A:0120 X:0004 Y:0027 P:envMXdizc
+
+43-46
+$7E1643: When = 01, wind activates
+***NOT USED
+
+
+Modify decrease countdown routine so wind doesn't count down when Chill's HP<10
+$87/F030 CE 3F 1F    DEC $1F3F  [$86:1F3F]   A:0124 X:0006 Y:00C9 P:envMXdizc	Decrease wind countdown
+$87/F033 D0 0C       BNE $0C    [$F041]      A:0124 X:0006 Y:00C9 P:eNvMXdizc
+$87/F041 AD 3F 1F    LDA $1F3F  [$86:1F3F]   A:0124 X:0006 Y:00C9 P:eNvMXdizc
+$87/F044 29 03       AND #$03                A:01FE X:0006 Y:00C9 P:eNvMXdizc
+$87/F046 18          CLC                     A:0102 X:0006 Y:00C9 P:envMXdizc
+$87/F047 69 30       ADC #$30                A:0102 X:0006 Y:00C9 P:envMXdizc
+$87/F049 0A          ASL A                   A:0132 X:0006 Y:00C9 P:envMXdizc
+$87/F04A A8          TAY                     A:0164 X:0006 Y:00C9 P:envMXdizc
+$87/F04B 22 7B 8A 80 JSL $808A7B[$80:8A7B]   A:0164 X:0006 Y:0064 P:envMXdizc
+
+$87/F030:
+--> 20 F0 FE
+
+$87/FEF0:
+C2 10		REP #$10
+DA			PHX						| Load Chill's HP
+AE 0E 1F    LDX $1F0E    [$86:1F0E]	|
+BD 27 00    LDA $0027,x[$86:0E8F]	|
+FA			PLX						|
+E2 10		SEP #$10
+C9 11		CMP #$11
+10 0A		BPL $0A					Branch if HP is less than half
+	AD 3F 1F	LDA $1F3F
+	29 13		AND	#$13
+	09 10		ORA #$10
+	8D 3F 1F	STA $1F3F
+CE 3F 1F	DEC $1F3F
+60

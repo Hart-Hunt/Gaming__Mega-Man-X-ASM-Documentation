@@ -1,0 +1,551 @@
+.-----------------.
+|Armored Armadillo|
+'-----------------'
+	Enemy ID: 14
+
+	$02,03 [$7E0E6A,$7E0E6B]		Action,Subaction.
+		Battle Start
+			Set E-Y-Acc = #$40 when Enemy Spawns
+			When State 02 ends:
+				E-$31 = #$00
+				E-$32 = #$01
+		00							Spin Charge
+			00,00				Initial Frame
+				Update Facing
+				Set X-Vel,Y-Vel
+				E-Air = #$FF (In the air)
+				MiscBitflag: Set bit 01
+				E-$18 = #$00
+				Routine loads CDSkeleton based on value of Table in $86C95D,X --> Where X is:
+					Parameter "A" at the beginning of the routine = #$03
+					If E-$33 <> #$00, Add E-SubID
+					CDSkeleton for E-$33 = #$00 (Start of the battle):
+						AFCD4F:
+						11 00 0f
+						07 00 10
+						05 00 0f
+						05 00 11
+						08 00 12
+						10 80 12
+						fd ff
+			00,02				Jump
+				Update Facing
+				Update X-Pos, Y-Pos, Y-Vel
+				Check for Colissions and adjust position
+				Continue CDSkeleton until CDAction = #$80
+				When CDAction = #$80:
+					
+			00,04				Name
+			00,06				Name
+		02							Name
+			02,00				Initial Frame
+			02,02				Name
+			02,04				Name
+			02,06				Name
+		04							Name
+			04,00				Initial Frame
+			04,02				Name
+			04,04				Name
+			04,06				Name
+		06							Name
+			06,00				Initial Frame
+			06,02				Name
+			06,04				Name
+			06,06				Name
+		08							Name
+		0A							Name		
+
+.-------------.
+|Chill Penguin|
+'-------------'
+	Enemy ID: 02
+
+	$02,03 [$7E0E6A,$7E0E6B]		Action,Subaction.
+		00			Spitting ice blocks (Attack at the start of the battle)
+			00,00		Initial frame --> Doesn't set at the start of the battle, because it's already 00 by prior routines
+				Changes Subaction to 02
+				Sets number of ice blocks in $36
+					CDSkeleton:
+					AFD028:
+					0b 00 00
+					0b 00 02
+					0b 00 04
+					0b 00 05	AFD031
+					05 01 07	AFD034	
+					06 80 06	AFD037
+					ee ff
+			00,02		Main Subaction. Throw ice until $36 = 0
+				Throws ice when CDAction > 0 and positive, and decreases $36. Repeats Countdown Skeleton when CDAction = #$80 until $36 = #$00 
+			00,04		Idle
+				Stays idle until Countdown2 = #$00, then ends Action
+					CDSkeleton:
+					AFD002:
+					0f 00 00
+					0f 00 01
+					0f 00 00
+					0f 00 01
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 80 02	AFD023 --> Repeats animation
+					dc ff
+		02			Switch and wind
+			02,00	Initial frame
+				Sets Y-Acc,Y-Vel
+				Updates Facing towards the middle
+				Sets same CDSkeleton as 06,00 (Skeleton for Chill Penguin jumping)
+					CDSkeleton:
+					AFD060:
+					10 00 00
+					05 00 02
+					05 00 03
+					05 00 0d
+					05 01 0e	AFD06C --> Jump
+					07 80 0f	AFD06F --> Change to 02,02, CDSkeleton
+					02 00 10
+					80 0f fd
+					ff
+			02,02	Jump
+				Jumps towards the switch when CDAction = #$01
+				X-Vel is set to always be at the center after x number of frames
+				Y-Vel and Y-Acc set to always be at the switch's height after reaching Y-Vel
+				Jump continues until Y-Vel = #$00, then it changes CDSkeleton
+					CDSkeleton:
+					AFD089:
+					08 00 11
+					08 00 12
+					08 00 13	AFD08F
+					20 80 14	AFD092
+					fd ff
+			02,04	Grab Switch and wind
+				Forces Enemy into exact position of claw (relative distance to middle of the screen)
+					CDAction = #$80 --> M-$1B = #$01 --> Activates wind when WindDuration = #$00
+					WindDuration is stored in $7E1F3F = #$78 when M-$1B = #$01
+			02,06	Fall
+				Changes CDSkeleton and falls
+				Subaction changes when Enemy hits ground, until then it keeps falling and accelerating
+					CDSkeleton:
+					AFD079:
+					10 80 10
+					fd ff
+			02,08	Land
+				Lasts one frame
+					CDSkeleton:
+					AFD07E:
+					06 00 02
+					06 00 03
+					10 80 00
+					fd ff
+			02,0A	Idle
+				Stays idle until Countdown2 = #$00, then ends Action
+					CDSkeleton:
+					AFD002:
+					0f 00 00
+					0f 00 01
+					0f 00 00
+					0f 00 01
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 80 02	AFD023 --> Repeats animation
+					dc ff
+		04			Slide
+			04,00	Initial frame
+				Sets Armor
+				Sets Deflect
+				Sets Y-Vel, Y-Acc = #$00
+				Sets X-Vel, X-Acc = #$00
+					CDSkeleton:
+					AFD03C:
+					0b 00 00
+					0b 00 02
+					0b 00 04
+					0b 00 05
+					06 00 08
+					06 01 0a	AFD04B
+					10 80 09	AFD04E
+					02 00 20
+					80 09 fd
+					ff
+			04,02	Lean back
+				Follows countdown routine until CDAction <> #$00, then moves to Subaction 04
+			04,04	Slide
+				Play SE
+			04,06	Idle
+				Disables Armor
+				Disables Deflect
+				Loads the Idle skeleton with #$1E Countdown2, but finishes Subaction in the next frame
+					CDSkeleton:
+					AFD002:
+					0f 00 00
+					0f 00 01
+					0f 00 00
+					0f 00 01
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 80 02	AFD023 --> Repeats animation
+					dc ff
+		06			Jump
+			06,00	Initial frame
+				Disables Armor
+				Sets Y-Acc,Y-Vel
+				Sets X-Vel based on distance with MMX
+				Sets same CDSkeleton as 02,00 (Skeleton for Chill Penguin jumping)
+					CDSkeleton:
+					AFD060:
+					10 00 00
+					05 00 02
+					05 00 03
+					05 00 0d
+					05 01 0e	AFD06C --> Change Subaction
+					07 80 0f	AFD06F
+					02 00 10
+					80 0f fd
+					ff
+			06,02	Prepare
+				Continues CDSkeleton
+				Changes Subaction when CDAction = #$01
+			06,04	Jump
+				Checks colission in every frame
+				Changes Subaction when Y-Vel is negative
+			06,06	Fall
+				Subaction changes when Enemy hits ground, until then it keeps falling and accelerating
+					CDSkeleton:
+					AFD079:
+					10 80 10
+					fd ff
+		08			Breath and Statues
+			08,00		Initial frame
+				Checks for empty EnemyShot data, doesn't do anything with it
+				Loads CDSkeleton and changes Subaction
+					CDSkeleton:
+					AFD028:
+					0b 00 00
+					0b 00 02
+					0b 00 04
+					0b 00 05	AFD031
+					05 01 07	AFD034	
+					06 80 06	AFD037
+					ee ff
+			08,02		Leaning back before ice breath
+				Idle until CDAction = #$01
+			08,04		Breath
+					Play SE
+					Loads Countdown2
+					At CDAction 80, spawns Breath. Repeats CDSkeleton until Countdown2 = #$00
+					Breath spawns, moves left and disappears.
+					CDSkeleton:
+					AFD0B1:
+					04 00 06
+					04 80 07	AFD0B4
+					fa ff
+			08,06		Ice statues spawn
+					Spawn Ice statues
+					Loads Countdown2
+					Keeps spawning breath until Countdown = #$00
+			08,08		Idle
+				Stays idle until Countdown2 = #$00, then ends Action
+					CDSkeleton:
+					AFD002:
+					0f 00 00
+					0f 00 01
+					0f 00 00
+					0f 00 01
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 80 02	AFD023 --> Repeats animation
+					dc ff
+		0A			Taking damage
+
+		At the end of each action, it changes action based on a table in $86C45B + 1B RNG:
+			After Action 00		00 02 02 04 04 04 04 04 04 04 06 06 08 08 08 08
+			After Action 02		00 00 02 04 04 06 06 06 06 06 06 06 08 08 08 08
+			After Action 04		00 00 00 00 02 02 04 06 06 08 08 08 08 08 08 08
+			After Action 06		00 00 00 00 00 00 00 02 02 02 02 04 04 06 08 08
+			After Action 08		00 00 00 00 02 02 02 02 02 02 02 04 04 06 06 08
+			After getting hit, it reads the table as in after Action 00
+			The table can be read as a probability chart:
+			After Action\Prob of next Action	00		02		04		06		08		0A
+			00									01/10	02/10	07/10	02/10	04/10	00/10
+			02									02/10	01/10	02/10	07/10	04/10	00/10
+			04									04/10	02/10	01/10	02/10	07/10	00/10
+			06									07/10	04/10	02/10	01/10	02/10	00/10
+			08									04/10	07/10	02/10	02/10	01/10	00/10
+			0A									Same as 00
+
+.--------------.
+|Spark Mandrill|
+'--------------'
+	Enemy ID: 31
+
+	$02,03 [$7E0E6A,$7E0E6B]		Action,Subaction.
+		00							Sparks
+			00,00				Initial Frame
+				Updates Facing
+				Loads CDSkeleton
+					CDSkeleton:
+					AFDF81:
+					04 00 00
+					06 00 15
+					04 01 14
+					0c 00 14
+					0c 80 14
+					fd ff
+			00,02				Shoot Sparks				
+				Continues skeleton
+				When CDAction <> #$00:
+					Spawn two sparks with different SubIDs
+					Play Sound Effect
+					Effect: Shake Screen Vertical
+					Change Subaction
+			00,04				Cooldown
+				Continues skeleton
+				When CDAction = #$80, change Subaction
+			00,06				Idle
+				Sets Countdown2
+				Stays Idle until Countdown2 = #$00, then changes action
+					CDSkeleton:
+					AFDE91:
+					06 00 00
+					04 00 01
+					06 00 02
+					04 80 01
+					f4 ff
+		02							Swing
+			02,00				Initial Frame
+				Sets X-Vel = #$0000, Y-Vel, Y-Acc
+				Sets E-Air = #$FF (In the air)
+				Loads CDSkeleton 
+					CDSkeleton:
+					AFDEC5:
+					04 00 01
+					04 00 02
+					04 00 01
+					04 00 00
+					04 00 08
+					08 80 07
+					fd ff
+			02,02				Jump
+				Continues Skeleton until CDAction = #$80
+				When CDAction = #$80, Ascends in the air
+				When E-Y-Vel < #$0100:
+				Changes Subaction
+				Loads CDSkeleton
+					CDSkeleton:
+					AFDF59:
+					02 00 0d
+					02 00 18
+					02 00 0d
+					08 00 18
+					08 00 11
+					18 00 12
+					18 80 12
+					eb ff
+			02,04				Finish Jump
+				Continues CDSkeleton until CDAction = #$80
+				When CDAction = #$80, Loads CDSkeleton and changes Subaction
+					CDSkeleton:
+					AFDF70:
+					08 00 13
+					08 01 12
+					08 02 11
+					07 03 10
+					01 83 10
+					f1 ff
+			02,06				Swing
+				Continues Skeleton
+				Continues Swinging until Enemy passes MMX, then:
+					Set E-X-Vel, E-Y-Vel, E-Y-Acc
+					Load CDSkeleton and changes Subaction
+					CDSkeleton:
+					AFDF59:
+					08 00 13
+					08 01 12
+					08 02 11
+					07 03 10
+					01 83 10
+					f1 ff				
+			02,08				Fall
+				Updates X and Y position, falling
+				Continues until it reaches ground then:
+					Disables 04 bit in E-MiscBitflag
+					E-Air = #$00
+					Play SE
+					Loads CDSkeleton and changes Subaction
+					CDSkeleton:
+					AFDF31:
+					04 00 00
+					04 00 01
+					04 00 02
+					04 80 01
+					fd ff
+			02,0A				Land			
+				Continues Skeleton until CDAction = #$80
+				When CDAction = #$80:
+					Set Countdown2
+					Load CDSkeleton and change Subaction
+					CDSkeleton:
+					AFDE91:
+					06 00 00
+					04 00 01
+					06 00 02
+					04 80 01
+					f4 ff					
+			02,0C				Idle
+				Updates Facing in each frame
+				Continues CDSkeleton until Countdown2 = #$00, then end Action
+		04							Punch
+			04,00				Initial Frame
+				Update Facing
+				Checks if Mandrill is next to wall:
+					If not next to wall:
+						Set E-X-Vel
+						Load CDSkeleton and change Subaction to 02 (DashPunch)	
+							CDSkeleton:
+							AFDF92:
+							04 00 00
+							04 80 17
+							fd ff
+					If next to wall:
+						Load CDSkeleton and change Subaction to 04 (Punch)
+							CDSkeleton:
+							AFDFB6:
+							10 00 00
+							02 00 01
+							04 00 02
+							02 00 01
+							02 00 00
+							04 00 0b
+							01 01 0a
+							01 00 0a
+							02 00 0c
+							02 00 0a
+							04 00 0c
+							04 00 0b
+							7f 80 00
+							fd ff						
+			04,02				DashPunch
+				Continues skeleton until CDAction = #$80
+				Various general checks
+				When CDAction = #$80:
+					Update X-Pos
+					Various general checks
+					Repeat until E-Miscbitflag bit 03 is set:
+						Set Countdown2
+						Effect: Screen Shake Horizontal
+						Load CDSkeleton and change Subaction to 06
+						General Checks
+						CDSkeleton:
+						AFDF9A:
+						08 80 16
+						fd ff 02
+			04,04				Punch
+				Continues skeleton until CDAction = #$01
+				When CDAction = #$01:
+					Set Countdown2
+					Effect: Screen Shake Horizontal					
+					Change Subaction to 06 (Doesn't change CDSkeleton)
+			04,06				Cooldown
+				Continues skeleton until Countdown2 = #$00
+				When Countdown2 = #$00:
+					Load CDSkeleton and change Subaction
+					CDSkeleton:
+					AFDE91:
+					06 00 00
+					04 00 01
+					06 00 02
+					04 80 01
+					f4 ff
+			04,08				Idle
+				Stays Idle until Countdown2 = #$00, then changes action
+		06							Jump
+			06,00				Initial Frame
+				Set X-Vel,Y-Vel,Y-Acc
+				Update Facing
+				Load CDSkeleton and change Subaction
+					CDSkeleton:
+					AFDEC5:
+					04 00 01
+					04 00 02
+					04 00 01
+					04 00 00
+					04 00 08
+					08 80 07
+					fd ff
+			06,02				Prepare
+				Continues Skeleton until CDAction = #$80
+				When CDAction = #$80:
+					E-Air = #$FF (Air)
+					Change Subaction
+			06,04				Jump
+				Update X-Pos,Y-Pos,Y-Vel
+				When Enemy hits ground:
+					E-Air = #$00
+					Play Sound Effect
+					Effect: Vertical Shake
+					Load CDSkeleton and change Subaction
+						CDSkeleton:
+						AFDF31:
+						04 00 00
+						04 00 01
+						04 00 02
+						04 80 01
+						fd ff
+			06,06				Land
+				Continue Skeleton until CDAction = #$80
+				When CDAction = #$80:
+					Set Countdown2
+					Load CDSkeleton and change Subaction
+						CDSkeleton:
+						AFDE91:
+						06 00 00
+						04 00 01
+						06 00 02
+						04 80 01
+						f4 ff		
+			06,08				Idle
+				Update Facing
+				Continue Skeleton until Countdown2 = #$00, then end action
+		08							Knockback
+			How Action 08 is set:
+				Code after each Action:
+				If Action = (02,04):
+					If CurrMMXShotID = #$01 (Green buster), change Action to 08
+					Means that if you shoot Mandrill with Green buster while he's in DashPunch subroutine, change action to Knockback
+
+		At the end of each action, it changes action based on a table in $86CFDB + 2B RNG:
+			**First byte in each row isn't read**.	The byte was still added in the actual code, so the whole row always adds $20 for consistency.
+			In the actual code, the probability of action 00 is the following: byte $00 = (#$20 - byte $02 - byte $04 - byte $06)
+			After Action 00		04 10 06 06
+			After Action 02		06 04 10 06
+			After Action 04		06 06 04 10
+			After Action 06		10 06 06 04
+			After Action 08		08 08 08 08
+			After Action 0A		08 08 08 08
+			The table acts in the code as a probability chart:
+			After Action\Prob of next Action	00		02		04		06
+			00									04/20 	10/20	06/20	06/20
+			02									06/20 	04/20	10/20	06/20
+			04									06/20 	06/20	04/20	10/20
+			06									10/20 	06/20	06/20	04/20
+			08									08/20 	08/20	08/20	08/20
+			0A									08/20 	08/20 	08/20	08/20
+

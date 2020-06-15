@@ -1,0 +1,43 @@
+Repointing AI skeletons
+
+1. Finding the base of the skeleton data
+2. Finding the relative pointer from the base
+3. Calculating new pointer and changing 2
+
+1. Finding the base of the skeleton data
+$84/8F1C BF 00 A0 AF LDA $AFA000,x[$AF:A135] A:0135 X:0135 Y:00CC P:envmxdizc	$AF:A135 = Pointer to base of the skeleton
+$84/8F20 85 14       STA $14    [$00:0E7C]   A:CFE0 X:0135 Y:00CC P:eNvmxdizc	A: absolute pointer of base of the skeleton ($AF:CFE0)
+
+2. Finding the pointer to the relative position from the base
+$84/8F34 B1 14       LDA ($14),y[$AF:CFE2]   A:0002 X:0135 Y:0002 P:envmxdizc	$AF:CFE2 = Relative pointer from the base
+$84/8F36 65 14       ADC $14    [$00:0E7C]   A:0048 X:0135 Y:0002 P:envmxdizc	A: relative pointer for this skeleton (#$0048)
+$84/8F38 85 14       STA $14    [$00:0E7C]   A:D028 X:0135 Y:0002 P:eNvmxdizc	A: absolute pointer for this skeleton ($AF:D028)
+
+3. Calculating new pointer and changing relative pointer
+Example:
+-	Base of skeleton is in					$AF:CFE0
+-	Relative pointer is in					$AF:CFE2
+-	Vanilla's absolute pointer is in		$AF:D028
+-	We want the skeleton to be in			$AF:E9A0
+->	We change the relative pointer to the diference between the new absolute pointer and the base:
+	#$E9A0 - #$CFE0 = #$19C0
+	$AF:CFE2 = 00 48 --> C0 19
+->	We add the skeleton we want to the new absolute pointer in $AF:E9A0
+
+
+$84/8F34 B1 14       LDA ($14),y[$AF:D0FE]   A:0002 X:0138 Y:0002 P:envmxdizc
+$84/8F36 65 14       ADC $14    [$00:193C]   A:0012 X:0138 Y:0002 P:envmxdizc
+$84/8F38 85 14       STA $14    [$00:193C]   A:D10E X:0138 Y:0002 P:eNvmxdizc
+
+$84/8F34 B1 14       LDA ($14),y[$AF:A254]   A:0044 X:0048 Y:0044 P:envmxdizc
+$84/8F36 65 14       ADC $14    [$00:0BBC]   A:0168 X:0048 Y:0044 P:envmxdizc
+$84/8F38 85 14       STA $14    [$00:0BBC]   A:A378 X:0048 Y:0044 P:eNvmxdizc
+
+$84/8F34 B1 14       LDA ($14),y[$AF:CFFE]   A:001E X:0135 Y:001E P:envmxdizc
+$84/8F36 65 14       ADC $14    [$00:157C]   A:00D9 X:0135 Y:001E P:envmxdizc
+$84/8F38 85 14       STA $14    [$00:157C]   A:D0B9 X:0135 Y:001E P:eNvmxdizc
+
+Ice statues skeleton
+$84/8F34 B1 14       LDA ($14),y[$AF:D0FC]   A:0000 X:0138 Y:0000 P:envmxdiZc
+$84/8F36 65 14       ADC $14    [$00:15BC]   A:0004 X:0138 Y:0000 P:envmxdizc
+$84/8F38 85 14       STA $14    [$00:15BC]   A:D100 X:0138 Y:0000 P:eNvmxdizc
