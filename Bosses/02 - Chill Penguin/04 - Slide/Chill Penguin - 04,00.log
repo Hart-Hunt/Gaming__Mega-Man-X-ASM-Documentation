@@ -33,7 +33,7 @@
 			81B89B A9 02       LDA #$02               A:C42D X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdiZc V:249 H: 39 F:40		Subaction = #$02
 			81B89D 85 03       STA $03       [000E6B] A:C402 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H: 42 F:40
 			81B89F 64 38       STZ $38       [000EA0] A:C402 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H: 48 F:40		Armor = Yes
-			81B8A1 22 A5 AC 84 JSL $84ACA5   [84ACA5] A:C402 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H: 55 F:40		JSL: $84ACA5 --> Update Status, Facing bit
+			81B8A1 22 A5 AC 84 JSL $84ACA5   [84ACA5] A:C402 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H: 55 F:40		JSL $84ACA5 --> Update Status, Facing bit
 
 				84ACA5 08          PHP                    A:C402 X:0000 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V:249 H: 68 F:40
 				84ACA6 E2 20       SEP #$20               A:C402 X:0000 Y:0027 S:0128 D:0E68 DB:86 nvMXdizc V:249 H: 73 F:40
@@ -52,7 +52,7 @@
 				84ACBD 6B          RTL                    A:FF00 X:0000 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V:249 H:155 F:40
 
 			81B8A5 A9 02       LDA #$02               A:FF00 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H:166 F:40		
-			81B8A7 22 07 8F 84 JSL $848F07   [848F07] A:FF02 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H:169 F:40		JSL: $848F07 --> Countdown routine (CDBase = #$67, b = A = #$02)
+			81B8A7 22 07 8F 84 JSL $848F07   [848F07] A:FF02 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H:169 F:40		JSL $848F07 --> Skeleton Load (SkelPoint = #$67, b = A = #$02)
 
 				848F07 08          PHP                    A:FF02 X:0000 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V:249 H:182 F:40
 				848F08 8B          PHB                    A:FF02 X:0000 Y:0027 S:0128 D:0E68 DB:86 nvMXdizc V:249 H:187 F:40

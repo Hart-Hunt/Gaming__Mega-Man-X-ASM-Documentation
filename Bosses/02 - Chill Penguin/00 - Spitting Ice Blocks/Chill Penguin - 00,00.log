@@ -20,32 +20,32 @@ ________________________________________________________________________________
 	80D53A E2 20       SEP #$20               A:01AC X:0000 Y:0027 S:0131 D:0E68 DB:86 nvmXdizC V:252 H: 95 F:42
 	80D53C A9 80       LDA #$80               A:01AC X:0000 Y:0027 S:0131 D:0E68 DB:86 nvMXdizC V:252 H:100 F:42
 	80D53E 14 0E       TRB $0E       [000E76] A:0180 X:0000 Y:0027 S:0131 D:0E68 DB:86 NvMXdizC V:252 H:103 F:42
-	80D540 A5 0A       LDA $0A       [000E72] A:0180 X:0000 Y:0027 S:0131 D:0E68 DB:86 NvMXdizC V:252 H:113 F:42					|X = E-ID * 
-	80D542 0A          ASL A                  A:0102 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvMXdizC V:252 H:119 F:42					|
-	80D543 AA          TAX                    A:0104 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvMXdizc V:252 H:122 F:42					|
-	80D544 7C DD F8    JMP ($F8DD,X) [80F8E1] A:0104 X:0004 Y:0027 S:0131 D:0E68 DB:86 nvMXdizc V:252 H:125 F:42					JMP ($F8DD,E-ID) = ($80F8E1) = $80F9BB
+	80D540 A5 0A       LDA $0A       [000E72] A:0180 X:0000 Y:0027 S:0131 D:0E68 DB:86 NvMXdizC V:252 H:113 F:42					 
+	80D542 0A          ASL A                  A:0102 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvMXdizC V:252 H:119 F:42					
+	80D543 AA          TAX                    A:0104 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvMXdizc V:252 H:122 F:42					
+	80D544 7C DD F8    JMP ($F8DD,X) [80F8E1] A:0104 X:0004 Y:0027 S:0131 D:0E68 DB:86 nvMXdizc V:252 H:125 F:42					
 
-	80F9BB 22 16 B5 81 JSL $81B516   [81B516] A:0104 X:0004 Y:0027 S:0131 D:0E68 DB:86 nvMXdizc V:252 H:144 F:42					JSL $81B516 (Main routine for Chill Penguin)
+	80F9BB 22 16 B5 81 JSL $81B516   [81B516] A:0104 X:0004 Y:0027 S:0131 D:0E68 DB:86 nvMXdizc V:252 H:144 F:42
 
 		81B516 A6 01       LDX $01       [000E69] A:0104 X:0004 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:252 H:158 F:42				
-		81B518 7C 1B B5    JMP ($B51B,X) [81B51F] A:0104 X:0004 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:252 H:164 F:42				JMP ($B51B,E-State) = ($81B51F) = $81B629 --> Main routine for Chill Penguin Battle
+		81B518 7C 1B B5    JMP ($B51B,X) [81B51F] A:0104 X:0004 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:252 H:164 F:42
 
-		81B629 A5 33       LDA $33       [000E9B] A:0104 X:0004 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:252 H:173 F:42				|Set Spawn08Bit in Status
-		81B62B 04 11       TSB $11       [000E79] A:0108 X:0004 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:252 H:180 F:42				|
-		81B62D C2 20       REP #$20               A:0108 X:0004 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:252 H:190 F:42				A:2B
-		81B62F A9 2D C4    LDA #$C42D             A:0108 X:0004 Y:0027 S:012E D:0E68 DB:86 nvmXdizc V:252 H:194 F:42				|$20 = $0E88 = #$C42D --> Something with physics apparently
-		81B632 85 20       STA $20       [000E88] A:C42D X:0004 Y:0027 S:012E D:0E68 DB:86 NvmXdizc V:252 H:199 F:42				|
-		81B634 E2 20       SEP #$20               A:C42D X:0004 Y:0027 S:012E D:0E68 DB:86 NvmXdizc V:252 H:207 F:42				
-		81B636 A6 02       LDX $02       [000E6A] A:C42D X:0004 Y:0027 S:012E D:0E68 DB:86 NvMXdizc V:252 H:212 F:42				
-		81B638 FC F3 B6    JSR ($B6F3,X) [81B6F3] A:C42D X:0000 Y:0027 S:012E D:0E68 DB:86 nvMXdiZc V:252 H:218 F:42				JSR ($B6F3,Action) = ($81B6F3) = $81B6FF --> Main routine for Attack 00
+		81B629 A5 33       LDA $33       [000E9B] A:0104 X:0004 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:252 H:173 F:42
+		81B62B 04 11       TSB $11       [000E79] A:0108 X:0004 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:252 H:180 F:42
+		81B62D C2 20       REP #$20               A:0108 X:0004 Y:0027 S:012E D:0E68 DB:86 nvMXdizc V:252 H:190 F:42
+		81B62F A9 2D C4    LDA #$C42D             A:0108 X:0004 Y:0027 S:012E D:0E68 DB:86 nvmXdizc V:252 H:194 F:42
+		81B632 85 20       STA $20       [000E88] A:C42D X:0004 Y:0027 S:012E D:0E68 DB:86 NvmXdizc V:252 H:199 F:42
+		81B634 E2 20       SEP #$20               A:C42D X:0004 Y:0027 S:012E D:0E68 DB:86 NvmXdizc V:252 H:207 F:42
+		81B636 A6 02       LDX $02       [000E6A] A:C42D X:0004 Y:0027 S:012E D:0E68 DB:86 NvMXdizc V:252 H:212 F:42
+		81B638 FC F3 B6    JSR ($B6F3,X) [81B6F3] A:C42D X:0000 Y:0027 S:012E D:0E68 DB:86 nvMXdiZc V:252 H:218 F:42
 
 			81B6FF A6 03       LDX $03       [000E6B] A:C42D X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdiZc V:252 H:231 F:42			
-			81B701 7C 04 B7    JMP ($B704,X) [81B704] A:C42D X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdiZc V:252 H:238 F:42			JMP ($B704,Subaction) = ($81B704) = $81B70A --> Main routine for Attack 00,00 --> Change Subaction to #$02, set Countdown, set Number of Ice blocks to shoot, update facing, set Armor = #$01
+			81B701 7C 04 B7    JMP ($B704,X) [81B704] A:C42D X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdiZc V:252 H:238 F:42
 
-			81B70A A9 02       LDA #$02               A:C42D X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdiZc V:252 H:247 F:42			|Subaction = #$02
-			81B70C 85 03       STA $03       [000E6B] A:C402 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:252 H:250 F:42			|
-			81B70E A9 01       LDA #$01               A:C402 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:252 H:256 F:42			A = #$01
-			81B710 22 07 8F 84 JSL $848F07   [848F07] A:C401 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:252 H:259 F:42			JSL: $848F07 --> Countdown routine (CDBase = #$67, b = A = #$01)
+			81B70A A9 02       LDA #$02               A:C42D X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdiZc V:252 H:247 F:42			
+			81B70C 85 03       STA $03       [000E6B] A:C402 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:252 H:250 F:42			Subaction = #$02
+			81B70E A9 01       LDA #$01               A:C402 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:252 H:256 F:42
+			81B710 22 07 8F 84 JSL $848F07   [848F07] A:C401 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:252 H:259 F:42			JSL $848F07 --> Skeleton Load (SkelPoint = #$67, b = A = #$01)
 
 				848F07 08          PHP                    A:C401 X:0000 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V:252 H:273 F:42
 				848F08 8B          PHB                    A:C401 X:0000 Y:0027 S:0128 D:0E68 DB:86 nvMXdizc V:252 H:278 F:42
@@ -87,8 +87,8 @@ ________________________________________________________________________________
 				848F50 28          PLP                    A:D080 X:0035 Y:0002 S:0128 D:0E68 DB:86 NvMXdizc V:253 H:178 F:42		
 				848F51 6B          RTL                    A:D080 X:0035 Y:0002 S:0129 D:0E68 DB:86 nvMXdizc V:253 H:184 F:42		
 
-			81B714 A9 04       LDA #$04               A:D080 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:253 H:195 F:42			|$36 = #$04 (Number of ice blocks to shoot)
-			81B716 85 36       STA $36       [000E9E] A:D004 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:253 H:198 F:42			|
+			81B714 A9 04       LDA #$04               A:D080 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:253 H:195 F:42			
+			81B716 85 36       STA $36       [000E9E] A:D004 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:253 H:198 F:42			E-Shots = #$04
 			81B718 22 A5 AC 84 JSL $84ACA5   [84ACA5] A:D004 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:253 H:204 F:42			JSL $84ACA5 --> Update Status, Facing bit
 
 				84ACA5 08          PHP                    A:D004 X:0035 Y:0002 S:0129 D:0E68 DB:86 nvMXdizc V:253 H:218 F:42		
@@ -107,8 +107,8 @@ ________________________________________________________________________________
 				84ACBC 28          PLP                    A:FF00 X:0035 Y:0002 S:0128 D:0E68 DB:86 nvMXdiZc V:253 H:288 F:42
 				84ACBD 6B          RTL                    A:FF00 X:0035 Y:0002 S:0129 D:0E68 DB:86 nvMXdizc V:253 H:295 F:42
 
-			81B71C A9 01       LDA #$01               A:FF00 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:253 H:305 F:42			|Armor = #$01 (Can flinch)
-			81B71E 85 38       STA $38       [000EA0] A:FF01 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:253 H:308 F:42			|
+			81B71C A9 01       LDA #$01               A:FF00 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:253 H:305 F:42			
+			81B71E 85 38       STA $38       [000EA0] A:FF01 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:253 H:308 F:42			Armor = #$01 (Can flinch)
 			81B720 60          RTS                    A:FF01 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:253 H:315 F:42			Return
 
 		81B63B A9 09       LDA #$09               A:FF01 X:0035 Y:0002 S:012E D:0E68 DB:86 nvMXdizc V:253 H:324 F:42				|$28 = #$09 (Can be hit) because I-Frames = #$00
@@ -129,7 +129,7 @@ ________________________________________________________________________________
 		81B65B 69 37 C4    ADC #$C437             A:0000 X:0000 Y:0002 S:012E D:0E68 DB:86 nvmXdiZc V:254 H: 52 F:42				|
 		81B65E 85 20       STA $20       [000E88] A:C437 X:0000 Y:0002 S:012E D:0E68 DB:86 NvmXdizc V:254 H: 56 F:42				|
 		81B660 E2 20       SEP #$20               A:C437 X:0000 Y:0002 S:012E D:0E68 DB:86 NvmXdizc V:254 H: 65 F:42				A:1B
-		81B662 22 43 9B 84 JSL $849B43   [849B43] A:C437 X:0000 Y:0002 S:012E D:0E68 DB:86 NvMXdizc V:254 H: 69 F:42				JSL: $849B43 --> Check if MMXShot exists, if there isn't return with A = #$00
+		81B662 22 43 9B 84 JSL $849B43   [849B43] A:C437 X:0000 Y:0002 S:012E D:0E68 DB:86 NvMXdizc V:254 H: 69 F:42				JSL $849B43 --> Check if MMXShot exists, if there isn't return with A = #$00
 
 			849B43 C2 10       REP #$10               A:C437 X:0000 Y:0002 S:012B D:0E68 DB:86 NvMXdizc V:254 H: 83 F:42			X:2B
 			849B45 A5 27       LDA $27       [000E8F] A:C437 X:0000 Y:0002 S:012B D:0E68 DB:86 NvMxdizc V:254 H: 87 F:42			|Branch if E-HP = #$00
@@ -220,7 +220,7 @@ ________________________________________________________________________________
 		81B666 F0 5C       BEQ $005C     [81B6C4] A:1400 X:0028 Y:0002 S:012E D:0E68 DB:86 nvMXdiZC V:255 H:153 F:42				Branch because there's no MMXShot (from last routine)
 		81B6C4 A5 35       LDA $35       [000E9D] A:1400 X:0028 Y:0002 S:012E D:0E68 DB:86 nvMXdiZC V:255 H:158 F:42				|Branch because I-Frames = #$00
 		81B6C6 F0 18       BEQ $0018     [81B6E0] A:1400 X:0028 Y:0002 S:012E D:0E68 DB:86 nvMXdiZC V:255 H:164 F:42				|
-		81B6E0 22 03 9B 84 JSL $849B03   [849B03] A:1400 X:0028 Y:0002 S:012E D:0E68 DB:86 nvMXdiZC V:255 H:169 F:42				JSL: $849B03 --> Various general checks
+		81B6E0 22 03 9B 84 JSL $849B03   [849B03] A:1400 X:0028 Y:0002 S:012E D:0E68 DB:86 nvMXdiZC V:255 H:169 F:42				JSL $849B03 --> Various general checks
 
 			849B03 C2 10       REP #$10               A:1400 X:0028 Y:0002 S:012B D:0E68 DB:86 nvMXdiZC V:255 H:182 F:42			X:2B
 			849B05 A5 27       LDA $27       [000E8F] A:1400 X:0028 Y:0002 S:012B D:0E68 DB:86 nvMxdiZC V:255 H:187 F:42			|Branch if E-HP = #$00

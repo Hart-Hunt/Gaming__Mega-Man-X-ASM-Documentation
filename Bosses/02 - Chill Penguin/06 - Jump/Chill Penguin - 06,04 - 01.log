@@ -935,7 +935,7 @@
 				8491DC 28          PLP                    A:0000 X:0E68 Y:01A3 S:0128 D:0E68 DB:86 nvmxdizc V:  1 H:224 F:19			
 				8491DD 6B          RTL                    A:0000 X:0068 Y:00A3 S:0129 D:0E68 DB:86 nvMXdizc V:  1 H:230 F:19
 
-			81B991 22 EA 8E 84 JSL $848EEA   [848EEA] A:0000 X:0068 Y:00A3 S:012C D:0E68 DB:86 nvMXdizc V:  1 H:241 F:19				JSL $848EEA --> Countdown routine
+			81B991 22 EA 8E 84 JSL $848EEA   [848EEA] A:0000 X:0068 Y:00A3 S:012C D:0E68 DB:86 nvMXdizc V:  1 H:241 F:19				JSL $848EEA --> Decrease CDSkel, Continue Skeleton
 
 				848EEA 08          PHP                    A:0000 X:0068 Y:00A3 S:0129 D:0E68 DB:86 nvMXdizc V:  1 H:254 F:19
 				848EEB 8B          PHB                    A:0000 X:0068 Y:00A3 S:0128 D:0E68 DB:86 nvMXdizc V:  1 H:259 F:19

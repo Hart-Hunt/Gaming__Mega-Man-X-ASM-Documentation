@@ -30,7 +30,7 @@
 			81B796 A6 03       LDX $03       [000E6B] A:C42D X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:251 H: 94 F:34
 			81B798 7C 9B B7    JMP ($B79B,X) [81B7A5] A:C42D X:000A Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:251 H:100 F:34					JMP ($B79B,Subaction) = ($81B7A5) = $81B882
 
-			81B882 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:000A Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:251 H:109 F:34					JSL $848EEA --> Countdown routine
+			81B882 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:000A Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:251 H:109 F:34					JSL $848EEA --> Decrease CDSkel, Continue Skeleton
 
 				848EEA 08          PHP                    A:C42D X:000A Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V:251 H:123 F:34
 				848EEB 8B          PHB                    A:C42D X:000A Y:0027 S:0128 D:0E68 DB:86 nvMXdizc V:251 H:128 F:34
@@ -61,8 +61,8 @@
 				848F50 28          PLP                    A:D080 X:000A Y:0002 S:0128 D:0E68 DB:86 NvMXdizc V:251 H:291 F:34
 				848F51 6B          RTL                    A:D080 X:000A Y:0002 S:0129 D:0E68 DB:86 nvMXdizc V:251 H:298 F:34
 
-			81B886 C6 34       DEC $34       [000E9C] A:D080 X:000A Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:251 H:308 F:34					Decrease Countdown2
-			81B888 D0 03       BNE $0003     [81B88D] A:D080 X:000A Y:0002 S:012C D:0E68 DB:86 nvMXdiZc V:251 H:318 F:34					Branch if Countdown2 <> #$00
+			81B886 C6 34       DEC $34       [000E9C] A:D080 X:000A Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:251 H:308 F:34					Decrease CD2
+			81B888 D0 03       BNE $0003     [81B88D] A:D080 X:000A Y:0002 S:012C D:0E68 DB:86 nvMXdiZc V:251 H:318 F:34					Branch if CD2 <> #$00
 			81B88A 20 19 C0    JSR $C019     [81C019] A:D080 X:000A Y:0002 S:012C D:0E68 DB:86 nvMXdiZc V:251 H:321 F:34					JSR $81C019 --> Changes Action from table in $86C45B, with 2B RNG value.
 
 				81C019 A5 02       LDA $02       [000E6A] A:D080 X:000A Y:0002 S:012A D:0E68 DB:86 nvMXdiZc V:251 H:330 F:34				$0000 = E-Action*8 = #$10

@@ -30,7 +30,7 @@
 			81B9FC A6 03       LDX $03       [000E6B] A:C42D X:0008 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:  4 H:151 F:12
 			81B9FE 7C 01 BA    JMP ($BA01,X) [81BA05] A:C42D X:0004 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:  4 H:158 F:12			JMP ($81BA01,Subaction) = ($81BA05) = $81BA6B
 
-			81BA6B 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:0004 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:  4 H:167 F:12			JSL $848EEA --> Countdown routine
+			81BA6B 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:0004 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:  4 H:167 F:12			JSL $848EEA --> Decrease CDSkel, Continue Skeleton
 
 				848EEA 08          PHP                    A:C42D X:0004 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V:  4 H:180 F:12
 				848EEB 8B          PHB                    A:C42D X:0004 Y:0027 S:0128 D:0E68 DB:86 nvMXdizc V:  4 H:185 F:12
@@ -61,7 +61,7 @@
 				848F50 28          PLP                    A:D080 X:0004 Y:0002 S:0128 D:0E68 DB:86 NvMXdizc V:  4 H:338 F:12
 				848F51 6B          RTL                    A:D080 X:0004 Y:0002 S:0129 D:0E68 DB:86 nvMXdizc V:  5 H:  4 F:12
 
-			81BA6F 20 16 BF    JSR $BF16     [81BF16] A:D080 X:0004 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:  5 H: 15 F:12			JSR $81BF16 --> If CDAction is not positive, Spawn Breath
+			81BA6F 20 16 BF    JSR $BF16     [81BF16] A:D080 X:0004 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:  5 H: 15 F:12			JSR $81BF16 --> If SkelAction is not positive, Spawn Breath
 
 				81BF16 A5 17       LDA $17       [000E7F] A:D080 X:0004 Y:0002 S:012A D:0E68 DB:86 nvMXdizc V:  5 H: 25 F:12
 				81BF18 10 41       BPL $0041     [81BF5B] A:D087 X:0004 Y:0002 S:012A D:0E68 DB:86 NvMXdizc V:  5 H: 31 F:12
@@ -112,8 +112,8 @@
 				81BF59 E2 30       SEP #$30               A:0E68 X:1468 Y:0002 S:012A D:0E68 DB:86 nvmxdizC V:  5 H:285 F:12
 				81BF5B 60          RTS                    A:0E68 X:0068 Y:0002 S:012A D:0E68 DB:86 nvMXdizC V:  5 H:289 F:12
 
-			81BA72 C6 34       DEC $34       [000E9C] A:0E68 X:0068 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  5 H:299 F:12			Decrease Countdown2
-			81BA74 D0 1E       BNE $001E     [81BA94] A:0E68 X:0068 Y:0002 S:012C D:0E68 DB:86 nvMXdiZC V:  5 H:309 F:12			Branch if Countdown2 <> #$00
+			81BA72 C6 34       DEC $34       [000E9C] A:0E68 X:0068 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  5 H:299 F:12			Decrease CD2
+			81BA74 D0 1E       BNE $001E     [81BA94] A:0E68 X:0068 Y:0002 S:012C D:0E68 DB:86 nvMXdiZC V:  5 H:309 F:12			Branch if CD2 <> #$00
 			81BA76 A9 30       LDA #$30               A:0E68 X:0068 Y:0002 S:012C D:0E68 DB:86 nvMXdiZC V:  5 H:312 F:12			|$0000 = #$0030
 			81BA78 8D 00 00    STA $0000     [860000] A:0E30 X:0068 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  5 H:315 F:12			|
 			81BA7B 9C 01 00    STZ $0001     [860001] A:0E30 X:0068 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  5 H:322 F:12			|
@@ -304,7 +304,7 @@
 
 			81BA8C A9 06       LDA #$06               A:0E68 X:00E8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:254 F:12			Subaction = #$06
 			81BA8E 85 03       STA $03       [000E6B] A:0E06 X:00E8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:257 F:12
-			81BA90 A9 3C       LDA #$3C               A:0E06 X:00E8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:263 F:12			Countdown2 = #$3C
+			81BA90 A9 3C       LDA #$3C               A:0E06 X:00E8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:263 F:12			CD2 = #$3C
 			81BA92 85 34       STA $34       [000E9C] A:0E3C X:00E8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:266 F:12
 			81BA94 60          RTS                    A:0E3C X:00E8 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:273 F:12			Return
 

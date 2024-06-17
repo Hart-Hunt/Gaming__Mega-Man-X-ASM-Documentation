@@ -30,7 +30,7 @@
 			81B796 A6 03       LDX $03       [000E6B] A:C42D X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H: 25 F:18
 			81B798 7C 9B B7    JMP ($B79B,X) [81B79D] A:C42D X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H: 32 F:18			JMP ($B79B,Subaction) = ($81B79D) = $81B7EB
 
-			81B7EB 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H: 41 F:18			JSL $848EEA --> Countdown skeleton routine
+			81B7EB 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H: 41 F:18			JSL $848EEA --> Decrease CDSkel, Continue Skeleton
 
 				848EEA 08          PHP                    A:C42D X:0002 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V:249 H: 54 F:18		|Decrease Countdown, return because Countdown <> #$00
 				848EEB 8B          PHB                    A:C42D X:0002 Y:0027 S:0128 D:0E68 DB:86 nvMXdizc V:249 H: 59 F:18		|
@@ -41,7 +41,7 @@
 				848F50 28          PLP                    A:C42D X:0002 Y:0027 S:0128 D:0E68 DB:86 NvMXdizc V:249 H: 90 F:18		|
 				848F51 6B          RTL                    A:C42D X:0002 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V:249 H: 96 F:18		Return
 
-			81B7EF A5 0F       LDA $0F       [000E77] A:C42D X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H:107 F:18			|Branch if CDAction = #$00
+			81B7EF A5 0F       LDA $0F       [000E77] A:C42D X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H:107 F:18			|Branch if SkelAction = #$00
 			81B7F1 F0 32       BEQ $0032     [81B825] A:C480 X:0002 Y:0027 S:012C D:0E68 DB:86 NvMXdizc V:249 H:113 F:18			|
 			81B7F3 22 E8 81 82 JSL $8281E8   [8281E8] A:C480 X:0002 Y:0027 S:012C D:0E68 DB:86 NvMXdizc V:249 H:116 F:18			JSL	$8281E8 --> Update E-Y-Vel, E-Positions
 
@@ -86,7 +86,7 @@
 			81B7FB A9 04       LDA #$04               A:34FF X:0002 Y:0027 S:012C D:0E68 DB:86 NvMXdizc V:250 H: 24 F:18			|Subaction = #$04
 			81B7FD 85 03       STA $03       [000E6B] A:3404 X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:250 H: 27 F:18			|
 			81B7FF A9 09       LDA #$09               A:3404 X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:250 H: 34 F:18			
-			81B801 22 07 8F 84 JSL $848F07   [848F07] A:3409 X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:250 H: 37 F:18			JSL: $848F07 --> Countdown routine (CDBase = #$67, b = A = #$09)
+			81B801 22 07 8F 84 JSL $848F07   [848F07] A:3409 X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:250 H: 37 F:18			JSL $848F07 --> Skeleton Load (SkelPoint = #$67, b = A = #$09)
 
 				848F07 08          PHP                    A:3409 X:0002 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V:250 H: 50 F:18
 				848F08 8B          PHB                    A:3409 X:0002 Y:0027 S:0128 D:0E68 DB:86 nvMXdizc V:250 H: 55 F:18
@@ -143,7 +143,7 @@
 			81B81D 64 1C       STZ $1C       [000E84] A:1E76 X:0035 Y:0002 S:012C D:0E68 DB:86 nvmXdizc V:251 H: 29 F:18			E-Y-Vel = #$00
 			81B81F 64 1A       STZ $1A       [000E82] A:1E76 X:0035 Y:0002 S:012C D:0E68 DB:86 nvmXdizc V:251 H: 37 F:18			E-X-Vel = #$00
 			81B821 E2 20       SEP #$20               A:1E76 X:0035 Y:0002 S:012C D:0E68 DB:86 nvmXdizc V:251 H: 46 F:18			A:1B
-			81B823 64 34       STZ $34       [000E9C] A:1E76 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:251 H: 50 F:18			Countdown2 = #$00
+			81B823 64 34       STZ $34       [000E9C] A:1E76 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:251 H: 50 F:18			CD2 = #$00
 			81B825 60          RTS                    A:1E76 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:251 H: 57 F:18			Return
 
 		81B63B A9 09       LDA #$09               A:1E76 X:0035 Y:0002 S:012E D:0E68 DB:86 nvMXdizc V:251 H: 67 F:18

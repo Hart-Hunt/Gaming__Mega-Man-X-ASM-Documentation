@@ -30,7 +30,7 @@
 			81B796 A6 03       LDX $03       [000E6B] A:C42D X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:251 H: 91 F:49
 			81B798 7C 9B B7    JMP ($B79B,X) [81B7A1] A:C42D X:0006 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:251 H: 98 F:49						JMP ($B79B,Subaction) = ($81B7A1) = $81B84C
 
-			81B84C 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:0006 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:251 H:107 F:49						JSL $848EEA --> Countdown routine
+			81B84C 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:0006 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:251 H:107 F:49						JSL $848EEA --> Decrease CDSkel, Continue Skeleton
 
 				848EEA 08          PHP                    A:C42D X:0006 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V:251 H:120 F:49
 				848EEB 8B          PHB                    A:C42D X:0006 Y:0027 S:0128 D:0E68 DB:86 nvMXdizc V:251 H:125 F:49
@@ -91,7 +91,7 @@
 				8491C8 A9 00 00    LDA #$0000             A:0E68 X:0E68 Y:0027 S:0126 D:0E68 DB:86 nvmxdizc V:252 H:119 F:49					|
 				8491CB 5B          TCD                    A:0000 X:0E68 Y:0027 S:0126 D:0E68 DB:86 nvmxdiZc V:252 H:123 F:49					|
 				8491CC 64 14       STZ $14       [000014] A:0000 X:0E68 Y:0027 S:0126 D:0000 DB:86 nvmxdiZc V:252 H:126 F:49					$0014 = #$00
-				8491CE B5 2B       LDA $2B,X     [000E93] A:0000 X:0E68 Y:0027 S:0126 D:0000 DB:86 nvmxdiZc V:252 H:143 F:49					|E-MiscBitflag = #$00 (Enemy in the air)
+				8491CE B5 2B       LDA $2B,X     [000E93] A:0000 X:0E68 Y:0027 S:0126 D:0000 DB:86 nvmxdiZc V:252 H:143 F:49					|E-Contact = #$00 (Enemy in the air)
 				8491D0 29 00 FF    AND #$FF00             A:0000 X:0E68 Y:0027 S:0126 D:0000 DB:86 nvmxdiZc V:252 H:152 F:49					|
 				8491D3 95 2B       STA $2B,X     [000E93] A:0000 X:0E68 Y:0027 S:0126 D:0000 DB:86 nvmxdiZc V:252 H:156 F:49					|
 				8491D5 20 AC 92    JSR $92AC     [8492AC] A:0000 X:0E68 Y:0027 S:0126 D:0000 DB:86 nvmxdiZc V:252 H:165 F:49					JSR $8492AC
@@ -244,7 +244,7 @@
 						8495E3 68          PLA                    A:0076 X:0E68 Y:0076 S:0121 D:0000 DB:86 nvMxdizc V:254 H:277 F:49			|
 						8495E4 95 2A       STA $2A,X     [000E92] A:0013 X:0E68 Y:0076 S:0122 D:0000 DB:86 nvMxdizc V:254 H:283 F:49			|
 						8495E6 A6 2C       LDX $2C       [00002C] A:0013 X:0E68 Y:0076 S:0122 D:0000 DB:86 nvMxdizc V:254 H:290 F:49			|X = EnemyData
-						8495E8 A9 FB       LDA #$FB               A:0013 X:0E68 Y:0076 S:0122 D:0000 DB:86 nvMxdizc V:254 H:297 F:49			|E-MiscBitflag = #$FB AND E-MiscBitflag
+						8495E8 A9 FB       LDA #$FB               A:0013 X:0E68 Y:0076 S:0122 D:0000 DB:86 nvMxdizc V:254 H:297 F:49			|E-Contact = #$FB AND E-Contact
 						8495EA 35 2B       AND $2B,X     [000E93] A:00FB X:0E68 Y:0076 S:0122 D:0000 DB:86 NvMxdizc V:254 H:300 F:49			|
 						8495EC 95 2B       STA $2B,X     [000E93] A:0000 X:0E68 Y:0076 S:0122 D:0000 DB:86 nvMxdiZc V:254 H:306 F:49			|
 						8495EE 64 01       STZ $01       [000001] A:0000 X:0E68 Y:0076 S:0122 D:0000 DB:86 nvMxdiZc V:254 H:313 F:49			|$0001 = #$00
@@ -303,13 +303,13 @@
 				8491DC 28          PLP                    A:0101 X:0E68 Y:01B0 S:0128 D:0E68 DB:86 nvmxdizC V:255 H:273 F:49					Pull Processor Flags
 				8491DD 6B          RTL                    A:0101 X:0068 Y:00B0 S:0129 D:0E68 DB:86 nvMXdizc V:255 H:280 F:49					Return
 
-			81B858 A5 2B       LDA $2B       [000E93] A:0101 X:0068 Y:00B0 S:012C D:0E68 DB:86 nvMXdizc V:255 H:290 F:49						|Branch if E-MiscBitflag bit 04 is not set (Enemy still in the air)
+			81B858 A5 2B       LDA $2B       [000E93] A:0101 X:0068 Y:00B0 S:012C D:0E68 DB:86 nvMXdizc V:255 H:290 F:49						|Branch if E-Contact bit 04 is not set (Enemy still in the air)
 			81B85A 29 04       AND #$04               A:0104 X:0068 Y:00B0 S:012C D:0E68 DB:86 nvMXdizc V:255 H:297 F:49						|
 			81B85C F0 0C       BEQ $000C     [81B86A] A:0104 X:0068 Y:00B0 S:012C D:0E68 DB:86 nvMXdizc V:255 H:300 F:49						|
 			81B85E A9 08       LDA #$08               A:0104 X:0068 Y:00B0 S:012C D:0E68 DB:86 nvMXdizc V:255 H:303 F:49						Subaction = #$08
 			81B860 85 03       STA $03       [000E6B] A:0108 X:0068 Y:00B0 S:012C D:0E68 DB:86 nvMXdizc V:255 H:306 F:49						
 			81B862 A9 08       LDA #$08               A:0108 X:0068 Y:00B0 S:012C D:0E68 DB:86 nvMXdizc V:255 H:312 F:49
-			81B864 22 07 8F 84 JSL $848F07   [848F07] A:0108 X:0068 Y:00B0 S:012C D:0E68 DB:86 nvMXdizc V:255 H:315 F:49						JSL: $848F07 --> Countdown routine (CDBase = #$67, b = A = #$08)
+			81B864 22 07 8F 84 JSL $848F07   [848F07] A:0108 X:0068 Y:00B0 S:012C D:0E68 DB:86 nvMXdizc V:255 H:315 F:49						JSL $848F07 --> Skeleton Load (SkelPoint = #$67, b = A = #$08)
 
 				848F07 08          PHP                    A:0108 X:0068 Y:00B0 S:0129 D:0E68 DB:86 nvMXdizc V:255 H:328 F:49
 				848F08 8B          PHB                    A:0108 X:0068 Y:00B0 S:0128 D:0E68 DB:86 nvMXdizc V:255 H:333 F:49

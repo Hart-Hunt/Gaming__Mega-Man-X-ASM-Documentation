@@ -133,7 +133,7 @@
 			81BA3F 90 D5       BCC $00D5     [81BA16] A:1628 X:1628 Y:0027 S:012C D:0E68 DB:86 nvmxdiZC V:250 H:233 F: 8		
 			81BA41 E2 30       SEP #$30               A:1628 X:1628 Y:0027 S:012C D:0E68 DB:86 nvmxdiZC V:250 H:236 F: 8		A:1B,X:1B
 			81BA43 A9 01       LDA #$01               A:1628 X:0028 Y:0027 S:012C D:0E68 DB:86 nvMXdiZC V:250 H:241 F: 8		
-			81BA45 22 07 8F 84 JSL $848F07   [848F07] A:1601 X:0028 Y:0027 S:012C D:0E68 DB:86 nvMXdizC V:250 H:244 F: 8		JSL: $848F07 --> Countdown routine (CDBase = #$67, b = A = #$01)
+			81BA45 22 07 8F 84 JSL $848F07   [848F07] A:1601 X:0028 Y:0027 S:012C D:0E68 DB:86 nvMXdizC V:250 H:244 F: 8		JSL $848F07 --> Skeleton Load (SkelPoint = #$67, b = A = #$01)
 
 				848F07 08          PHP                    A:1601 X:0028 Y:0027 S:0129 D:0E68 DB:86 nvMXdizC V:250 H:257 F: 8
 				848F08 8B          PHB                    A:1601 X:0028 Y:0027 S:0128 D:0E68 DB:86 nvMXdizC V:250 H:262 F: 8

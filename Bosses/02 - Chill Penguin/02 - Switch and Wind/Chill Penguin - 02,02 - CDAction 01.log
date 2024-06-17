@@ -30,7 +30,7 @@
 			81B796 A6 03       LDX $03       [000E6B] A:C42D X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V: 13 H: 16 F:58
 			81B798 7C 9B B7    JMP ($B79B,X) [81B79D] A:C42D X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V: 13 H: 23 F:58			JMP ($B79B,Subaction) = ($81B79D) = $81B7EB
 
-			81B7EB 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V: 13 H: 32 F:58			JSL $848EEA --> Countdown skeleton routine
+			81B7EB 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V: 13 H: 32 F:58			JSL $848EEA --> Decrease CDSkel, Continue Skeleton
 
 				848EEA 08          PHP                    A:C42D X:0002 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V: 13 H: 45 F:58
 				848EEB 8B          PHB                    A:C42D X:0002 Y:0027 S:0128 D:0E68 DB:86 nvMXdizc V: 13 H: 50 F:58
@@ -53,7 +53,7 @@
 				848F42 B1 14       LDA ($14),Y   [AFD06D] A:D005 X:0002 Y:0001 S:0127 D:0E68 DB:AF nvMXdizc V: 13 H:158 F:58
 				848F44 85 0F       STA $0F       [000E77] A:D001 X:0002 Y:0001 S:0127 D:0E68 DB:AF nvMXdizc V: 13 H:168 F:58
 				848F46 C8          INY                    A:D001 X:0002 Y:0001 S:0127 D:0E68 DB:AF nvMXdizc V: 13 H:175 F:58
-				848F47 B1 14       LDA ($14),Y   [AFD06E] A:D001 X:0002 Y:0002 S:0127 D:0E68 DB:AF nvMXdizc V: 13 H:178 F:58		CDAction = #$01
+				848F47 B1 14       LDA ($14),Y   [AFD06E] A:D001 X:0002 Y:0002 S:0127 D:0E68 DB:AF nvMXdizc V: 13 H:178 F:58		SkelAction = #$01
 				848F49 85 17       STA $17       [000E7F] A:D00E X:0002 Y:0002 S:0127 D:0E68 DB:AF nvMXdizc V: 13 H:188 F:58
 				848F4B A9 80       LDA #$80               A:D00E X:0002 Y:0002 S:0127 D:0E68 DB:AF nvMXdizc V: 13 H:194 F:58
 				848F4D 04 17       TSB $17       [000E7F] A:D080 X:0002 Y:0002 S:0127 D:0E68 DB:AF NvMXdizc V: 13 H:197 F:58
@@ -61,7 +61,7 @@
 				848F50 28          PLP                    A:D080 X:0002 Y:0002 S:0128 D:0E68 DB:86 NvMXdizc V: 13 H:214 F:58
 				848F51 6B          RTL                    A:D080 X:0002 Y:0002 S:0129 D:0E68 DB:86 nvMXdizc V: 13 H:220 F:58
 
-			81B7EF A5 0F       LDA $0F       [000E77] A:D080 X:0002 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V: 13 H:231 F:58			|Branch if CDAction = #$00
+			81B7EF A5 0F       LDA $0F       [000E77] A:D080 X:0002 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V: 13 H:231 F:58			|Branch if SkelAction = #$00
 			81B7F1 F0 32       BEQ $0032     [81B825] A:D001 X:0002 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V: 13 H:237 F:58			|
 			81B7F3 22 E8 81 82 JSL $8281E8   [8281E8] A:D001 X:0002 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V: 13 H:240 F:58			JSL	$8281E8 --> Update E-Y-Vel, E-Positions
 

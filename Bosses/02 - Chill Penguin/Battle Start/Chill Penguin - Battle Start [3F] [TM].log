@@ -2035,7 +2035,7 @@ Routine that loads countdown into
 818317 65 6F       ADC $6F       [000C17] A:0000 X:0018 Y:00CC S:012D D:0BA8 DB:86 nVMXdiZc V:240 H: 10 F:52					|
 818319 18          CLC                    A:0022 X:0018 Y:00CC S:012D D:0BA8 DB:86 nvMXdizc V:240 H: 17 F:52					|
 81831A 65 73       ADC $73       [000C1B] A:0022 X:0018 Y:00CC S:012D D:0BA8 DB:86 nvMXdizc V:240 H: 20 F:52					|
-81831C 22 07 8F 84 JSL $848F07   [848F07] A:0022 X:0018 Y:00CC S:012D D:0BA8 DB:86 nvMXdizc V:240 H: 26 F:52					JSL $848F07 --> Countdown
+81831C 22 07 8F 84 JSL $848F07   [848F07] A:0022 X:0018 Y:00CC S:012D D:0BA8 DB:86 nvMXdizc V:240 H: 26 F:52					JSL $848F07 --> Skeleton Load
 
 	848F07 08          PHP                    A:0022 X:0018 Y:00CC S:012A D:0BA8 DB:86 nvMXdizc V:240 H: 40 F:52				Push Processor Flags
 	848F08 8B          PHB                    A:0022 X:0018 Y:00CC S:0129 D:0BA8 DB:86 nvMXdizc V:240 H: 45 F:52				Push Bank Register

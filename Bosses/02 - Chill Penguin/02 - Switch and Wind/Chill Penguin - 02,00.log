@@ -33,7 +33,7 @@
 			81B7A7 A9 02       LDA #$02               A:C42D X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdiZc V: 16 H:200 F:27			|Subaction = #$02
 			81B7A9 85 03       STA $03       [000E6B] A:C402 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V: 16 H:203 F:27			|
 			81B7AB A9 05       LDA #$05               A:C402 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V: 16 H:210 F:27			A = #$05
-			81B7AD 22 07 8F 84 JSL $848F07   [848F07] A:C405 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V: 16 H:213 F:27			JSL: $848F07 --> Countdown routine (CDBase = #$67, b = A = #$05)
+			81B7AD 22 07 8F 84 JSL $848F07   [848F07] A:C405 X:0000 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V: 16 H:213 F:27			JSL $848F07 --> Skeleton Load (SkelPoint = #$67, b = A = #$05)
 
 				848F07 08          PHP                    A:C405 X:0000 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V: 16 H:226 F:27
 				848F08 8B          PHB                    A:C405 X:0000 Y:0027 S:0128 D:0E68 DB:86 nvMXdizc V: 16 H:231 F:27

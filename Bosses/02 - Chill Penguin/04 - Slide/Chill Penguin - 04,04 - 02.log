@@ -30,7 +30,7 @@
 			81B88E A6 03       LDX $03       [000E6B] A:C42D X:0004 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:256 H:106 F:31
 			81B890 7C 93 B8    JMP ($B893,X) [81B897] A:C42D X:0004 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:256 H:113 F:31
 
-			81B8E1 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:0004 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:256 H:122 F:31					JSL $848EEA --> Countdown routine
+			81B8E1 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:0004 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:256 H:122 F:31					JSL $848EEA --> Decrease CDSkel, Continue Skeleton
 
 				848EEA 08          PHP                    A:C42D X:0004 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V:256 H:145 F:31
 				848EEB 8B          PHB                    A:C42D X:0004 Y:0027 S:0128 D:0E68 DB:86 nvMXdizc V:256 H:150 F:31
@@ -741,7 +741,7 @@
 			81B8FB A5 1A       LDA $1A       [000E82] A:0101 X:0068 Y:00AC S:012C D:0E68 DB:86 NvmXdizc V:  5 H:281 F:32					|Branch if E-X-Vel = #$00
 			81B8FD E2 20       SEP #$20               A:FA10 X:0068 Y:00AC S:012C D:0E68 DB:86 NvmXdizc V:  5 H:290 F:32					|
 			81B8FF F0 19       BEQ $0019     [81B91A] A:FA10 X:0068 Y:00AC S:012C D:0E68 DB:86 NvMXdizc V:  5 H:294 F:32					|
-			81B901 A5 2B       LDA $2B       [000E93] A:FA10 X:0068 Y:00AC S:012C D:0E68 DB:86 NvMXdizc V:  5 H:297 F:32					|Branch because MiscBitflag AND #$03 = #$00
+			81B901 A5 2B       LDA $2B       [000E93] A:FA10 X:0068 Y:00AC S:012C D:0E68 DB:86 NvMXdizc V:  5 H:297 F:32					|Branch because Contact AND #$03 = #$00
 			81B903 29 03       AND #$03               A:FA04 X:0068 Y:00AC S:012C D:0E68 DB:86 nvMXdizc V:  5 H:304 F:32					|
 			81B905 F0 27       BEQ $0027     [81B92E] A:FA00 X:0068 Y:00AC S:012C D:0E68 DB:86 nvMXdiZc V:  5 H:307 F:32					|
 			81B92E 60          RTS                    A:FA00 X:0068 Y:00AC S:012C D:0E68 DB:86 nvMXdiZc V:  5 H:311 F:32					Return

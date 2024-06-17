@@ -999,7 +999,7 @@
 				8491DC 28          PLP                    A:0000 X:0E68 Y:0120 S:0128 D:0E68 DB:86 nvmxdizc V:  9 H:238 F:52
 				8491DD 6B          RTL                    A:0000 X:0068 Y:0020 S:0129 D:0E68 DB:86 nvMXdizc V:  9 H:244 F:52
 
-			81B991 22 EA 8E 84 JSL $848EEA   [848EEA] A:0000 X:0068 Y:0020 S:012C D:0E68 DB:86 nvMXdizc V:  9 H:255 F:52
+			81B991 22 EA 8E 84 JSL $848EEA   [848EEA] A:0000 X:0068 Y:0020 S:012C D:0E68 DB:86 nvMXdizc V:  9 H:255 F:52			JSL $848EEA --> Decrease CDSkel, Continue Skeleton
 
 				848EEA 08          PHP                    A:0000 X:0068 Y:0020 S:0129 D:0E68 DB:86 nvMXdizc V:  9 H:268 F:52
 				848EEB 8B          PHB                    A:0000 X:0068 Y:0020 S:0128 D:0E68 DB:86 nvMXdizc V:  9 H:273 F:52
@@ -1017,7 +1017,7 @@
 			81B99D A9 06       LDA #$06               A:FFFE X:0068 Y:0020 S:012C D:0E68 DB:86 NvMXdizc V: 10 H:  0 F:52			Subaction = #$06
 			81B99F 85 03       STA $03       [000E6B] A:FF06 X:0068 Y:0020 S:012C D:0E68 DB:86 nvMXdizc V: 10 H:  3 F:52
 			81B9A1 A9 07       LDA #$07               A:FF06 X:0068 Y:0020 S:012C D:0E68 DB:86 nvMXdizc V: 10 H: 10 F:52
-			81B9A3 22 07 8F 84 JSL $848F07   [848F07] A:FF07 X:0068 Y:0020 S:012C D:0E68 DB:86 nvMXdizc V: 10 H: 13 F:52			JSL: $848F07 --> Countdown routine (CDBase = #$67, b = A = #$07)
+			81B9A3 22 07 8F 84 JSL $848F07   [848F07] A:FF07 X:0068 Y:0020 S:012C D:0E68 DB:86 nvMXdizc V: 10 H: 13 F:52			JSL $848F07 --> Skeleton Load (SkelPoint = #$67, b = A = #$07)
 
 				848F07 08          PHP                    A:FF07 X:0068 Y:0020 S:0129 D:0E68 DB:86 nvMXdizc V: 10 H: 26 F:52
 				848F08 8B          PHB                    A:FF07 X:0068 Y:0020 S:0128 D:0E68 DB:86 nvMXdizc V: 10 H: 31 F:52

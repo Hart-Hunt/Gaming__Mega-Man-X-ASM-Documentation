@@ -30,7 +30,7 @@
 			81B88E A6 03       LDX $03       [000E6B] A:C42D X:0004 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H: 70 F:30
 			81B890 7C 93 B8    JMP ($B893,X) [81B897] A:C42D X:0004 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H: 77 F:30
 
-			81B8E1 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:0004 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H: 86 F:30					JSL $848EEA --> Countdown routine
+			81B8E1 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:0004 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H: 86 F:30					JSL $848EEA --> Decrease CDSkel, Continue Skeleton
 
 				848EEA 08          PHP                    A:C42D X:0004 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V:249 H: 99 F:30
 				848EEB 8B          PHB                    A:C42D X:0004 Y:0027 S:0128 D:0E68 DB:86 nvMXdizc V:249 H:104 F:30
@@ -324,7 +324,7 @@
 			81B91A A9 06       LDA #$06               A:0000 X:0068 Y:00AC S:012C D:0E68 DB:86 nvMXdiZC V:254 H: 22 F:30					Subaction = #$06
 			81B91C 85 03       STA $03       [000E6B] A:0006 X:0068 Y:00AC S:012C D:0E68 DB:86 nvMXdizC V:254 H: 25 F:30
 			81B91E A9 00       LDA #$00               A:0006 X:0068 Y:00AC S:012C D:0E68 DB:86 nvMXdizC V:254 H: 32 F:30					
-			81B920 22 07 8F 84 JSL $848F07   [848F07] A:0000 X:0068 Y:00AC S:012C D:0E68 DB:86 nvMXdiZC V:254 H: 35 F:30					JSL: $848F07 --> Countdown routine (CDBase = #$67, b = A = #$00)
+			81B920 22 07 8F 84 JSL $848F07   [848F07] A:0000 X:0068 Y:00AC S:012C D:0E68 DB:86 nvMXdiZC V:254 H: 35 F:30					JSL $848F07 --> Skeleton Load (SkelPoint = #$67, b = A = #$00)
 
 				848F07 08          PHP                    A:0000 X:0068 Y:00AC S:0129 D:0E68 DB:86 nvMXdiZC V:254 H: 48 F:30
 				848F08 8B          PHB                    A:0000 X:0068 Y:00AC S:0128 D:0E68 DB:86 nvMXdiZC V:254 H: 53 F:30
@@ -368,7 +368,7 @@
 
 			81B924 A9 01       LDA #$01               A:D080 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdiZC V:254 H:311 F:30					Disable Armor
 			81B926 85 38       STA $38       [000EA0] A:D001 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:254 H:314 F:30
-			81B928 A9 1E       LDA #$1E               A:D001 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:254 H:321 F:30					Countdown2 = #$1E
+			81B928 A9 1E       LDA #$1E               A:D001 X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:254 H:321 F:30					CD2 = #$1E
 			81B92A 85 34       STA $34       [000E9C] A:D01E X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:254 H:323 F:30
 			81B92C 64 39       STZ $39       [000EA1] A:D01E X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:254 H:329 F:30					Disable Deflect
 			81B92E 60          RTS                    A:D01E X:0035 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:254 H:336 F:30					Return
