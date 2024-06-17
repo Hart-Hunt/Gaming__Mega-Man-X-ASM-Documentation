@@ -1,0 +1,73 @@
+Layout:
+Offset	Byte length	Description
+#$0	1 byte		Object in memory flag. #$00 = No object in memory. #$01 = Object exists in memory.
+#$1	1 byte		Hoganmer has shield?
+#$2	1 byte		State
+#$4	1 byte		Object's sub-pixel X-position.
+#$5	2 bytes		Object's X-position, in pixels.
+#$7	1 byte		Object's sub-pixel Y-position.
+#$8	2 bytes		Object's Y-position, in pixels.
+#$A	1 byte		Object ID.
+#$13	1 byte		Animation countdown (animates and reset when zero).
+#$17	1 byte		Object sprite (bits 0-7).
+#$1A	2 bytes		Object X-velocity, in sub-pixels per frame.
+#$1C	2 bytes		Object Y-velocity, in negative sub-pixels per frame.
+#$1E	1 byte		Object Y-acceleration, in sub-pixels per frame per frame.
+#$22	2 bytes		Object X-position, in pixels.
+#$24	2 bytes		Object Y-position, in pixels.
+#$27	1 byte		Object's current health.
+#$34	1 byte		Usual countdown timer.
+
+7e10e8
+
+7e10ea
+States:
+00: Stand by
+  00 00: First frame
+  00 01: Stand by
+04: Attacking
+  04 00: First frame
+  04 02: Preparing flail
+  04 04: Launching flail
+  04 06: Taking flail back  
+
+____
+7E10FC: Substates
+  For countdowns, breakpoint execute 848F3C
+
+40: Stand by
+0x1AFF8:
+A9 3C --> A9 20
+0x1AF0A:
+A9 3C --> A9 20
+
+4A: Flail pulled back
+0x0017A54A
+$AF:A54A
+08 --> 02
+
+4D: Flail pulled further back
+$AF:A54D
+06 --> 06
+
+50: Change from 04 02 to 04 04
+
+53: Flail traveling towards the player, then going back (6 loops of 7E10FB countdown)
+$AF:A553
+0F (?) 
+
+63: Change from 04 04 to 04 06
+
+66: Taking flail back (1)
+$AF:A566
+04 --> 02
+
+69: Taking flail back (2)
+$AF:A569
+04 --> 02
+
+6C: Change  from 04 06 to 00 01
+
+40
+
+

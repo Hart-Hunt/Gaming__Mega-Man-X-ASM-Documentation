@@ -1,0 +1,46 @@
+Enemy data:
+7E0E68
+
+Layout:
+Offset	Byte length	Description
+#$0	1 byte		Object in memory flag. #$00 = No object in memory. #$01 = Object exists in memory.
+#$1	1 byte		Object's action 1.
+#$2	1 byte		Object's action 2.
+#$4	1 byte		Object's sub-pixel X-position.
+#$5	2 bytes		Object's X-position, in pixels.
+#$7	1 byte		Object's sub-pixel Y-position.
+#$8	2 bytes		Object's Y-position, in pixels.
+#$A	1 byte		Object ID.
+#$13	1 byte		Animation countdown (animates and reset when zero).
+#$17	1 byte		Object sprite (bits 0-7).
+#$1A	2 bytes		Object X-velocity, in sub-pixels per frame.
+#$1C	2 bytes		Object Y-velocity, in negative sub-pixels per frame.
+#$1E	1 byte		Object Y-acceleration, in sub-pixels per frame per frame.
+#$22	2 bytes		Object X-position, in pixels.
+#$24	2 bytes		Object Y-position, in pixels.
+#$27	1 byte		Object's current health.
+#$34	1 byte		Usual countdown timer.
+
+Horizontal speed - Left - 1
+0x1178F:
+A9 40 FF
+-->
+A9 00 FF
+
+Horizontal speed - Right - 1
+0x11787:
+A9 C0 00
+-->
+A9 00 01
+
+Horitontal speed - Left - 2
+0x117B5:
+A9 40 FF
+-->
+A9 E0 FE
+
+Horizontal speed - Right - 2
+0x117BF:
+A9 C0 00
+-->
+A9 20 01

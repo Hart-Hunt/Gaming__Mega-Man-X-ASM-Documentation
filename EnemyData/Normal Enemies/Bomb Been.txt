@@ -1,0 +1,46 @@
+
+
+RAM Value that controls delay timers:
+7E0E9D
+7E0EA0
+
+0x10CBC:
+A9 28 --> A9 02
+
+0x11FA3:
+A9 5A --> A9 40
+
+0x12007:
+A9 08 --> A9 04
+
+0x1203B:
+A9 08 --> A9 04
+
+0x12078:
+A9 18 --> A9 0C
+
+
+Delay after attack:
+0x12088:
+A9 08 --> A9 04
+0x1209E:
+A9 08 --> A9 04
+
+Delay before attacking again:
+0x120AA:
+A9 5A --> A9 30
+0x11FF0:
+A9 5A --> A9 30
+Bomb been has an RNG check to see if it will attack or not. If it doesn't, then he will move for another 30 ^ frames to attack again. Maybe check the routine to see how it reads RNG? 
+
+Bomb delays before exploding:
+0x34D26:
+14 0A 0A --> 04 04 04
+
+
+Movement speed
+0x11FB8:
+A9 40 01 --> A9 80 01
+0x11FC5:
+A9 C0 FE --> A9 80 FE
+

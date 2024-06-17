@@ -1,0 +1,68 @@
+States:
+
+02: Stand By
+04: Missiles
+06: Sparks
+______________________________________________________________
+
+02: Stand by
+
+Stand by duration 1 (Initial?)
+0x15A52:
+A9 3C
+--> A9 14
+
+Stand by duration 2 (Post-Attack?)
+0x15B1B:
+A9 3C
+--> A9 1E
+
+Stand by duration 2 (After Post-Attack by random chance?)
+0x15AA8:
+A9 3C
+--> A9 08
+
+______________________________________________________________
+
+06: Sparks
+
+Frames before opening hatch
+0x17BC1B:
+14
+-->
+06
+
+Frames before shooting sparks
+0x17BC2D:
+14
+-->
+06
+
+Sparks speed:
+1105F:
+A9 00 FC
+-->
+A9 00 FA
+
+______________________________________________________________
+
+04: Missiles
+7E0E9D: Missile count -1
+
+Number of missiles:
+0x15A95:
+A9 01 (Two missiles)
+-->
+A9 02 (Three missiles)
+
+Frames between shooting missiles:
+0x17BC3C:
+1D
+-->
+19
+
+Missiles speed:
+0x11077:
+A9 00 FE
+-->
+A9 B0 FD

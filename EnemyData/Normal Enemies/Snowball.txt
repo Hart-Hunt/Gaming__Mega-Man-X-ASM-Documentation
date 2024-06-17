@@ -1,0 +1,7 @@
+Old documentation:
+
+Snowball:
+Initial:
+3E072: A9 80 FF --> A9 00 FF 
+Acceleration in slope:
+3E068: A8 0C --> A9 0E

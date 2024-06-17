@@ -1,0 +1,44 @@
+
+
+
+
+X-Acceleration:
+Right:
+$88/9031 BD C1 C8    LDA $C8C1,x[$86:C8C5]   A:0904 X:0004 Y:0060 
+Left:
+$88/9031 BD C1 C8    LDA $C8C1,x[$86:C8C6]   A:0905 X:0005 Y:0000 P:enVMXdizC
+$88/9034 85 1F       STA $1F    [$00:0E87]   A:0910 X:0005 Y:0000 P:enVMXdizC
+
+Initial speed:
+Right:
+0x40F77:
+A9 C0 01
+Left:
+$88/8F7E A9 40 FE    LDA #$FE40              A:01C0 X:0000 Y:0000 P:envmXdiZc
+$88/8F81 85 1A       STA $1A    [$00:0E82]   A:FE40 X:0000 Y:0000 P:eNvmXdizc
+
+Acceleration change when hitting and bouncing off a wall (unchanged):
+0x41298:
+A9 40 85 1E
+
+Acceleration1 when turning:
+0x4112B:
+A9 08 85 1F
+
+Max speed routine:
+$88/9085 BD B5 C8    LDA $C8B5,x[$86:C8BD]   A:C108 X:0008 Y:0008 P:envmXdizc -->
+$88/9088 24 36       BIT $36    [$00:0E9E]   A:01C0 X:0008 Y:0008 P:envmXdizc
+$88/908A 70 0A       BVS $0A    [$9096]      A:01C0 X:0008 Y:0008 P:enVmXdiZc
+$88/9096 C5 1A       CMP $1A    [$00:0E82]   A:01C0 X:0008 Y:0008 P:enVmXdiZc
+$88/9098 10 09       BPL $09    [$90A3]      A:01C0 X:0008 Y:0008 P:enVmXdiZC
+
+Offsets:
+Right - Normal:
+348BD: C0 01 --> 80 02
+Left - Normal:
+348BF: C0 01 --> 80 02 
+Left and Right - Hard Slope Downwards:
+348B5: 02 40 --> C0 02
+Left and Right - Hard Slope Upwards:
+348B7: 40 01 --> 00 02
+Left and Right - Soft Slope Downwards:

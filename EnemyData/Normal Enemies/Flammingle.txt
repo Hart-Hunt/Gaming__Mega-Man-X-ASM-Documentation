@@ -1,0 +1,24 @@
+Flammingle:
+
+Old documentation:
+
+Projectile speed:
+$81/ABE0 BD B7 EE    LDA $EEB7,x[$86:EF0F]   A:0258 X:0058 Y:0000 P:envmXdizc
+$81/ABE3 85 1A       STA $1A    [$00:1442]   A:FE28 X:0058 Y:0000 P:eNvmXdizc
+$81/ABE5 BD B9 EE    LDA $EEB9,x[$86:EF11]   A:FE28 X:0058 Y:0000 P:eNvmXdizc
+$81/ABE8 85 1C       STA $1C    [$00:1444]   A:FF3D X:0058 Y:0000 P:eNvmXdizc
+$81/ABE0 BD B7 EE    LDA $EEB7,x[$86:EF1B]   A:0064 X:0064 Y:0003 P:envmXdizc
+Vectores para cada velocidad. Para cambiar su velocidad se debe calcular el valor absoluto del vector suma, reducir ese valor absoluto y calcular los valores resultantes de los vectores velocidad x e y.
+36F0F: --> 28 FE
+36F11: --> 3D FF
+36F1B: --> 0B FE
+C0E0: A9 78 --> A9 18 (Delay after projectile)
+17A8DD: 20 --> 10 (Delay before projectile)
+
+
+_____________________________________
+
+Minimum distance for Flammingle to shoot you:
+
+0x34551 (Counts downwards from FF)
+CD --> 80

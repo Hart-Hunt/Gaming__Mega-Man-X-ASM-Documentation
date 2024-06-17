@@ -1,0 +1,10 @@
+Spikey:
+
+Initial speed:
+L: 11CB2: A9 80 FE --> A9 C0 FD
+R: 11CA8: A9 80 01 --> A9 40 02
+Speed without slope:
+L: 11CF4: A9 80 FE --> A9 C0 FD
+R: 11CFE: A9 80 01 --> A9 40 02
+Acceleration in slope:
+11DA9: A9 04 --> A9 0A

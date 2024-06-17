@@ -1,0 +1,110 @@
+Ball de Voux:
+17BB48: 0C --> 08 Delay before step
+17BB4B: 0C --> 08
+17BB4E: 0C --> 08
+17BB51: 0C --> 08
+17BB54: 0C --> 08
+17BB57: 0C --> 08
+17BB5A: 0C --> 08
+17BB5D: 0C --> 08
+17BBAC: 08 --> 04
+
+Bomb Been:
+11FA3: A9 5A --> A9 40 (Delay before stopping and dropping bombs)
+11FB8: A9 40 01 --> A9 80 01 (Speed to the right)
+11FC5: A9 C0 FE --> A9 80 FE (Speed to the left)
+10CFE: C9 04 --> C9 01 (Seconds before bomb exploding)
+
+Flammingle:
+Projectile speed:
+$81/ABE0 BD B7 EE    LDA $EEB7,x[$86:EF0F]   A:0258 X:0058 Y:0000 P:envmXdizc
+$81/ABE3 85 1A       STA $1A    [$00:1442]   A:FE28 X:0058 Y:0000 P:eNvmXdizc
+$81/ABE5 BD B9 EE    LDA $EEB9,x[$86:EF11]   A:FE28 X:0058 Y:0000 P:eNvmXdizc
+$81/ABE8 85 1C       STA $1C    [$00:1444]   A:FF3D X:0058 Y:0000 P:eNvmXdizc
+$81/ABE0 BD B7 EE    LDA $EEB7,x[$86:EF1B]   A:0064 X:0064 Y:0003 P:envmXdizc
+Vectores para cada velocidad. Para cambiar su velocidad se debe calcular el valor absoluto del vector suma, reducir ese valor absoluto y calcular los valores resultantes de los vectores velocidad x e y.
+C0E0: A9 78 --> A9 18 (Delay after projectile)
+17A8DD: 20 --> 10 (Delay before projectile)
+
+Crag Man:
+17A9A4: 10 --> 04
+17A9A7: 20 --> 04
+17A9AA: 05 --> 02
+17A9B3: 14 --> 04
+17A387: 04 --> 02
+17A38A: 04 --> 02
+17A38D: 04 --> 02
+17A390: 04 --> 02
+17A393: 04 --> 02
+17A396: 04 --> 02
+17A399: 04 --> 02
+1D8F4: C9 50 00 --> C9 70 00 (Distance before falling)
+
+Mad Pecker:
+1281D: A9 12 --> A9 06
+128FB: A9 3C --> A9 10
+12921: A9 12 --> A9 06
+
+Mole Borer:
+Speed: 0x1C082: A9 40 01 --> A9 A0 02
+
+
+
+
+TO ADD:
+
+Ray Bit:
+Projectile Speed:
+L: 3D830: A9 C0 FD --> A9 60 FD
+R: 3D825: A9 40 02 --> A9 A0 02
+Delay after Jump: 3D71D: A9 1E --> A9 10
+Delay after beam: 3D84F: A9 1E --> A9 10
+
+Spikey:
+Initial speed:
+L: 11CB2: A9 80 FE --> A9 00 FE
+R: 11CA8: A9 80 01 --> A9 00 02
+Speed without slope:
+L: 11CF4: A9 80 FE --> A9 00 FE
+R: 11CFE: A9 80 01 --> A9 00 02
+Acceleration in slope:
+11DA9: A9 04 --> A9 10
+
+Snowball:
+Initial:
+3E072: A9 80 FF --> A9 00 FF 
+Acceleration in slope:
+3E068: A8 0C --> A9 0E
+
+Turn Cannon:
+Duration of bullets:
+1A672: A9 60 --> A9 80
+1AE5A: A9 60 --> A9 80
+Downwards:
+Diagonal Shots:
+D: 39B17: A9 90 FE --> A9 00 FE
+U: 39B0C: A9 70 01 --> A9 00 02
+L: 39AFC: A9 90 FE --> A9 00 FE
+R: 39B01: A9 70 01 --> A9 00 02
+Horizontal shots:
+R: 39AB8: A9 00 02 --> A9 D4 02
+L: 39AB3: A9 00 FE --> A9 2C FD
+
+Mega Tortoise:
+3EC8B: A9 28 --> A9 01 (Initial Delay)
+3ECB2: A9 30 --> A9 20 (Delay after two missiles)
+1AD9A: A9 06 06 --> A9 20 05 (Initial vertical speed missiles)
+
+Hoganmer:
+1AFF8: A9 3C --> A9 20
+
+Storm Eagle Platforms speed:
+L: 1F23B: A9 00 FF --> A9 00 FE
+R: 1F20D: A9 00 01 --> A9 00 02
+
+Scrap Robo (shooter)
+Beam speed:
+L: 39E17: A9 00 FC --> A9 00
+R: 39E09: A9 00 04 --> A9 00
+Delay after beam:
+39DD0: A9 50 --> A9 40

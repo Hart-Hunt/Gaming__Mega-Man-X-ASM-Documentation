@@ -1,0 +1,39 @@
+Turn Cannon:
+Duration of bullets:
+1A672: A9 60 --> A9 48
+1AE5A: A9 60 --> A9 48
+Downwards:
+Diagonal Shots:
+D: 39B17: A9 90 FE --> A9 00 FE
+U: 39B0C: A9 70 01 --> A9 00 02
+L: 39AFC: A9 90 FE --> A9 00 FE
+R: 39B01: A9 70 01 --> A9 00 02
+Horizontal shots:
+R: 39AB8: A9 00 02 --> A9 D4 02
+L: 39AB3: A9 00 FE --> A9 2C FD
+
+
+Delay before shooting - 1
+0x17DD6A:
+20
+-->
+10
+
+Delay after shooting - 1
+0x17DD73:
+20
+-->
+10
+
+
+Delay before shooting - 2
+0x17DD85:
+20
+-->
+10
+
+Delay after shooting - 2
+0x17DD8E:
+20
+-->
+10

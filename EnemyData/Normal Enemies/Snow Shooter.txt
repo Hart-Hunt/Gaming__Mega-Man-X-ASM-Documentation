@@ -1,0 +1,19 @@
+RAM vale used for delay timer:
+7E0E9B
+
+
+States:
+02: Idle
+04: Shooting
+
+
+02: Idle:
+
+Delay in idle state:
+0x3DFB8:
+A9 5A --> A9 20
+
+04: Shooting:
+Delay before shooting (Can't change, tied with animation)
+0x3DF49:
+A9 30 --> A9 30

@@ -1,0 +1,15 @@
+Bee Blader:
+7E0E68
+7E0E6D: X position
+7E0E6F: Y position
+
+
+0x13BE9: C9 0C --> C9 18 Counter for how many movements BB should do before changing direction (upward or downward)
+
+0x13991: A9 40 00 --> A9 60 00 Speed of ascend / descend
+
+
+0x35A31: X-position falling platform (BB 1)
+90 10
+0x35A35: Y-position falling platform (BB 1)
+98 01

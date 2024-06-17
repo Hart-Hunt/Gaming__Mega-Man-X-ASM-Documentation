@@ -1,0 +1,13 @@
+Old documentation:
+
+Ray Bit:
+Projectile Speed:
+L: 3D830: A9 C0 FD --> A9 60 FD
+R: 3D825: A9 40 02 --> A9 A0 02
+Delay after Jump: 3D71D: A9 1E --> A9 10
+Delay after beam: 3D84F: A9 1E --> A9 10
+
+Movement speed:
+Jump:
+L: 3D780: A9 80 FE --> A9 40 FE
+R: 3D776: A9 80 01 --> A9 C0 01

@@ -1,0 +1,55 @@
+Max Speed - Right:
+0xDB23:
+C9 00 02 --> C9 00 04
+0xDB2A:
+A9 00 02 --> A9 00 04
+
+Max Speed - Left:
+0xDB3B:
+C9 00 FE --> C9 00 FC
+0xDB40:
+A9 00 FE --> A9 00 FC
+
+Acceleration:
+0xD7E0:
+A9 10 --> A9 20
+
+
+Delay before turning:
+0xD7A5:
+A9 20 --> A9 10
+
+Delay before shooting
+Pauses while turning
+0x34927:
+64 --> 30
+
+Bullet speed - Right:
+0x10C3C:
+A9 00 04 --> A9 80 04
+Bullet speed - Left:
+0x10C41:
+A9 00 FC --> A9 80 FB
+
+Wrecked car:
+Max speed - Right:
+0xD905:
+C9 80 01 --> C9 80 02
+0xD90E:
+A9 80 01 --> A9 80 02
+Max speed - Left:
+0xD913:
+A9 80 FE --> A9 80 FD
+_____________________
+
+Ship
+
+7e0E9D
+
+Delay before sending first Road Attacker:
+0x414C4:
+A9 78 00 --> A9 20 00
+
+Delay before sending another Road Attacker:
+0x4154F:
+A9 F0 --> A9 80

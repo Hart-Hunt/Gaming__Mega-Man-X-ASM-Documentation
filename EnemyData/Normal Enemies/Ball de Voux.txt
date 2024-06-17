@@ -1,0 +1,12 @@
+Old documentation
+
+Ball de Voux:
+17BB48: 0C --> 08 Delay before step
+17BB4B: 0C --> 08
+17BB4E: 0C --> 08
+17BB51: 0C --> 08
+17BB54: 0C --> 08
+17BB57: 0C --> 08
+17BB5A: 0C --> 08
+17BB5D: 0C --> 08
+17BBAC: 08 --> 04
