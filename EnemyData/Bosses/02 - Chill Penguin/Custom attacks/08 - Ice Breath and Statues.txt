@@ -1,0 +1,316 @@
+Action 08
+
+Ice Breath and ice statues
+
+RAM data for ice breath:
+7E1428
+7E1468
+7E14A8
+7E14E8
+7E1528
+7E1568
+RAM data for statues:
+7E15A8
+7E15E8
+
+
+Subaction [$03] [7E0E6B]
+00	Initial frame
+02	Leaning back before ice breath
+04	Ice Breath
+06	Ice Statues spawn
+08	End of attack, ice breath lasts a little longer
+
+Attack:
+$84/8F34 B1 14       LDA ($14),y[$AF:CFE0]   A:0000 X:0135 Y:0000 P:envmxdiZc
+$84/8F36 65 14       ADC $14    [$00:0E7C]   A:0022 X:0135 Y:0000 P:envmxdizc
+$84/8F38 85 14       STA $14    [$00:0E7C]   A:D002 X:0135 Y:0000 P:eNvmxdizc
+AFD002
+
+Penguin exhalating:
+$84/8F34 B1 14       LDA ($14),y[$AF:CFFC]   A:001C X:0135 Y:001C P:envmxdizc
+$84/8F36 65 14       ADC $14    [$00:0E7C]   A:00D1 X:0135 Y:001C P:envmxdizc
+$84/8F38 85 14       STA $14    [$00:0E7C]   A:D0B1 X:0135 Y:001C P:eNvmxdizc
+
+
+Breath particles:
+$84/8F34 B1 14       LDA ($14),y[$AF:CFFE]   A:001E X:0135 Y:001E P:envmxdizc
+$84/8F36 65 14       ADC $14    [$00:143C]   A:00D9 X:0135 Y:001E P:envmxdizc
+$84/8F38 85 14       STA $14    [$00:143C]   A:D0B9 X:0135 Y:001E P:eNvmxdizc
+
+
+________________________________________________________
+
+Changing Ice Breath's position:
+
+$81/BF26 D0 31       BNE $31    [$BF59]      A:0000 X:1428 Y:0002 P:envMxdiZc
+$81/BF28 FE 00 00    INC $0000,x[$86:1428]   A:0000 X:1428 Y:0002 P:envMxdiZc
+$81/BF2B A9 1A       LDA #$1A                A:0000 X:1428 Y:0002 P:envMxdizc
+$81/BF2D 9D 0A 00    STA $000A,x[$86:1432]   A:001A X:1428 Y:0002 P:envMxdizc
+$81/BF30 9E 0B 00    STZ $000B,x[$86:1433]   A:001A X:1428 Y:0002 P:envMxdizc
+$81/BF33 A5 11       LDA $11    [$00:0E79]   A:001A X:1428 Y:0002 P:envMxdizc
+$81/BF35 29 40       AND #$40                A:0029 X:1428 Y:0002 P:envMxdizc
+$81/BF37 9D 11 00    STA $0011,x[$86:1439]   A:0000 X:1428 Y:0002 P:envMxdiZc
+$81/BF3A 0A          ASL A                   A:0000 X:1428 Y:0002 P:envMxdiZc
+$81/BF3B 0A          ASL A                   A:0000 X:1428 Y:0002 P:envMxdiZc
+$81/BF3C C2 20       REP #$20                A:0000 X:1428 Y:0002 P:envMxdiZc
+$81/BF3E A9 1A 00    LDA #$001A              A:0000 X:1428 Y:0002 P:envmxdiZC	Load Distance from penguin
+$81/BF41 B0 03       BCS $03    [$BF46]      A:001A X:1428 Y:0002 P:envmxdizC	Branch if shooting right
+$81/BF46 18          CLC                     A:001A X:1428 Y:0002 P:envmxdizC	|
+$81/BF47 65 05       ADC $05    [$00:0E6D]   A:001A X:1428 Y:0002 P:envmxdizc	| Add Boss's X-Coor
+$81/BF49 9D 05 00    STA $0005,x[$86:142D]   A:1EA4 X:1428 Y:0002 P:envmxdizc	Store Breath's X-Coor
+$81/BF4C A5 08       LDA $08    [$00:0E70]   A:1EA4 X:1428 Y:0002 P:envmxdizc	Load Boss's Y-Coor
+$81/BF4E 38          SEC                     A:01AC X:1428 Y:0002 P:envmxdizc	|
+$81/BF4F E9 02 00    SBC #$0002              A:01AC X:1428 Y:0002 P:envmxdizC	|Subtract #$0002
+$81/BF52 9D 08 00    STA $0008,x[$86:1430]   A:01AA X:1428 Y:0002 P:envmxdizC	Store Breath's Y-Coor
+-->
+$81/BF3E
+08					PHP
+22 90 F1 84			JSL $84F190 [$84:F190]
+28					PLP
+A5 08				LDA $08
+38					SEC
+69 0A 00			ADC #$000A
+9D 08 00			STA $0008,X [$86:1430]
+
+
+$84/F190
+XXXXXX:
+
+AD AD 0B			LDA $0BAD [$00:0BAD]				LDA MM-X
+18					CLC									CLC
+ED 56 1E			SBC $1E56 [$00:1E56]				SBC CA-L
+C9 28 00			CMP #$0028							CMP DI-L
+10 1B (a)			BPL $1B (a)							BPL (a)
+	AD 56 1E			LDA $1E56 [$00:1E56]				LDA CA-L
+	18					CLC									CLC
+	69 14 00			ADC #$0014							ADC DI-L
+	48					PHA
+	E2 20				SEP #$20							|1 byte acc
+	A5 11				LDA $11 [$00:0E79]					|
+	29 40				AND #$40							|
+	0A					ASL									|
+	0A					ASL									|
+	B0 49				BCS $49								|If shooting right branch to (c)
+		C2 20				REP #$20							2 byte acc
+		68					PLA									ONE EXTRA PULL (C)
+		18					CLC									CLC
+		69 52 00			ADC #$0052							ADC BR-L (66 IN TOTAL)
+		80 45 (c1)			BRA $45 (c1)						BRA (c1)
+
+(a)														(a)
+
+C9 C0 00			CMP #$00C0							CMP DI-R
+30 1B (b)			BMI $1B (b)							BMI (b)
+	AD 56 1E			LDA $1E56 [$00:1E56]				LDA CA-L
+	18					CLC									CLC
+	69 E8 00			ADC #$00E8							ADC DI-R
+
+	48					PHA
+	E2 20				SEP #$20							|1 byte acc
+	A5 11				LDA $11 [$00:0E79]					|
+	29 40				AND #$40							|
+	0A					ASL									|
+	0A					ASL									|
+	90 29				BCC $29								|If shooting left branch to (c)
+
+		C2 20				REP #$20							2 byte acc
+		68					PLA
+		18					CLC									CLC
+		E9 4C 00			SBC #$004C							SBC BR-L
+		80 25 (c1)			BRA $25 (c1)						BRA (c1)
+
+(b)														(b)
+
+AD AD 0B			LDA $0BAD [$00:0BAD]				LDA MM-X
+48					PHA
+E2 20				SEP #$20							|1 byte acc
+A5 11				LDA $11 [$00:0E79]					|
+29 40				AND #$40							|
+0A					ASL									|
+0A					ASL									|
+B0 09				BCS $09								|If shooting right branch to (b1)
+
+	C2 20				REP #$20							2 byte acc
+	68					PLA
+	18					CLC									CLC
+	69 30 00			ADC #$0030							SBC (BR-L/2)
+	80 0E (c)			BRA $0E (c1)							BRA (c1)
+
+(b1)													(b1)
+
+C2 20				REP #$20							2 byte acc
+68					PLA
+18					CLC									CLC
+E9 1C 00			SBC #$001C							ADC (BR-L/2)
+80 05				BRA $05
+
+(c)					[$81:F1F2]									(c)
+
+C2 20				REP #$20							2 byte acc
+68					PLA
+80 02				BRA $02
+
+(c1)															(c1)
+C2 20				REP #$20
+9D 05 00			STA $0005,x [$86:142D]				STA BR-X
+6B					RTL									RTL
+
+
+Left Border:
+7E:1E56
+
+Right Border:
+7E:1E58
+
+Top Border:
+7E:1E5A
+
+Ice Breath coordinates:
+
+MM-X = X's X-Coor
+MM-Y = X's Y-Coor
+CA-L = Camera's Left Border
+CA-R = Camera's Right Border
+CA-T = Camera's Top Border
+DI-L = Constant. Minimum distance from CA-L = 0020
+DI-R = Constant. Maximum distance from CA-L = 00E0
+DI-T = Constant. Maximum distance from CA-T = 0050
+BR-X = Breath's X-Coor
+BR-Y = Breath's Y-Coor
+BR-L = Constant. Breath's Length = 0060
+
+$7E:15A8 = First ice statue
+$7E:15E8 = Second ice statue
+
+
+Ice breath duration before ice statues spawn:
+$81/BA60 A9 3C       LDA #$3C                A:D080 X:0035 Y:0002 P:envMXdizc
+$81/BA62 85 34       STA $34    [$00:0E9C]   A:D03C X:0035 Y:0002 P:envMXdizc
+$81/BA64 A9 72       LDA #$72                A:D03C X:0035 Y:0002 P:envMXdizc
+$81/BA66 22 A2 88 80 JSL $8088A2[$80:88A2]   A:D072 X:0035 Y:0002 P:envMXdizc
+
+$81/BA60:
+--> A9 2C
+
+Ice breath's duration after ice statues spawn:
+$81/BA8C A9 06       LDA #$06                A:0E68 X:00E8 Y:0002 P:envMXdizC
+$81/BA8E 85 03       STA $03    [$00:0E6B]   A:0E06 X:00E8 Y:0002 P:envMXdizC
+$81/BA90 A9 3C       LDA #$3C                A:0E06 X:00E8 Y:0002 P:envMXdizC
+$81/BA92 85 34       STA $34    [$00:0E9C]   A:0E3C X:00E8 Y:0002 P:envMXdizC
+$81/BA94 60          RTS                     A:0E3C X:00E8 Y:0002 P:envMXdizC
+
+$81/BA90:
+--> A9 2C
+
+
+________________________________________________________
+
+Distance between ice statues:
+$81/BA76 A9 30       LDA #$30                A:0E68 X:0068 Y:0002 P:envMXdiZc	First statue
+$81/BA81 A9 50       LDA #$50                A:0E68 X:00A8 Y:0002 P:envMXdizC	Second statue
+--> A9 4A
+
+Ice statues coordinate routine:
+
+$81/BF60 D0 34       BNE $34    [$BF96]      A:0000 X:15A8 Y:0002 P:envMxdiZc
+$81/BF62 FE 00 00    INC $0000,x[$86:15A8]   A:0000 X:15A8 Y:0002 P:envMxdiZc	Base offset
+$81/BF65 A9 1A       LDA #$1A                A:0000 X:15A8 Y:0002 P:envMxdizc
+$81/BF67 9D 0A 00    STA $000A,x[$86:15B2]   A:001A X:15A8 Y:0002 P:envMxdizc	Object ID
+$81/BF6A A9 01       LDA #$01                A:001A X:15A8 Y:0002 P:envMxdizc
+$81/BF6C 9D 0B 00    STA $000B,x[$86:15B3]   A:0001 X:15A8 Y:0002 P:envMxdizc
+$81/BF6F A5 11       LDA $11    [$00:0E79]   A:0001 X:15A8 Y:0002 P:envMxdizc
+$81/BF71 29 40       AND #$40                A:0029 X:15A8 Y:0002 P:envMxdizc
+$81/BF73 9D 11 00    STA $0011,x[$86:15B9]   A:0000 X:15A8 Y:0002 P:envMxdiZc
+$81/BF76 0A          ASL A                   A:0000 X:15A8 Y:0002 P:envMxdiZc
+$81/BF77 0A          ASL A                   A:0000 X:15A8 Y:0002 P:envMxdiZc
+$81/BF78 C2 20       REP #$20                A:0000 X:15A8 Y:0002 P:envMxdiZc
+$81/BF7A AD 00 00    LDA $0000  [$86:0000]   A:0000 X:15A8 Y:0002 P:envmxdiZc	|INSERT ROUTINE HERE
+$81/BF7D B0 04       BCS $04    [$BF83]      A:0030 X:15A8 Y:0002 P:envmxdizc	|
+$81/BF7F 49 FF FF    EOR #$FFFF              A:0030 X:15A8 Y:0002 P:envmxdizc	|
+$81/BF82 1A          INC A                   A:FFCF X:15A8 Y:0002 P:eNvmxdizc	|
+$81/BF83 18          CLC                     A:FFD0 X:15A8 Y:0002 P:eNvmxdizc	|INSERT EXPERIMENT HERE
+$81/BF84 65 05       ADC $05    [$00:0E6D]   A:FFD0 X:15A8 Y:0002 P:eNvmxdizc	|Add Chill's X-Coor
+$81/BF86 9D 05 00    STA $0005,x[$86:15AD]   A:1E5A X:15A8 Y:0002 P:envmxdizC	|Store X-Coor
+$81/BF89 A5 08       LDA $08    [$00:0E70]   A:1E5A X:15A8 Y:0002 P:envmxdizC	|Load Chill's Y-Coor
+$81/BF8B 38          SEC                     A:01AC X:15A8 Y:0002 P:envmxdizC	|
+$81/BF8C E9 10 00    SBC #$0010              A:01AC X:15A8 Y:0002 P:envmxdizC	| EXPERIMENT TIL HERE
+$81/BF8F 9D 08 00    STA $0008,x[$86:15B0]   A:019C X:15A8 Y:0002 P:envmxdizC	|Store Y-Coor
+$81/BF92 7B          TDC                     A:019C X:15A8 Y:0002 P:envmxdizC		|Don't mess with this
+$81/BF93 9D 0C 00    STA $000C,x[$86:15B4]   A:0E68 X:15A8 Y:0002 P:envmxdizC		|
+$81/BF96 E2 30       SEP #$30                A:0E68 X:15A8 Y:0002 P:envmxdizC		|
+$81/BF98 60          RTS                     A:0E68 X:00A8 Y:0002 P:envMXdizC
+
+$81/BF7A:
+22 10 F2 84
+22 50 F2 84
+EA EA EA EA
+EA EA EA
+EA EA
+EA 
+EA EA EA
+EA EA EA
+          
+
+$84/F210:
+XXXXXX:
+
+AD AD 0B			LDA $0BAD [$00:0BAD]				LDA MM-X
+18					CLC									CLC
+ED 56 1E			SBC $1E56 [$00:1E56]				SBC CA-L
+C9 28 00			CMP #$0028							CMP DI-L
+10 0C (a)			BPL $0C (a)							BPL (a)
+	AD 56 1E			LDA $1E56 [$00:1E56]				LDA CA-L
+	18					CLC									CLC
+	E9 12 00			SBC #$0012							ADC DI-L
+	6D 00 00			ADC $0000 [$86:0000]
+	80 1B (c)			BRA $1B (c)						BRA (c)
+
+(a)														(a)
+
+C9 D0 00			CMP #$00D0							CMP DI-R
+30 0C (b)			BMI $0C (b)							BMI (b)
+	AD 56 1E			LDA $1E56 [$00:1E56]				LDA CA-L
+	18					CLC									CLC
+	69 9A 00			ADC #$009A							ADC DI-R
+	6D 00 00			ADC $0000 [$86:0000]			
+	80 0A (c)			BRA $0A (c)						BRA (c)
+
+(b)														(b)
+
+AD AD 0B			LDA $0BAD [$00:0BAD]				LDA MM-X
+18					CLC
+E9 3C 00			SBC #$003C
+6D 00 00			ADC $0000 [$86:0000]
+
+(c)					[]									(c)
+
+9D 05 00			STA $0005,x [$86:142D]				STA BR-X
+6B					RTL									RTL
+
+
+$84/F250:
+YYYYYY:
+AD B0 0B			LDA $0BB0 [$00:0BB0]				LDA MM-Y
+18					CLC									CLC
+ED 5A 1E			SBC $1E5A [$00:1E54]				SBC CA-T
+C9 80 00			CMP #$0080							CMP DI-T
+10 09 (a)			BPL $09 (a)							BPL (a)
+	AD 5A 1E			LDA $1E5A [$00:1E5A]				LDA CA-T
+	18					CLC									CLC
+	69 1E 00			ADC #$001E							ADC DI-T
+	80 07 (b)			BRA $07 (b)							BRA (b)
+(a)														(a)
+AD B0 0B			LDA $0BB0 [$00:0BB0]				LDA MM-Y
+18					CLC									CLC
+E9 58 00			SBC #$0058							SBC DI-T
+(b)														(b)
+9D 08 00    		STA $0008,x [$86:1430]				STA BR-Y
+6B
+
+
+Ice statues skeleton
+$84/8F34 B1 14       LDA ($14),y[$AF:D0FC]   A:0000 X:0138 Y:0000 P:envmxdiZc
+$84/8F36 65 14       ADC $14    [$00:15BC]   A:0004 X:0138 Y:0000 P:envmxdizc
+$84/8F38 85 14       STA $14    [$00:15BC]   A:D100 X:0138 Y:0000 P:eNvmxdizc
+
