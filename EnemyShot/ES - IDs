@@ -1,0 +1,55 @@
+.------------.
+|EnemyShot ID|
+'------------'
+
+01	
+02	
+03	
+04	Armored Armadillo Counter Beam
+	SubID (01,08): Direction it loads in Initial frame routine
+05	
+06	Chill Penguin Ice Block
+07	
+08	
+09	
+0A	Some sort of beam (Works with Penguin)
+0B	
+0C	
+0D	
+0E	
+10	
+11	
+12	
+13	
+14	
+15	
+16	Vile paralysis shot
+17	
+18	
+19	
+1A	Ice Breath / Statues (Chill Penguin)
+	00	Breath
+	01	Ice Statue
+1B	
+1C	
+1D	
+1E	
+1F	
+20	
+21	
+22	
+23	
+24	Tornado (Storm Eagle)
+25	
+26	
+27	
+28	Spark (Spark Mandrill)
+	00	Default direction
+	28	Inverse direction
+29	
+2A	D-Rex purple shot
+2B	
+2C	
+2D	
+2E	
+2F	

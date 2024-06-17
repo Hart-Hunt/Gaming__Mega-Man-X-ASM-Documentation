@@ -1,0 +1,31 @@
+.--------------------.
+|Wind (Chill Penguin)|
+'--------------------'
+Misc ID: 12
+
+$1B				$7E1643			On			#$00 = Wind is off. #$01 = Wind is on.
+$1F3F			$7E1F3F			WindCD		Countdown for wind.
+
+$01 			$7E1629			State		Used in Misc to indicate current action
+	00			Initial Frame
+		$00C0 = #$13
+		$1F3F = #$00
+		M-Status = $7F8361 = #$29
+		M-X-Vel = #$10	--> To move the hook during the initial animation
+		M-On = #$00
+			CDSkeleton:
+			AFD0A1:
+			04 80 17
+			fd ff
+	02	Initial animation
+	04	Stand by
+		If M-On = #$00, return
+		If M-On = #$01 (Set by external routine [Chill Penguin]):
+			M-WindCD = #$78
+			Set M-Facing same as E-Facing
+			M-State = #$06
+			Load relevant values
+			Draw Wind
+	06	Wind
+		Keeps drawing Wind from a 3 frame cycle based on current M-WindCD
+		Adds value to MMX-X-Vel on the direction of M-Facing

@@ -1,0 +1,39 @@
+
+Layout:
+Offset			Byte	Offset					Description
+$00				1B		[$7E1428]		Exist			Object in memory flag. #$00 = No object in memory. #$01 = Object exists in memory.
+$01				1B		[$7E1429]		State			Object's State. With Enemy Shots, it signifies the current action.
+$02				1B		[$7E142A]		Action			Object's Action.
+$04				1B		[$7E142C]		X-subpos		Object's sub-pixel X-position.
+$05				2B		[$7E142D]		X-pos			Object's X-position, in pixels.
+$07				1B		[$7E142F]		Y-subpos		Object's sub-pixel Y-position.
+$08				2B		[$7E1430]		Y-pos			Object's Y-position, in pixels.
+$0A				1B		[$7E1432]		ID				Object ID.
+$0B				1B		[$7E1433]		SubID			Object SubID.
+$0C				2B		[$7E1434]		Parent			Associated Data. Can be an object or another enemy.
+$0F				1B		[$7E1437]		CDSkel			Byte used in Countdown routine for each Action to determine different routines.
+$13				1B		[$7E143B]		Countdown		Animation countdown (animates and reset when zero).
+$16				1B		[$7E143E]		CDPointer		Pointer for Countdown routine.
+$17				1B		[$7E143F]		Sprite			Object sprite (bits 0-7).
+$1A				2B		[$7E1442]		X-vel			Object X-velocity, in sub-pixels per frame.
+$1C				2B		[$7E1444]		Y-vel			Object Y-velocity, in negative sub-pixels per frame.
+$1E				1B		[$7E1446]		Y-acc			Object Y-acceleration, in sub-pixels per frame per frame.
+$1F				1B		[$7E1447]		X-acc			Object X-acceleration
+$20				2B		[$7E1448]		HitPoint		Pointer to Object's hitbox?
+$22				2B		[$7E144A]		X-pos-old		Object's Old X-position, in pixels.
+$24				2B		[$7E144C]		Y-pos-old		Object's Old Y-position, in pixels.
+$27				1B		[$7E144F]		HP				Object's current health.
+$2E				1B		[$7E1456]		Colission		Colission of tile object is on
+$2F				1B		[$7E1457]		Air				Used for checks in routines. #$00: On the Ground. #$FF: In the air
+$34				1B		[$7E145C]		CD2		Usual countdown timer.
+
+
+
+$26				1B		[$7E144C]					
+$28				1B		[$7E144E]		
+$2B				1B		[$7E0E93]		Contact		Bitflag for various purposes. 04 bit = Enemy is on the ground (Checked to change Subaction after falling)			
+$30				1B		[$7E1458]		
+
+
+_________________________________________________________________________________________________________________________
+

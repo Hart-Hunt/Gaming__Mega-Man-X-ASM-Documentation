@@ -1,0 +1,61 @@
+02,(01,08)	Counter Beam (Armored Armadillo)
+		00	Initial Frame
+			Increase ES-State = #$01
+			Sets $12, $18, $26, $28
+			Loads ES-X-Vel, ES-Y-Vel based on table and ES-SubID
+				CDSkeleton:
+				$AFCE48:
+				02 00 0b
+				02 00 0c
+				02 00 0d
+				02 80 0c
+				f4 ff
+			Continues CDSkeleton
+			Update X-Pos, Y-Pos
+			Various general checks
+			Updates unknown variables
+		02	Move
+			Continues CDSkeleton
+			Update X-Pos, Y-Pos
+			Various general checks
+			Updates unknown variables
+1A,00		Breath (Chill Penguin)
+		00	Initial Frame
+			Sets X-Vel
+			Sets CD2
+			Loads CDSkeleton
+				CDSkeleton:
+				AFD0B9:
+				01 00 20
+				01 00 21
+				01 00 22
+				01 00 23
+				01 00 24
+				01 00 25
+				01 00 26
+				01 00 27
+				01 00 28
+				01 00 29
+				01 00 1b
+				01 00 1c
+				01 00 1d
+				01 00 1e
+				01 80 1f
+				d3 ff
+		02	Move
+			Moves with X-Vel
+			Exists until CD2 = #$00
+	1A,02	Statue (Chill Penguin)
+		00	Initial Frame
+			Sets $26, $28, $30
+				CDSkeleton:
+				AFD100:
+				12 00 00
+				12 00 01
+				12 00 02
+				12 80 03	AFD109
+				f4 ff
+		04	Form
+			Continues CDSkeleton
+			At SkelAction #$80, check colissions, set X-Vel,Y-Vel,Y-Acc, change action
+		06	Fall

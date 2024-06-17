@@ -1,0 +1,106 @@
+Sum up routine #848F07
+
+Initial parameters:
+a	$16 (CDBase)	$0BBE				#$18
+b	A = $6F + $73	$#0C17 + #0C1B		#$22
+
+$000E = b	[AFA048]
+
+$14'1 = $AFA000,a*3 = #$A210
+DB = $AFA002,a*3 = #$AF
+
+$14'2 = ($14'1),b*2 + $14'1
+      = [A210 + 44] + $14'1
+      = [AFA254]    + $14'1
+      = #$0168      + #$A210
+      = #$A378
+
+$13 = ($14'2)   = [AFA378] = #$50		Countdown
+$0F = ($14'2),1 = [AFA379]
+$17 = ($14'2),2 = [AFA37A] + Bit #$80	CurrentSprite2 
+
+
+In other words:
+[Base +          Offset'1]
+[Base + [Base + Offset'2]]
+[A210 + [Base +      b*2]]	Value in b determines which value offsets from base.
+[A210 + [A210 +       44]]
+[A210 +            [A258]]
+[A210 +              0168]
+[AFA378] = #$50
+
+____________________________________________________________________________________________________________
+Routine to load Countdown Skeleton:
+81831C 22 07 8F 84 JSL $848F07   [848F07] A:0022 X:0018 Y:00CC S:012D D:0BA8 DB:86 nvMXdizc V:240 H: 26 F:52					JSL $848F07 --> Skeleton Load
+
+	848F07 08          PHP                    A:0022 X:0018 Y:00CC S:012A D:0BA8 DB:86 nvMXdizc V:240 H: 40 F:52				Push Processor Flags
+	848F08 8B          PHB                    A:0022 X:0018 Y:00CC S:0129 D:0BA8 DB:86 nvMXdizc V:240 H: 45 F:52				Push Bank Register
+	848F09 C2 30       REP #$30               A:0022 X:0018 Y:00CC S:0128 D:0BA8 DB:86 nvMXdizc V:240 H: 50 F:52				A:2B,X:1B
+	848F0B 8D 0E 00    STA $000E     [86000E] A:0022 X:0018 Y:00CC S:0128 D:0BA8 DB:86 nvmxdizc V:240 H: 54 F:52				$000E = A
+	848F0E A5 16       LDA $16       [000BBE] A:0022 X:0018 Y:00CC S:0128 D:0BA8 DB:86 nvmxdizc V:240 H: 63 F:52				|$14 [7E0BBC] = $AFA000,[7E0BBE]*3 = $AFA048 = #$A210
+	848F10 29 FF 00    AND #$00FF             A:0018 X:0018 Y:00CC S:0128 D:0BA8 DB:86 nvmxdizc V:240 H: 71 F:52				|
+	848F13 8D 0C 00    STA $000C     [86000C] A:0018 X:0018 Y:00CC S:0128 D:0BA8 DB:86 nvmxdizc V:240 H: 76 F:52				|
+	848F16 0A          ASL A                  A:0018 X:0018 Y:00CC S:0128 D:0BA8 DB:86 nvmxdizc V:240 H: 84 F:52				|
+	848F17 18          CLC                    A:0030 X:0018 Y:00CC S:0128 D:0BA8 DB:86 nvmxdizc V:240 H: 87 F:52				|
+	848F18 6D 0C 00    ADC $000C     [86000C] A:0030 X:0018 Y:00CC S:0128 D:0BA8 DB:86 nvmxdizc V:240 H: 90 F:52				|
+	848F1B AA          TAX                    A:0048 X:0018 Y:00CC S:0128 D:0BA8 DB:86 nvmxdizc V:240 H: 99 F:52				|
+	848F1C BF 00 A0 AF LDA $AFA000,X [AFA048] A:0048 X:0048 Y:00CC S:0128 D:0BA8 DB:86 nvmxdizc V:240 H:102 F:52				|	$14'1
+	848F20 85 14       STA $14       [000BBC] A:A210 X:0048 Y:00CC S:0128 D:0BA8 DB:86 Nvmxdizc V:240 H:111 F:52				|
+	848F22 E2 20       SEP #$20               A:A210 X:0048 Y:00CC S:0128 D:0BA8 DB:86 Nvmxdizc V:240 H:119 F:52				A:1B
+	848F24 BF 02 A0 AF LDA $AFA002,X [AFA04A] A:A210 X:0048 Y:00CC S:0128 D:0BA8 DB:86 NvMxdizc V:240 H:124 F:52				|DB = $AFA002,[7E0BBE]*3 = $AFA04A = #$AF
+	848F28 48          PHA                    A:A2AF X:0048 Y:00CC S:0128 D:0BA8 DB:86 NvMxdizc V:240 H:131 F:52				|
+	848F29 AB          PLB                    A:A2AF X:0048 Y:00CC S:0127 D:0BA8 DB:86 NvMxdizc V:240 H:146 F:52				|
+	848F2A C2 20       REP #$20               A:A2AF X:0048 Y:00CC S:0128 D:0BA8 DB:AF NvMxdizc V:240 H:153 F:52				A:2B
+	848F2C AD 0E 00    LDA $000E     [AF000E] A:A2AF X:0048 Y:00CC S:0128 D:0BA8 DB:AF Nvmxdizc V:240 H:157 F:52				|Y = $000E * 2
+	848F2F 29 FF 00    AND #$00FF             A:0022 X:0048 Y:00CC S:0128 D:0BA8 DB:AF nvmxdizc V:240 H:166 F:52				|CDPointer [7E0BBC] = ($14),Y + $14 = [#$A210 + #$0048] + [7E0BBC] = [AFA254] + [7E0BBC] = #$0168 + #$A210 = #$A378
+	848F32 0A          ASL A                  A:0022 X:0048 Y:00CC S:0128 D:0BA8 DB:AF nvmxdizc V:240 H:170 F:52				|
+	848F33 A8          TAY                    A:0044 X:0048 Y:00CC S:0128 D:0BA8 DB:AF nvmxdizc V:240 H:173 F:52				|
+	848F34 B1 14       LDA ($14),Y   [AFA254] A:0044 X:0048 Y:0044 S:0128 D:0BA8 DB:AF nvmxdizc V:240 H:176 F:52				|	($14'1),$000E*2
+	848F36 65 14       ADC $14       [000BBC] A:0168 X:0048 Y:0044 S:0128 D:0BA8 DB:AF nvmxdizc V:240 H:189 F:52				|
+	848F38 85 14       STA $14       [000BBC] A:A378 X:0048 Y:0044 S:0128 D:0BA8 DB:AF Nvmxdizc V:240 H:198 F:52				|
+	848F3A E2 30       SEP #$30               A:A378 X:0048 Y:0044 S:0128 D:0BA8 DB:AF Nvmxdizc V:240 H:206 F:52				A:1B,X:1B
+	848F3C B2 14       LDA ($14)     [AFA378] A:A378 X:0048 Y:0044 S:0128 D:0BA8 DB:AF NvMXdizc V:240 H:211 F:52				|Countdown = (CDPointer) = [AFA378] = #$50
+	848F3E 85 13       STA $13       [000BBB] A:A350 X:0048 Y:0044 S:0128 D:0BA8 DB:AF nvMXdizc V:240 H:221 F:52				|
+	848F40 A0 01       LDY #$01               A:A350 X:0048 Y:0044 S:0128 D:0BA8 DB:AF nvMXdizc V:240 H:227 F:52				|SkelAction = (Countdown),1 = [AFA379] = 00
+	848F42 B1 14       LDA ($14),Y   [AFA379] A:A350 X:0048 Y:0001 S:0128 D:0BA8 DB:AF nvMXdizc V:240 H:230 F:52				|
+	848F44 85 0F       STA $0F       [000BB7] A:A300 X:0048 Y:0001 S:0128 D:0BA8 DB:AF nvMXdiZc V:240 H:240 F:52				|
+	848F46 C8          INY                    A:A300 X:0048 Y:0001 S:0128 D:0BA8 DB:AF nvMXdiZc V:240 H:247 F:52				|Sprite = (Countdown),2 = [AFA37A] = 00 + Set bit $#80
+	848F47 B1 14       LDA ($14),Y   [AFA37A] A:A300 X:0048 Y:0002 S:0128 D:0BA8 DB:AF nvMXdizc V:240 H:250 F:52				|
+	848F49 85 17       STA $17       [000BBF] A:A300 X:0048 Y:0002 S:0128 D:0BA8 DB:AF nvMXdiZc V:240 H:260 F:52				|
+	848F4B A9 80       LDA #$80               A:A300 X:0048 Y:0002 S:0128 D:0BA8 DB:AF nvMXdiZc V:240 H:266 F:52				|
+	848F4D 04 17       TSB $17       [000BBF] A:A380 X:0048 Y:0002 S:0128 D:0BA8 DB:AF NvMXdizc V:240 H:269 F:52				|
+	[...]																														[...]
+
+____________________________________________________________________________________________________________
+Routine when Countdown = 00
+
+81B721 22 EA 8E 84 JSL $848EEA   [848EEA] A:C42D X:0002 Y:0027 S:012C D:0E68 DB:86 nvMXdizc V:249 H: 46 F:26				JSL $848EEA --> 00,02 routine
+
+	848EEA 08          PHP                    A:C42D X:0002 Y:0027 S:0129 D:0E68 DB:86 nvMXdizc V:249 H: 60 F:26			Push Processor Flags
+	848EEB 8B          PHB                    A:C42D X:0002 Y:0027 S:0128 D:0E68 DB:86 nvMXdizc V:249 H: 65 F:26			Push DB
+	848EEC E2 30       SEP #$30               A:C42D X:0002 Y:0027 S:0127 D:0E68 DB:86 nvMXdizc V:249 H: 70 F:26			A:1B,X:1B
+	848EEE C6 13       DEC $13       [000E7B] A:C42D X:0002 Y:0027 S:0127 D:0E68 DB:86 nvMXdizc V:249 H: 74 F:26			Decrease Countdown
+	848EF0 D0 5D       BNE $005D     [848F4F] A:C42D X:0002 Y:0027 S:0127 D:0E68 DB:86 nvMXdiZc V:249 H: 84 F:26			Branch if Countdown <> #$00
+	848EF2 A9 AF       LDA #$AF               A:C42D X:0002 Y:0027 S:0127 D:0E68 DB:86 nvMXdiZc V:249 H: 87 F:26			|DB = #$AF
+	848EF4 48          PHA                    A:C4AF X:0002 Y:0027 S:0127 D:0E68 DB:86 NvMXdizc V:249 H: 90 F:26			|
+	848EF5 AB          PLB                    A:C4AF X:0002 Y:0027 S:0126 D:0E68 DB:86 NvMXdizc V:249 H: 95 F:26			|
+	848EF6 C2 21       REP #$21               A:C4AF X:0002 Y:0027 S:0127 D:0E68 DB:AF NvMXdizc V:249 H:102 F:26			A:2B,X:1B
+	848EF8 A5 14       LDA $14       [000E7C] A:C4AF X:0002 Y:0027 S:0127 D:0E68 DB:AF NvmXdizc V:249 H:106 F:26			
+	848EFA 69 03 00    ADC #$0003             A:D028 X:0002 Y:0027 S:0127 D:0E68 DB:AF NvmXdizc V:249 H:115 F:26			
+	848EFD A4 0F       LDY $0F       [000E77] A:D02B X:0002 Y:0027 S:0127 D:0E68 DB:AF NvmXdizc V:249 H:119 F:26			Y = CDSkel
+	848EFF 10 37       BPL $0037     [848F38] A:D02B X:0002 Y:0000 S:0127 D:0E68 DB:AF nvmXdiZc V:249 H:126 F:26			Branch because SkelAction is positive
+	848F38 85 14       STA $14       [000E7C] A:D02B X:0002 Y:0000 S:0127 D:0E68 DB:AF nvmXdiZc V:249 H:130 F:26			CDPointer = CDPointer + #$03
+	848F3A E2 30       SEP #$30               A:D02B X:0002 Y:0000 S:0127 D:0E68 DB:AF nvmXdiZc V:249 H:149 F:26			A:1B,X:1B
+	848F3C B2 14       LDA ($14)     [AFD02B] A:D02B X:0002 Y:0000 S:0127 D:0E68 DB:AF nvMXdiZc V:249 H:153 F:26			|Countdown = ($14)
+	848F3E 85 13       STA $13       [000E7B] A:D00B X:0002 Y:0000 S:0127 D:0E68 DB:AF nvMXdizc V:249 H:163 F:26			|
+	848F40 A0 01       LDY #$01               A:D00B X:0002 Y:0000 S:0127 D:0E68 DB:AF nvMXdizc V:249 H:170 F:26			|
+	848F42 B1 14       LDA ($14),Y   [AFD02C] A:D00B X:0002 Y:0001 S:0127 D:0E68 DB:AF nvMXdizc V:249 H:173 F:26			|SkelAction = ($14),1
+	848F44 85 0F       STA $0F       [000E77] A:D000 X:0002 Y:0001 S:0127 D:0E68 DB:AF nvMXdiZc V:249 H:183 F:26			|
+	848F46 C8          INY                    A:D000 X:0002 Y:0001 S:0127 D:0E68 DB:AF nvMXdiZc V:249 H:189 F:26			|
+	848F47 B1 14       LDA ($14),Y   [AFD02D] A:D000 X:0002 Y:0002 S:0127 D:0E68 DB:AF nvMXdizc V:249 H:192 F:26			|Sprite = ($14),2
+	848F49 85 17       STA $17       [000E7F] A:D002 X:0002 Y:0002 S:0127 D:0E68 DB:AF nvMXdizc V:249 H:202 F:26			|
+	848F4B A9 80       LDA #$80               A:D002 X:0002 Y:0002 S:0127 D:0E68 DB:AF nvMXdizc V:249 H:209 F:26			|Set bit #$80 to Sprite
+	848F4D 04 17       TSB $17       [000E7F] A:D080 X:0002 Y:0002 S:0127 D:0E68 DB:AF NvMXdizc V:249 H:212 F:26			|
+	848F4F AB          PLB                    A:D080 X:0002 Y:0002 S:0127 D:0E68 DB:AF NvMXdiZc V:249 H:222 F:26			Pull DB
+	848F50 28          PLP                    A:D080 X:0002 Y:0002 S:0128 D:0E68 DB:86 NvMXdizc V:249 H:228 F:26			Pull Processor Flags
+	848F51 6B          RTL                    A:D080 X:0002 Y:0002 S:0129 D:0E68 DB:86 nvMXdizc V:249 H:235 F:26			Return
