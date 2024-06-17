@@ -1,0 +1,103 @@
+80D4F6 20 30 D5    JSR $D530     [80D530] A:0E01 X:0000 Y:0002 S:0133 D:0E68 DB:86 nvMXdizC V:  6 H:331 F:37
+
+	80D530 C2 20       REP #$20               A:0E01 X:0000 Y:0002 S:0131 D:0E68 DB:86 nvMXdizC V:  7 H:  1 F:37
+	80D532 A5 05       LDA $05       [000E6D] A:0E01 X:0000 Y:0002 S:0131 D:0E68 DB:86 nvmXdizC V:  7 H:  6 F:37
+	80D534 85 22       STA $22       [000E8A] A:1DD0 X:0000 Y:0002 S:0131 D:0E68 DB:86 nvmXdizC V:  7 H: 14 F:37
+	80D536 A5 08       LDA $08       [000E70] A:1DD0 X:0000 Y:0002 S:0131 D:0E68 DB:86 nvmXdizC V:  7 H: 23 F:37
+	80D538 85 24       STA $24       [000E8C] A:03A2 X:0000 Y:0002 S:0131 D:0E68 DB:86 nvmXdizC V:  7 H: 31 F:37
+	80D53A E2 20       SEP #$20               A:03A2 X:0000 Y:0002 S:0131 D:0E68 DB:86 nvmXdizC V:  7 H: 40 F:37
+	80D53C A9 80       LDA #$80               A:03A2 X:0000 Y:0002 S:0131 D:0E68 DB:86 nvMXdizC V:  7 H: 44 F:37
+	80D53E 14 0E       TRB $0E       [000E76] A:0380 X:0000 Y:0002 S:0131 D:0E68 DB:86 NvMXdizC V:  7 H: 47 F:37
+	80D540 A5 0A       LDA $0A       [000E72] A:0380 X:0000 Y:0002 S:0131 D:0E68 DB:86 NvMXdizC V:  7 H: 57 F:37
+	80D542 0A          ASL A                  A:0331 X:0000 Y:0002 S:0131 D:0E68 DB:86 nvMXdizC V:  7 H: 64 F:37
+	80D543 AA          TAX                    A:0362 X:0000 Y:0002 S:0131 D:0E68 DB:86 nvMXdizc V:  7 H: 67 F:37
+	80D544 7C DD F8    JMP ($F8DD,X) [80F93F] A:0362 X:0062 Y:0002 S:0131 D:0E68 DB:86 nvMXdizc V:  7 H: 70 F:37
+
+	80FAA6 22 E1 9B 88 JSL $889BE1   [889BE1] A:0362 X:0062 Y:0002 S:0131 D:0E68 DB:86 nvMXdizc V:  7 H: 79 F:37
+
+		889BE1 A6 01       LDX $01       [000E69] A:0362 X:0062 Y:0002 S:012E D:0E68 DB:86 nvMXdizc V:  7 H: 92 F:37
+		889BE3 7C E6 9B    JMP ($9BE6,X) [889BEA] A:0362 X:0004 Y:0002 S:012E D:0E68 DB:86 nvMXdizc V:  7 H: 99 F:37
+
+		889D6E A9 0E       LDA #$0E               A:0362 X:0004 Y:0002 S:012E D:0E68 DB:86 nvMXdizc V:  7 H:108 F:37
+		889D70 14 11       TRB $11       [000E79] A:030E X:0004 Y:0002 S:012E D:0E68 DB:86 nvMXdizc V:  7 H:111 F:37
+		889D72 A5 33       LDA $33       [000E9B] A:030E X:0004 Y:0002 S:012E D:0E68 DB:86 nvMXdizc V:  7 H:121 F:37
+		889D74 04 11       TSB $11       [000E79] A:0308 X:0004 Y:0002 S:012E D:0E68 DB:86 nvMXdizc V:  7 H:127 F:37
+		889D76 A6 02       LDX $02       [000E6A] A:0308 X:0004 Y:0002 S:012E D:0E68 DB:86 nvMXdiZc V:  7 H:147 F:37
+		889D78 FC 2C 9E    JSR ($9E2C,X) [889E2C] A:0308 X:0000 Y:0002 S:012E D:0E68 DB:86 nvMXdiZc V:  7 H:154 F:37
+
+			889E38 A6 03       LDX $03       [000E6B] A:0308 X:0000 Y:0002 S:012C D:0E68 DB:86 nvMXdiZc V:  7 H:167 F:37
+			889E3A 7C 3D 9E    JMP ($9E3D,X) [889E43] A:0308 X:0006 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:  7 H:173 F:37
+
+			889F14 22 A5 AC 84 JSL $84ACA5   [84ACA5] A:0308 X:0006 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:  7 H:182 F:37		JSL $84ACA5 --> Update Facing (40 bit)
+
+				84ACA5 08          PHP                    A:0308 X:0006 Y:0002 S:0129 D:0E68 DB:86 nvMXdizc V:  7 H:196 F:37
+				84ACA6 E2 20       SEP #$20               A:0308 X:0006 Y:0002 S:0128 D:0E68 DB:86 nvMXdizc V:  7 H:201 F:37
+				84ACA8 A9 40       LDA #$40               A:0308 X:0006 Y:0002 S:0128 D:0E68 DB:86 nvMXdizc V:  7 H:205 F:37
+				84ACAA 14 11       TRB $11       [000E79] A:0340 X:0006 Y:0002 S:0128 D:0E68 DB:86 nvMXdizc V:  7 H:208 F:37
+				84ACAC C2 20       REP #$20               A:0340 X:0006 Y:0002 S:0128 D:0E68 DB:86 nvMXdiZc V:  7 H:218 F:37
+				84ACAE AD AD 0B    LDA $0BAD     [860BAD] A:0340 X:0006 Y:0002 S:0128 D:0E68 DB:86 nvmXdiZc V:  7 H:223 F:37
+				84ACB1 38          SEC                    A:1D16 X:0006 Y:0002 S:0128 D:0E68 DB:86 nvmXdizc V:  7 H:231 F:37
+				84ACB2 E5 05       SBC $05       [000E6D] A:1D16 X:0006 Y:0002 S:0128 D:0E68 DB:86 nvmXdizC V:  7 H:234 F:37
+				84ACB4 E2 20       SEP #$20               A:FF46 X:0006 Y:0002 S:0128 D:0E68 DB:86 NvmXdizc V:  7 H:243 F:37
+				84ACB6 A9 00       LDA #$00               A:FF46 X:0006 Y:0002 S:0128 D:0E68 DB:86 NvMXdizc V:  7 H:247 F:37
+				84ACB8 6A          ROR A                  A:FF00 X:0006 Y:0002 S:0128 D:0E68 DB:86 nvMXdiZc V:  7 H:250 F:37
+				84ACB9 4A          LSR A                  A:FF00 X:0006 Y:0002 S:0128 D:0E68 DB:86 nvMXdiZc V:  7 H:253 F:37
+				84ACBA 04 11       TSB $11       [000E79] A:FF00 X:0006 Y:0002 S:0128 D:0E68 DB:86 nvMXdiZc V:  7 H:256 F:37
+				84ACBC 28          PLP                    A:FF00 X:0006 Y:0002 S:0128 D:0E68 DB:86 nvMXdiZc V:  7 H:266 F:37
+				84ACBD 6B          RTL                    A:FF00 X:0006 Y:0002 S:0129 D:0E68 DB:86 nvMXdizc V:  7 H:273 F:37
+
+			889F18 22 EA 8E 84 JSL $848EEA   [848EEA] A:FF00 X:0006 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:  7 H:283 F:37		JSL $848EEA --> Decrease CDSkel, Continue Skeleton
+
+				848EEA 08          PHP                    A:FF00 X:0006 Y:0002 S:0129 D:0E68 DB:86 nvMXdizc V:  7 H:297 F:37
+				848EEB 8B          PHB                    A:FF00 X:0006 Y:0002 S:0128 D:0E68 DB:86 nvMXdizc V:  7 H:302 F:37
+				848EEC E2 30       SEP #$30               A:FF00 X:0006 Y:0002 S:0127 D:0E68 DB:86 nvMXdizc V:  7 H:307 F:37
+				848EEE C6 13       DEC $13       [000E7B] A:FF00 X:0006 Y:0002 S:0127 D:0E68 DB:86 nvMXdizc V:  7 H:311 F:37
+				848EF0 D0 5D       BNE $005D     [848F4F] A:FF00 X:0006 Y:0002 S:0127 D:0E68 DB:86 nvMXdizc V:  7 H:321 F:37
+				848F4F AB          PLB                    A:FF00 X:0006 Y:0002 S:0127 D:0E68 DB:86 nvMXdizc V:  7 H:325 F:37
+				848F50 28          PLP                    A:FF00 X:0006 Y:0002 S:0128 D:0E68 DB:86 NvMXdizc V:  7 H:331 F:37
+				848F51 6B          RTL                    A:FF00 X:0006 Y:0002 S:0129 D:0E68 DB:86 nvMXdizc V:  7 H:338 F:37
+
+			889F1C C6 34       DEC $34       [000E9C] A:FF00 X:0006 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:  8 H:  8 F:37		Decrease CD2
+			889F1E D0 03       BNE $0003     [889F23] A:FF00 X:0006 Y:0002 S:012C D:0E68 DB:86 nvMXdiZc V:  8 H: 18 F:37		Branch if CD2 <> #$00
+			889F20 4C 62 A3    JMP $A362     [88A362] A:FF00 X:0006 Y:0002 S:012C D:0E68 DB:86 nvMXdiZc V:  8 H: 21 F:37		JMP $88A362 --> Next action routine
+
+			88A362 A5 02       LDA $02       [000E6A] A:FF00 X:0006 Y:0002 S:012C D:0E68 DB:86 nvMXdiZc V:  8 H: 26 F:37		|X = (Action*2) + #$03
+			88A364 0A          ASL A                  A:FF00 X:0006 Y:0002 S:012C D:0E68 DB:86 nvMXdiZc V:  8 H: 32 F:37		|
+			88A365 18          CLC                    A:FF00 X:0006 Y:0002 S:012C D:0E68 DB:86 nvMXdiZc V:  8 H: 35 F:37		|
+			88A366 69 03       ADC #$03               A:FF00 X:0006 Y:0002 S:012C D:0E68 DB:86 nvMXdiZc V:  8 H: 38 F:37		|
+			88A368 AA          TAX                    A:FF03 X:0006 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:  8 H: 41 F:37		|
+			88A369 A0 03       LDY #$03               A:FF03 X:0003 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:  8 H: 44 F:37		Y = #$03 (Maximum iterations)
+			88A36B 22 86 90 84 JSL $849086   [849086] A:FF03 X:0003 Y:0003 S:012C D:0E68 DB:86 nvMXdizc V:  8 H: 47 F:37		JSL $849086 --> Load A (2B) with RNG value
+
+				849086 08          PHP                    A:FF03 X:0003 Y:0003 S:0129 D:0E68 DB:86 nvMXdizc V:  8 H: 61 F:37
+				849087 C2 20       REP #$20               A:FF03 X:0003 Y:0003 S:0128 D:0E68 DB:86 nvMXdizc V:  8 H: 66 F:37
+				849089 AD A6 0B    LDA $0BA6     [860BA6] A:FF03 X:0003 Y:0003 S:0128 D:0E68 DB:86 nvmXdizc V:  8 H: 70 F:37
+				84908C 0A          ASL A                  A:A7D0 X:0003 Y:0003 S:0128 D:0E68 DB:86 NvmXdizc V:  8 H: 79 F:37
+				84908D 18          CLC                    A:4FA0 X:0003 Y:0003 S:0128 D:0E68 DB:86 nvmXdizC V:  8 H: 82 F:37
+				84908E 6D A6 0B    ADC $0BA6     [860BA6] A:4FA0 X:0003 Y:0003 S:0128 D:0E68 DB:86 nvmXdizc V:  8 H: 85 F:37
+				849091 EB          XBA                    A:F770 X:0003 Y:0003 S:0128 D:0E68 DB:86 NvmXdizc V:  8 H: 93 F:37
+				849092 E2 20       SEP #$20               A:70F7 X:0003 Y:0003 S:0128 D:0E68 DB:86 NvmXdizc V:  8 H: 98 F:37
+				849094 8D A7 0B    STA $0BA7     [860BA7] A:70F7 X:0003 Y:0003 S:0128 D:0E68 DB:86 NvMXdizc V:  8 H:102 F:37
+				849097 18          CLC                    A:70F7 X:0003 Y:0003 S:0128 D:0E68 DB:86 NvMXdizc V:  8 H:109 F:37
+				849098 6D A6 0B    ADC $0BA6     [860BA6] A:70F7 X:0003 Y:0003 S:0128 D:0E68 DB:86 NvMXdizc V:  8 H:112 F:37
+				84909B 8D A6 0B    STA $0BA6     [860BA6] A:70C7 X:0003 Y:0003 S:0128 D:0E68 DB:86 NvMXdizC V:  8 H:118 F:37
+				84909E 28          PLP                    A:70C7 X:0003 Y:0003 S:0128 D:0E68 DB:86 NvMXdizC V:  8 H:125 F:37
+				84909F 6B          RTL                    A:70C7 X:0003 Y:0003 S:0129 D:0E68 DB:86 nvMXdizc V:  8 H:131 F:37
+
+			88A36F 29 1F       AND #$1F               A:70C7 X:0003 Y:0003 S:012C D:0E68 DB:86 nvMXdizc V:  8 H:152 F:37		A = RNG (00-1F) 
+			88A371 38          SEC                    A:7007 X:0003 Y:0003 S:012C D:0E68 DB:86 nvMXdizc V:  8 H:155 F:37		
+			88A372 FD DB CF    SBC $CFDB,X   [86CFDE] A:7007 X:0003 Y:0003 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:158 F:37		
+			88A375 90 04       BCC $0004     [88A37B] A:7001 X:0003 Y:0003 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:164 F:37		Branch if RNG > Value in table $CFDB,X
+			88A377 CA          DEX                    A:7001 X:0003 Y:0003 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:167 F:37		Decrease X
+			88A378 88          DEY                    A:7001 X:0002 Y:0003 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:170 F:37		Decrease Y
+			88A379 D0 F6       BNE $00F6     [88A371] A:7001 X:0002 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:173 F:37		Repeat if not equal
+			88A371 38          SEC                    A:7001 X:0002 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:177 F:37
+			88A372 FD DB CF    SBC $CFDB,X   [86CFDD] A:7001 X:0002 Y:0002 S:012C D:0E68 DB:86 nvMXdizC V:  8 H:180 F:37
+			88A375 90 04       BCC $0004     [88A37B] A:70FB X:0002 Y:0002 S:012C D:0E68 DB:86 NvMXdizc V:  8 H:186 F:37		Branch because A < Value in table
+			88A37B 98          TYA                    A:70FB X:0002 Y:0002 S:012C D:0E68 DB:86 NvMXdizc V:  8 H:191 F:37		|Action = Y*2
+			88A37C 0A          ASL A                  A:7002 X:0002 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:  8 H:194 F:37		|
+			88A37D 85 02       STA $02       [000E6A] A:7004 X:0002 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:  8 H:197 F:37		|
+			88A37F 64 03       STZ $03       [000E6B] A:7004 X:0002 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:  8 H:203 F:37		Subaction = #$00
+			88A381 60          RTS                    A:7004 X:0002 Y:0002 S:012C D:0E68 DB:86 nvMXdizc V:  8 H:210 F:37		Return
+
+		889D7B AD CF 0B    LDA $0BCF     [860BCF] A:7004 X:0002 Y:0002 S:012E D:0E68 DB:86 nvMXdizc V:  8 H:220 F:37

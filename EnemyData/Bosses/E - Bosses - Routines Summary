@@ -1,0 +1,1461 @@
+.--------------.
+|Launch Octopus|
+'--------------'
+	Enemy ID: 07
+
+	$02,03 [$7E0E6A,$7E0E6B]	Action,Subaction.
+		Battle Start
+			When State 02 is set:
+				E-Action = #$00
+				E-HitPoint = #$C607			
+				E-Air = #$FF
+				E-$0C = #$03				
+				E-$12 = #$04
+				E-$26 = #$04				
+				E-$33 = E-Status AND #$0E
+				E-$36 = #$00
+				E-$39 = #$00
+				E-$3A = #$00
+				E-$3C = #$00
+			When State 04 is set:
+				E-Action = 00,00
+
+
+		00						Attack 00
+			00,00					Initial Frame
+			00,02					Subaction 02
+			00,04					Subaction 04
+			00,06					Subaction 06
+			00,08					Subaction 08
+			00,0A					Subaction 0A
+			00,0C					Subaction 0C
+		02						Attack 02
+			02,00					Initial Frame
+			02,02					Subaction 02
+			02,04					Subaction 04
+			02,06					Subaction 06
+			02,08					Subaction 08
+			02,0A					Subaction 0A
+			02,0C					Subaction 0C
+		04						Attack 04
+			04,00					Initial Frame
+			04,02					Subaction 02
+			04,04					Subaction 04
+			04,06					Subaction 06
+			04,08					Subaction 08
+			04,0A					Subaction 0A
+			04,0C					Subaction 0C
+		06						Attack 06
+			06,00					Initial Frame
+			06,02					Subaction 02
+			06,04					Subaction 04
+			06,06					Subaction 06
+			06,08					Subaction 08
+			06,0A					Subaction 0A
+			06,0C					Subaction 0C
+		08						Attack 08
+			08,00					Initial Frame
+			08,02					Subaction 02
+			08,04					Subaction 04
+			08,06					Subaction 06
+			08,08					Subaction 08
+			08,0A					Subaction 0A
+			08,0C					Subaction 0C
+		0A						Attack 0A
+			0A,00					Initial Frame
+			0A,02					Subaction 02
+			0A,04					Subaction 04
+			0A,06					Subaction 06
+			0A,08					Subaction 08
+			0A,0A					Subaction 0A
+			0A,0C					Subaction 0C
+
+.---------------.
+|Boomer Kuwanger|
+'---------------'
+	Enemy ID: 04
+
+	$02,03 [$7E0E6A,$7E0E6B]	Action,Subaction.
+		Battle Start
+			When State 02 is set:
+				E-Action = #$00
+				E-$26 = #$04
+				E-$30 = #$00
+				E-TeleLeft = #$00
+				E-Teleporting = #$00
+				E-CDTeleport = #$00
+				E-GrabMMX = #$00
+			When State 04 is set:
+				E-Action = 00,00
+				E-BoomOut = #$00
+				E-$36 = #$00
+				E-GrabBoom = #$00
+		00						Dash
+			00,00					Initial Frame
+				Update Facing
+				Subaction = #$02
+				Play SE
+				E-$31 = #$00
+				Set E-X-Vel based on Facing
+				CD2 = (X-Distance / 4) + #$01 = #$2D --> "Else" value
+				If |X-Distance| > #$0080 Then:
+					If RNG(00,0F) < #$06 Then:
+						CD2 = #$08
+					Else:
+						"Else" value
+				Else:
+					If RNG(00,0F) < #$06 Then:
+						"Else" value
+					Else:
+						CD2 = #$08
+				Custom Skeleton Load
+				Skeleton (E-BoomOut = #$00):
+					AFD3CA:
+					06 0d 0c
+					26 8e 0d
+					fd ff
+			00,02					Stand By
+				Continue Skeleton
+				If SkelAction is not positive:
+					Subaction = #$04
+					Spawn OtherData (O-ID = #$34)
+				If (|X-Distance| < #$20) AND (E-BoomOut ORA E-GrabMMX ORA StageEndAction ORA BossBeatInv = #$00) Then:
+					Action = #$06
+					Subaction = #$00
+					E-$36 = #$00
+				Else:
+					Return
+			00,04					Dash
+				Update X-Pos
+				If Contact = Left or Right Then:
+					Same as if CD2 = #$00, see below
+				Else:
+					Decrease CD2
+					If CD2 = #$00 Then:
+						Subaction = #$06
+						CD2 = #$14
+						Custom Skeleton Load
+						Skeleton (E-BoomOut = #$00):
+							AFD3A1:
+							0b 00 00
+							0b 01 01
+							0b 02 02
+							0b 03 03
+							0b 04 00
+							0b 05 01
+							0b 06 02
+							0b 07 03
+							08 08 0e
+							03 09 00
+							0b 0a 01
+							0b 0b 02
+							0b 8c 03
+							d9 ff
+						Skeleton (E-BoomOut = #$01):
+							AFD45B:
+							0b 00 20
+							0b 01 21
+							0b 02 22
+							0b 03 23
+							0b 04 20
+							0b 05 21
+							0b 06 22
+							0b 07 23
+							08 08 24
+							03 09 20
+							0b 0a 21
+							0b 0b 22
+							0b 8c 23
+							d9 ff						
+				If (|X-Distance| < #$20) AND (E-BoomOut ORA E-GrabMMX ORA StageEndAction ORA BossBeatInv = #$00) Then:
+					Action = #$06
+					Subaction = #$00
+					E-$36 = #$00
+				Else:
+					Return
+			00,06					Idle
+				Update Facing
+				Continue Skeleton
+				Decrease CD2
+				If CD2 = #$00:
+					If E-BoomOut <> #$00 Then:
+						Subaction = #$00
+					Else:
+						If E-$31 > #$09 Then:
+							Action = Value from Table in $86C5B3 + RNG(00,0F)
+							Table:
+								02 02 02 02 04 04 04 04 04 04 00 00 00 00 00 00
+								00 Chance: 06/16
+								02 Chance: 04/16
+								04 chance: 06/16
+				Else:
+					Action = Value from Table in $86C5A3 + RNG(00,0F)
+					Table:
+						02 02 02 02 02 02 02 02 04 04 04 04 04 04 00 00
+						00 Chance: 02/16
+						02 Chance: 08/16
+						04 Chance: 06/16
+					Subaction = #$00
+					If (|X-Distance| < #$0020) AND (E-BoomOut ORA E-GrabMMX ORA StageEndAction ORA BossBeatInv = #$00) Then:
+						Action = #$06
+						Subaction = #$00
+						E-$36 = #$00
+					Else:
+						Return				
+		02						Throw Boomerang
+			02,00					Initial Frame
+				Update Facing
+				Subaction = #$02
+				Custom Skeleton Load
+				Skeleton (E-BoomOut = #$00):
+					AFD3F0:
+					10 00 00
+					06 00 06
+					08 00 07
+					06 00 08
+					02 00 09
+					02 01 09
+					02 00 0a
+					10 00 0b
+					10 80 0b
+					fd ff
+			02,02					Throw
+				Update Facing
+				Continue Skeleton
+				If (SkelAction AND #$7F) <> #$00 Then:
+					E-BoomOut = #$01
+					Spawn EnemyShot Data (ES-ID = #$1B)
+				If SkelAction = #$80 Then:
+					Subaction = #$04
+					CD2 = #$08
+					Custom Skeleton Load
+					Skeleton (E-BoomOut = #$00):
+						AFD3A1:
+						0b 00 00
+						0b 01 01
+						0b 02 02
+						0b 03 03
+						0b 04 00
+						0b 05 01
+						0b 06 02
+						0b 07 03
+						08 08 0e
+						03 09 00
+						0b 0a 01
+						0b 0b 02
+						0b 8c 03
+						d9 ff
+					Skeleton (E-BoomOut = #$01):
+						AFD45B:
+						0b 00 20
+						0b 01 21
+						0b 02 22
+						0b 03 23
+						0b 04 20
+						0b 05 21
+						0b 06 22
+						0b 07 23
+						08 08 24
+						03 09 20
+						0b 0a 21
+						0b 0b 22
+						0b 8c 23
+						d9 ff		
+			02,04					Idle
+				Continue Skeleton
+				Decrease CD2
+				If CD2 = #$00 Then:
+					Action = #$00
+					Subaction = #$00		
+		04						Teleport
+			04,00					Initial Frame
+				Subaction = #$02
+				Load different E-TelePos based on MMX-X-Pos and RNG(00,03)
+				E-X-Vel = #$0800 (#$F800 if E-TelePos < E-X-Pos)
+				Play SE
+				Custom Skeleton Load
+				Skeleton (E-BoomOut = #$00):
+					AFD3E8:
+					08 00 04
+					20 80 05
+					fd ff
+			04,02					Prepare Teleport
+				If SkelAction <> #$80 Then:
+					Continue Skeleton
+					If SkelAction <> #$80 Then:
+						Return
+					Else:
+						E-Teleporting = #$01
+						E-CDTeleport = #$14
+						Return
+				Else:
+					If E-CDTeleport = #$00 Then:
+						Subaction = #$04
+						E-CDTeleport = #$02
+					Else
+						Return
+			04,04					Teleport
+				E-CDTeleport = #$02 (So it doesn't display the Enemy, see After Action routine)
+				Update X-Pos
+				Check for colissions, adjust position, update Contact
+				If Contact = Left or Right, Then:
+					Subaction = #$06			|Same code
+					Play SE						|
+					E-CDTeleport = #$14			|
+				Else:
+					If |E-X-Pos - E-TelePos| > #$0005 Then:
+						Return
+					Else:
+						E-X-Pos = E-TelePos
+						Subaction = #$06		|Same code
+						Play SE					|
+						E-CDTeleport = #$14		|
+			04,06					Finish Teleport
+				Update Facing
+				If CDTeleport <> #$00 Then:
+					Return
+				Else:
+					Subaction = #$08
+					E-CD2 = #$08
+					E-Teleporting = #$00
+					Load Skeleton
+						AFD3A1:
+						0b 00 00
+						0b 01 01
+						0b 02 02
+						0b 03 03
+						0b 04 00
+						0b 05 01
+						0b 06 02
+						0b 07 03
+						08 08 0e
+						03 09 00
+						0b 0a 01
+						0b 0b 02
+						0b 8c 03
+						d9 ff
+			04,08					Idle
+				Update Facing
+				Continue Skeleton
+				Decrease E-CD2
+				If E-CD2 <> #$00 Then:
+					If (|X-Distance| < #$0020) AND (E-BoomOut ORA E-GrabMMX ORA StageEndAction ORA BossBeatInv = #$00) Then:
+							Action = #$06
+							Subaction = #$00
+							E-$36 = #$00
+					Else:
+							Return
+				Else:
+					If E-TeleLeft <> #$00 Then:
+						Decrease E-TeleLeft
+						Subaction = #$00 (Repeat Action)
+						Return
+					Else:
+						If |X-Distance| > #$0080 Then:
+							Action = Value from Table in $86C5C3 + RNG(00,0F)
+							Table:
+								02 02 02 02 02 04 04 04 04 04 04 04 00 00 00 00
+								00 Chance: 04/16
+								02 Chance: 05/16
+								04 Chance: 07/16
+							Continue
+						Else:
+							Action = Value from Table in $86C5D3 + RNG(00,0F)
+							Table:
+								04 04 04 04 04 04 04 04 04 04 00 00 00 00 00 00
+								00 Chance: 06/16
+								02 Chance: 00/16
+								04 Chance: 12/16
+							Continue
+					Subaction = #$00
+					If (|X-Distance| < #$0020) AND (E-BoomOut ORA E-GrabMMX ORA StageEndAction ORA BossBeatInv = #$00) Then:
+							Action = #$06
+							Subaction = #$00
+							E-$36 = #$00
+					Else:
+							Return
+		06						Grab
+			06,00					Initial Frame
+				Update Facing
+				Subaction = #$02
+				Custom Skeleton Load
+				Skeleton (E-BoomOut = #$00):
+					AFD42A:
+					03 00 17
+					02 00 18
+					01 01 18
+					08 00 19
+					05 00 18
+					03 01 17
+					05 00 1a
+					10 00 1b
+					10 80 1b
+					fd ff
+			06,02					Prepare Grab
+				Continue Skeleton
+				If SkelAction <> #$00 Then:
+					If (|X-Distance| < #$28) AND (E-BoomOut ORA E-GrabMMX ORA StageEndAction ORA BossBeatInv = #$00) Then:
+						Subaction = #$04
+						Jumping2 = #$08, JustHit = #$08, MMX-State = #$16, MMX-Substate = #$00
+						E-GrabMMX = #$01
+						E-CD2 = #$14
+						MMX-X-Pos = E-X-Pos + #$0020 (#$FFE0 if E-Facing = Left)
+						Play SE
+					Else:
+						Subaction = #$06
+			06,04					Grab
+				MMX-X-Pos = E-X-Pos + #$0020 (#$FFE0 if E-Facing = Left)
+				Decrease CD2
+				If CD2 = #$00 Then:
+					Continue Skeleton
+					If SkelAction <> #$00 Then:
+						Subaction = #$06
+						E-GrabMMX = #$80
+					Else:
+						Return
+			06,06					After Throw
+				Continue Skeleton
+				If SkelAction = #$80 Then:
+					Subaction = #$08
+					CD2 = #$1E
+					Load Skeleton:
+						AFD3A1:
+						0b 00 00
+						0b 01 01
+						0b 02 02
+						0b 03 03
+						0b 04 00
+						0b 05 01
+						0b 06 02
+						0b 07 03
+						08 08 0e
+						03 09 00
+						0b 0a 01
+						0b 0b 02
+						0b 8c 03
+						d9 ff
+			06,08					Idle
+				Continue Skeleton
+				Decrease CD2
+				If CD2 = #$00 Then:
+					Action = #$00
+					Subaction = #$00
+		08						Hit
+			08						Hit
+				Continue Skeleton
+				Decrease*2 E-X-Pos (or Increase*2 if Facing = Left)
+				Decrease E-CD2
+				If E-CD2 <> #$00 Then:
+					Return
+				Else:
+					If E-BoomOut <> #$00 Then:
+						|Jump to routine based on E-OldAction
+							Routine for E-OldAction = #$06:
+								Action = #$00
+								Subaction = #$00
+								If (|X-Distance| < #$0020) AND (E-BoomOut ORA E-GrabMMX ORA StageEndAction ORA BossBeatInv = #$00) Then:
+										Action = #$06
+										Subaction = #$00
+										E-$36 = #$00
+								Else:
+										Return
+					Else:
+						If E-TeleLeft <> #$00 Then:
+							E-Action = #$04
+							E-Subaction = #$00
+							Return
+						Else:
+							If E-HP AND #$7F >= #$11 Then:
+								|Jump to routine based on E-OldAction (Same as E-BoomOut <> #$00)
+							Else:
+								If RNG(00,0F) >= #$06 Then:
+									|Jump to routine based on E-OldAction (Same as E-BoomOut <> #$00)
+								Else:
+									E-TeleLeft = RNG(00,07) + #$06
+									E-Action = #$04
+									E-Subaction = #$00
+									Return
+			0A						Attack 0A
+			0A,00					Initial Frame
+			0A,02					Subaction
+			0A,04					Subaction
+			0A,06					Subaction
+			0A,08					Subaction
+			0A,0A					Subaction
+			0A,0C					Subaction
+			0A,0E					Subaction			
+		After Action Routine:
+			If E-GrabBoom <> #$00 Then:
+				E-GrabBoom = #$00
+				E-BoomOut = #$00
+				Push CDSkel
+				Load Skeleton based on current SkelAction
+				Pull CDSkel
+			If E-I_Frames <> #$00 Then:
+				Document
+			Else:
+				E-DamageState = #$0D (Normal)
+			If (CurrentWeapon <> #$02 [Homing Torpedo]) OR E-Teleporting = #$00  Then:
+				If Enemy is hit Then:
+					If E-I_Frames <> #$00 Then:
+						E-I_Frames = #$3C
+						E-OldAction = E-Action
+						Action = #$08
+						E-Facing = CurrMMXShotFac
+						E-CD2 = #$10
+						E-Teleporting = #$00
+						E-$36 = #$00
+						Play SE
+						If E-GrabMMX = #$01 Then:
+							Document
+						Else:
+							If CurrMMXShotID = #$07 or #$10 Then:
+								E-CD2 = #$18
+								"a" = #$04
+								Custom Skeleton Load
+								Skeleton (E-BoomOut = #$00):
+									AFD3D2:
+									03 0f 1b
+									10 10 1c
+									03 11 1c
+									03 92 1c
+									fd ff
+							Else:
+								"a" = #$03
+								Custom Skeleton Load
+								Skeleton (E-BoomOut = #$00):
+									AFD3E0:
+									20 13 2a
+									20 93 2a
+									fd ff
+			If E-I_Frames <> #$00 Then:
+				Decrease E-I_Frames
+					If E-I_Frames AND #$03 = #$00 Then:
+						Document
+			If E-HP AND #$7F = #$00 Then:
+				Document
+			If E-Teleporting = #$00 Then:
+				Various general checks
+				If MMX-HP AND #$7F = #$00 Then:
+					Document
+			If E-GrabMMX = #$80 Then:
+				Document
+			If E-CDTeleport <> #$00 Then:
+				Decrease CDTeleport
+				If CDTeleport is even Then:
+					Skip displaying enemy (fading out effect)
+				Else:
+					Continue
+			Return
+
+.-----------------.
+|Armored Armadillo|
+'-----------------'
+	Enemy ID: 14
+
+	$02,03 [$7E0E6A,$7E0E6B]	Action,Subaction.
+		Battle Start
+			Set E-Y-Acc = #$40 when Enemy Spawns
+			When State 02 ends:
+				E-$31 = #$00
+				E-$32 = #$01
+		00						Roll Charge
+			00,00					Initial Frame
+				Update Facing
+				Set X-Vel,Y-Vel
+				E-Air = #$FF (In the air)
+				E-Status: Set bit 01
+				E-$18 = #$00
+				Routine loads CDSkeleton based on value of Table in $86C95D,X --> Where X is:
+					Parameter "A" at the beginning of the routine = #$03
+					"A" <> #$0B, then:
+					If E-ShieldBit <> #$00 (No Shield), Add E-SubID
+					CDSkeleton for E-ShieldBit = #$00:
+						AFCD4F:
+						11 00 0f
+						07 00 10
+						05 00 0f
+						05 00 11
+						08 00 12
+						10 80 12
+						fd ff
+						fd ff
+			00,02					Jump
+				Update Facing
+				Update X-Pos, Y-Pos, Y-Vel
+				Check for Colissions and adjust position
+				Continue CDSkeleton until SkelAction = #$80
+				When SkelAction = #$80:
+					E-Status: Reset bit 01
+					E-$18 = #$40
+					Load CDSkeleton and change Subaction (Custom routine for CD parameters)
+						CDSkeleton:
+						AFCE21:
+						01 00 00
+						01 00 01
+						01 00 02
+						01 80 03
+						f4 ff
+			00,04					Fall
+				Update Facing
+				Update X-Pos, Y-Pos, Y-Vel
+				Check for Colissions and adjust position
+				When Enemy hits the ground (Misbitflag bit 04 is set):
+					Invert E-Y-Vel
+					Change Subaction to 06
+			00,06					Land
+				Update Facing
+				Update X-Pos, Y-Pos, Y-Vel
+				When Enemy hits the ground (Misbitflag bit 04 is set) --> Same condicion as 00,04 --> Subaction lasts 1 frame:
+					Set E-X-Vel
+					Set E-Y-Vel = #$00
+					Change Subaction to 08
+			00,08					First Roll
+				Update X-Pos
+				Check Colissions and adjust position
+				When Contact AND 03 <> #$00:
+					Play SE
+					Spawn Debris:
+						E-$3D = #$03 --> Spawn #$04 1. OtherData
+						$0004 = RNG(00,0F)
+						1. Spawn OtherData:
+							O-ID = #$2B
+							O-SubID = [86C9D8,$0004 + E-$3D]
+							O-Parent = #$0000
+							O-X-Vel = [86C9EB,RNG(0000,000F)*2] --> Value is inverted if E-$3D is odd
+							O-Y-Vel = [86CA0B,RNG(0000,000F)*2]
+							O-X-Pos = E-X-Pos + #$0010,#$FFF0 (if Enemy is Facing Right,Left)
+							O-Y-Pos = E-Y-Pos
+							O-Y-Acc = #$40
+							O-X-Acc = #$00
+							Decrease E-$3D, if E-$3D is positive repeat 1.
+						2. Spawn OtherData:
+							O-ID = #$22
+							O-SubID = #$00
+							O-Status = #$00
+							O-X-Pos = E-X-Pos + #$0010,#$FFF0 (if Enemy is Facing Right,Left)	--> Same as 1.
+							O-Y-Pos = E-Y-Pos													--> Same as 1.
+					If RNG(00,0F) >= #$06
+						Then
+							Effect: Shake Screen Horizontal
+							E-Y-Vel and E-X-Vel = [$86EE49]*3, Invert E-X-Vel if Moving Right
+							Change Subaction = #$0A
+						Else
+							Invert E-X-Vel High byte
+							Set E-X-Vel,E-Y-Vel
+							E-Status: Set bit 01
+							E-$18 = #$00
+							Change Subaction = #$0C
+							Load CDSkeleton
+								CDSkeleton:
+								AFCD63:
+								10 00 12
+								04 00 11
+								20 00 0e
+								20 80 0e
+								fd ff
+			00,0A					Roll
+				Updates Facing in each frame (no subroutine)
+				Update X-Pos,Y-Pos
+				Continues Skeleton
+				Repeat if E-Contact = #$00
+				When E-Contact <> #$00:
+					If Contact is Horizontal:
+						Play SE
+						Effect: Shake Screen Horizontal
+						Invert E-X-Vel
+						Spawn Debris
+					Else (Contact is Vertical):
+						If Contact is Up:
+							Play SE
+							Effect: Shake Screen Vertical
+							Invert E-Y-Vel
+							Spawn Debris
+						Else (If Contact is Down):
+							If RNG(00,0F) >= #$06:
+								*Same as if Contact is Up*
+								Play SE
+								Effect: Shake Screen Vertical
+								Invert E-Y-Vel
+								Spawn Debris
+							Else
+								Spawn Debris
+								Play SE
+								Set E-X-Vel,E-Y-Vel
+								E-$37: Reset 80 bit
+								Load CDSkeleton and change Subroutine
+									CDSkeleton:
+									AFCD63:
+									10 00 12
+									04 00 11
+									20 00 0e
+									20 80 0e
+									fd ff
+			00,0C					End Bounce
+				Continues Skeleton
+				Update X-Pos,Y-Pos,Y-Vel
+				When Contact = Down:
+					E-Contact = #$00 ; Hits the ground but forces E-Contact = #$00
+					Load CDSkeleton and Change Subaction
+						CDSkel:
+						AFCD71:
+						01 00 0d
+						04 00 0b
+						04 00 0c
+						10 00 0b
+						10 80 0b
+						fd ff
+			00,0E					Idle
+				Update Contact and adjust Position
+				Continues Skeleton
+				When SkelAction = #$80:
+					Action = #$02
+					Subaction = #$00
+		02						Beam Shot
+			02,00					Initial Frame
+				E-Shots = RNG(03,05) --> Number of shots?
+				E-Status: Set bit 01
+				E-$18 = #$01
+				Load CDSkeleton and change Subaction
+					CDSkeleton:
+					AFCD82:
+					18 00 13
+					04 01 14
+					0c 80 13
+					f7 ff
+			02,02					Beam Shot
+				Continue CDSkeleton
+				If SkelAction is positive:
+					When SkelAction = #$01:
+						Decrease E-Shots
+						Spawn EnemyShot (ES-ID = 04,00)
+						Spawn Debris (O-ID = 10,0F)
+						Play SE
+						If MMXShotData exists:
+							Action = #$02
+							Subaction = #$04
+							E-GuardBit = Set bit 01
+							E-CDGuard = #$1E
+							Load CDSkeleton
+								CDSkeleton:
+								AFCDDF:
+								10 80 17
+								fd ff								
+					Else (SkelAction = #$00):
+						Check if MMXShotData exists
+				Else (SkelAction is negative):
+					If E-Shots <> #$00 Then:
+						Update Facing
+						Check if MMXShotData exists
+					Else (E-Shots = #$00):
+						Update Facing
+						Change Action = #$04
+						Subaction = #$00
+						Check if MMXShotData exists
+			02,04					Guard
+				Update Facing
+				Decrease E-CDKnockback, Knocks Enemy back 02 pixels if Enemy is hit
+				Decrease CDGuard
+				If CDGuard = #$00:
+					E-GuardBit = Reset bit 01
+					If E-Shots <> #$00:
+						Subaction = #$02
+						Load CDSkeleton
+							CDSkeleton:
+							AFCD82:
+							18 00 13
+							04 01 14
+							0c 80 13
+							f7 ff
+					Else
+						To Document
+				Else
+					Return
+
+		04						Stand By
+			04,00					Initial Frame
+				Set CD2
+				Load CDSkeleton and Change Subaction
+				CDSkeleton:
+				AFCD3C:
+				14 80 0b
+				fd ff
+			04,02					Stand By
+				Update Facing
+				If MMXShotData exists:
+					Then
+						E-GuardBit = Set bit 01
+						E-CDGuard = #$1E
+						Change Subaction = #$04 and load CDSkeleton
+							CDSkeleton:
+							AFCDDF:
+							10 80 17
+							fd ff
+					Else
+						Decrease CD2
+						When CD2 = #$00:
+							If E-$32 = #$02 Then:
+								To Document
+							Else:
+								Load Value from table [$86C980,RNG(00,0F)]
+								If Value = E-$31 Then (If RNG(00,0F) = #$05:
+									To Document
+								Else:
+									E-$31 = Value
+									Action = Value
+									E-$32 = #$01
+								Table: 02 02 02 02 02 00 02 02 02 02 02 02 02 02 02 02
+			04,04					Guard
+				If CDKnockback <> #$00 (See After Action routine):
+					Decrease E-CDKnockback
+					Knock Enemy back 02 pixels
+				Decrease CD2
+				Decrease CDGuard (Also see After Action routine)
+				If CDGuard = #$00:
+					E-GuardBit = Reset bit 01
+					[CD2 stays the same]
+					Load CDSkeleton and Change Subaction = #$02
+						CDSkeleton:
+						AFCD3C:
+						14 80 0b
+						fd ff
+		06						Counter Beam
+			06,00					Initial Frame
+				E-Shots = #$00
+				E-Guardbit = #$80
+				Play SE
+				Load CDSkeleton
+				Change Subaction
+					CDSkeleton:
+					AFCD95:
+					04 03 17
+					04 00 18
+					04 01 17
+					04 02 18
+					04 01 17
+					04 00 18
+					04 03 17
+					04 00 18
+					04 01 17
+					04 02 18
+					04 01 17
+					04 00 18
+					04 03 17
+					04 00 18
+					04 01 17
+					04 02 18
+					04 01 17
+					04 00 18
+					04 03 17
+					04 00 18
+					04 01 17
+					04 02 18
+					14 00 19
+					14 80 19
+					fd ff
+			06,02					Charge and Shoot
+				Continue CDSkeleton
+				When it changes CDSkel:
+					Update LayerPalettes, based on CDSkel
+				When SkelAction is 80:
+					E-BeamCD = #$08
+					Spawn E-BeamCD number of EnemyShots:
+						ES-ID = #$04
+						ES-SubID = E-BeamCD
+						ES-X-Pos,ES-Y-Pos = E-X-Pos,E-Y-Pos
+						Decrease E-BeamCD
+						Repeat if E-BeamCD <> #$00
+					Set CD2
+					E-GuardBit = #$00
+					Change Subaction
+			06,04					Idle
+				Decrease CD2
+				When CD2 = #$00:
+					Action = #$04
+					Subaction = #$00
+					E-Status: Set bit 01
+					E-$18 = #$00
+					Load CDSkeleton
+					CDSkeleton:
+					AFCD3C:
+					14 80 0b
+					fd ff
+		08						Get Hit or Lose Shield
+			08,00					Get Hit: Initial Frame
+			08,02					Lose Shield: Initial Frame
+				Subaction = #$08
+				E-$CDLoseShield = #$5A
+				Set E-X-Vel, E-Y-Vel, E-HitPoint
+				E-$2F = #$FF
+				E-GuardBit = #$00
+				Load CDSkeleton
+				CDSkeleton:
+				AFCD8D:
+				03 00 15
+				03 80 16
+				fa ff
+			08,04					Name
+			08,06					Name
+			08,08					Lose Shield
+				Continue CDSkeleton
+				When SkelAction = #$80:
+					Play SE
+				When CDLoseShield = #$00:
+					Subaction = #$0A
+					CDLoseShield = #$14
+					Decrease CDLoseShield = #$13
+			08,0A					Knockback Air
+				Update X-Pos, Y-Pos, Y-Vel
+				Check for colissions and adjust position
+				Continue CDSkeleton
+				If CDLoseShield > #$00, Decrease CDSkeleton
+				When E-Contact bit 04 is set (Contact against Floor):
+					E-Air = #$00
+					Subaction = #$0C
+			08,0C					Knockback Ground
+				Update X-Pos, X-Vel
+				Check for colissions and adjust position
+				Continue CDSkeleton
+				If CDLoseShield > #$00, Then:
+					Decrease CDSkeleton
+				Else:
+					Spawn 05 OtherData, ID = #$2B,SubID = #$1E+(00,04)
+					ShieldBit = #$01
+					Action = #$04
+					Subaction = #$00
+					Load CDSkeleton:
+					AFCCE6:
+					04 80 00
+					fd ff
+		How Armored Armadillo handles CDSkeleton Load:
+			Custom routine loads different pointer to CDSkeleton, if ShieldBit = #$00.
+			Routines are essentially the same, but have different CDSkeletons with or without Shield
+		After Action routine:
+			Various general checks
+			If MMXShot hits enemy:
+				Updates CurrMMXShotData,CurrMMXShotID
+				If MMXShot deals damage Then:
+					If E-$38 = #$00 Then:
+						E-$38 = #$3C
+						If E-Action = (00,00-0A):
+							Play SE
+						Else:
+							Action = 08,00
+							E-Facing = CurrMMXShotFac
+							If E-ShieldBit <> #$00 Then:
+								Play SE
+							Else:
+								If CurrMMXShotID = #$0C or #$15 (Electric Spark) Then:
+									Subaction = #$02
+									E-$38 = #$B4
+								Else:
+									Play SE
+					Else:
+						Document
+				Else:
+					Loads routine for MMXShot hitting enemy
+					CDKnockback = E-CDKnockback + #$02
+					CDGuard = #$01
+					If CurrMMXShotID = #$01 or #$02 or #$03 (Green, Pink or Blue buster):
+						Action = #$06
+						Subaction = #$00
+
+.--------------.
+|Spark Mandrill|
+'--------------'
+	Enemy ID: 31
+
+	$02,03 [$7E0E6A,$7E0E6B]	Action,Subaction.
+		00						Sparks
+			00,00					Initial Frame
+				Updates Facing
+				Loads CDSkeleton
+					CDSkeleton:
+					AFDF81:
+					04 00 00
+					06 00 15
+					04 01 14
+					0c 00 14
+					0c 80 14
+					fd ff
+			00,02					Shoot Sparks				
+				Continues skeleton
+				When SkelAction <> #$00:
+					Spawn two sparks with different SubIDs
+					Play SE
+					Effect: Shake Screen Vertical
+					Change Subaction
+			00,04					Cooldown
+				Continues skeleton
+				When SkelAction = #$80, change Subaction
+			00,06					Idle
+				Sets CD2
+				Stays Idle until CD2 = #$00, then changes action
+					CDSkeleton:
+					AFDE91:
+					06 00 00
+					04 00 01
+					06 00 02
+					04 80 01
+					f4 ff
+		02						Swing
+			02,00					Initial Frame
+				Sets X-Vel = #$0000, Y-Vel, Y-Acc
+				Sets E-Air = #$FF (In the air)
+				Loads CDSkeleton 
+					CDSkeleton:
+					AFDEC5:
+					04 00 01
+					04 00 02
+					04 00 01
+					04 00 00
+					04 00 08
+					08 80 07
+					fd ff
+			02,02					Jump
+				Continues Skeleton until SkelAction = #$80
+				When SkelAction = #$80, Ascends in the air
+				When E-Y-Vel < #$0100:
+				Changes Subaction
+				Loads CDSkeleton
+					CDSkeleton:
+					AFDF59:
+					02 00 0d
+					02 00 18
+					02 00 0d
+					08 00 18
+					08 00 11
+					18 00 12
+					18 80 12
+					eb ff
+			02,04					Finish Jump
+				Continues CDSkeleton until SkelAction = #$80
+				When SkelAction = #$80, Loads CDSkeleton and changes Subaction
+					CDSkeleton:
+					AFDF70:
+					08 00 13
+					08 01 12
+					08 02 11
+					07 03 10
+					01 83 10
+					f1 ff
+			02,06					Swing
+				Continues Skeleton
+				Continues Swinging until Enemy passes MMX, then:
+					Set E-X-Vel, E-Y-Vel, E-Y-Acc
+					Load CDSkeleton and changes Subaction
+					CDSkeleton:
+					AFDF59:
+					08 00 13
+					08 01 12
+					08 02 11
+					07 03 10
+					01 83 10
+					f1 ff				
+			02,08					Fall
+				Updates X and Y position, falling
+				Continues until it reaches ground then:
+					Disables 04 bit in E-Contact
+					E-Air = #$00
+					Play SE
+					Loads CDSkeleton and changes Subaction
+					CDSkeleton:
+					AFDF31:
+					04 00 00
+					04 00 01
+					04 00 02
+					04 80 01
+					fd ff
+			02,0A					Land			
+				When SkelAction = #$80:
+					Set CD2
+					Load CDSkeleton and change Subaction
+					CDSkeleton:
+					AFDE91:
+					06 00 00
+					04 00 01
+					06 00 02
+					04 80 01
+					f4 ff					
+			02,0C					Idle
+				Updates Facing in each frame
+				Continues CDSkeleton until CD2 = #$00, then end Action
+		04						Punch
+			04,00					Initial Frame
+				Update Facing
+				Checks if Mandrill is next to wall:
+					If not next to wall:
+						Set E-X-Vel
+						Load CDSkeleton and change Subaction to 02 (DashPunch)	
+							CDSkeleton:
+							AFDF92:
+							04 00 00
+							04 80 17
+							fd ff
+					If next to wall:
+						Load CDSkeleton and change Subaction to 04 (Punch)
+							CDSkeleton:
+							AFDFB6:
+							10 00 00
+							02 00 01
+							04 00 02
+							02 00 01
+							02 00 00
+							04 00 0b
+							01 01 0a
+							01 00 0a
+							02 00 0c
+							02 00 0a
+							04 00 0c
+							04 00 0b
+							7f 80 00
+							fd ff						
+			04,02					DashPunch
+				Continues skeleton until SkelAction = #$80
+				Various general checks
+				When SkelAction = #$80:
+					Update X-Pos
+					Various general checks
+					Repeat until E-Contact bit 03 is set:
+						Set CD2
+						Effect: Screen Shake Horizontal
+						Load CDSkeleton and change Subaction to 06
+						General Checks
+						CDSkeleton:
+						AFDF9A:
+						08 80 16
+						fd ff 02
+			04,04					Punch
+				Continues skeleton until SkelAction = #$01
+				When SkelAction = #$01:
+					Set CD2
+					Effect: Screen Shake Horizontal					
+					Change Subaction to 06 (Doesn't change CDSkeleton)
+			04,06					Cooldown
+				Continues skeleton until CD2 = #$00
+				When CD2 = #$00:
+					Load CDSkeleton and change Subaction
+					CDSkeleton:
+					AFDE91:
+					06 00 00
+					04 00 01
+					06 00 02
+					04 80 01
+					f4 ff
+			04,08					Idle
+				Stays Idle until CD2 = #$00, then changes action
+		06						Jump
+			06,00					Initial Frame
+				Set X-Vel,Y-Vel,Y-Acc
+				Update Facing
+				Load CDSkeleton and change Subaction
+					CDSkeleton:
+					AFDEC5:
+					04 00 01
+					04 00 02
+					04 00 01
+					04 00 00
+					04 00 08
+					08 80 07
+					fd ff
+			06,02					Prepare
+				Continues Skeleton until SkelAction = #$80
+				When SkelAction = #$80:
+					E-Air = #$FF (Air)
+					Change Subaction
+			06,04					Jump
+				Update X-Pos,Y-Pos,Y-Vel
+				When Enemy hits ground:
+					E-Air = #$00
+					Play Sound Effect
+					Effect: Vertical Shake
+					Load CDSkeleton and change Subaction
+						CDSkeleton:
+						AFDF31:
+						04 00 00
+						04 00 01
+						04 00 02
+						04 80 01
+						fd ff
+			06,06					Land
+				Continue Skeleton until SkelAction = #$80
+				When SkelAction = #$80:
+					Set CD2
+					Load CDSkeleton and change Subaction
+						CDSkeleton:
+						AFDE91:
+						06 00 00
+						04 00 01
+						06 00 02
+						04 80 01
+						f4 ff		
+			06,08					Idle
+				Update Facing
+				Continue Skeleton until CD2 = #$00, then end action
+		08						Knockback
+			How Action 08 is set:
+				Code after each Action:
+				If Action = (02,04):
+					If CurrMMXShotID = #$01 (Green buster), change Action to 08
+					Means that if you shoot Mandrill with Green buster while he's in DashPunch subroutine, change action to Knockback
+
+		At the end of each action, it changes action based on a table in $86CFDB + 2B RNG:
+			**First byte in each row isn't read**.	The byte was still added in the actual code, so the whole row always adds $20 for consistency.
+			In the actual code, the probability of action 00 is the following: byte $00 = (#$20 - byte $02 - byte $04 - byte $06)
+			After Action 00		04 10 06 06
+			After Action 02		06 04 10 06
+			After Action 04		06 06 04 10
+			After Action 06		10 06 06 04
+			After Action 08		08 08 08 08
+			After Action 0A		08 08 08 08
+			The table acts in the code as a probability chart:
+			After Action\Prob of next Action	00		02		04		06
+			00									04/20 	10/20	06/20	06/20
+			02									06/20 	04/20	10/20	06/20
+			04									06/20 	06/20	04/20	10/20
+			06									10/20 	06/20	06/20	04/20
+			08									08/20 	08/20	08/20	08/20
+			0A									08/20 	08/20 	08/20	08/20
+
+.-------------.
+|Chill Penguin|
+'-------------'
+	Enemy ID: 02
+
+	$02,03 [$7E0E6A,$7E0E6B]	Action,Subaction.
+		00						Spitting ice blocks
+			00,00					Initial frame
+				E-Shots = #$04
+				E-Armor = #$01
+				Subaction = #$02
+				Loads Skeleton
+				Skeleton:
+				AFD028:
+				0b 00 00
+				0b 00 02
+				0b 00 04
+				0b 00 05
+				05 01 07	
+				06 80 06
+				ee ff
+			00,02					Shoot Ice Blocks
+				Continue Skeleton
+				If (SkelAction AND #$7F) <> #$00 Then:
+					Spawn EnemyShot (ES-ID = #$06) --> SubID is set in ES routine
+				If SkelAction = #$80 Then:
+
+				Throws ice when SkelAction > 0 and positive, and decreases $36. Repeats Countdown Skeleton when SkelAction = #$80 until $36 = #$00 
+			00,04		Idle
+				Stays idle until CD2 = #$00, then ends Action
+					CDSkeleton:
+					AFD002:
+					0f 00 00
+					0f 00 01
+					0f 00 00
+					0f 00 01
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 80 02	AFD023 --> Repeats animation
+					dc ff
+		02			Switch and wind
+			02,00	Initial frame
+				Sets Y-Acc,Y-Vel
+				Updates Facing towards the middle
+				Sets same CDSkeleton as 06,00 (Skeleton for Chill Penguin jumping)
+					CDSkeleton:
+					AFD060:
+					10 00 00
+					05 00 02
+					05 00 03
+					05 00 0d
+					05 01 0e	AFD06C --> Jump
+					07 80 0f	AFD06F --> Change to 02,02, CDSkeleton
+					02 00 10
+					80 0f fd
+					ff
+			02,02	Jump
+				Jumps towards the switch when SkelAction = #$01
+				X-Vel is set to always be at the center after x number of frames
+				Y-Vel and Y-Acc set to always be at the switch's height after reaching Y-Vel
+				Jump continues until Y-Vel = #$00, then it changes CDSkeleton
+					CDSkeleton:
+					AFD089:
+					08 00 11
+					08 00 12
+					08 00 13	AFD08F
+					20 80 14	AFD092
+					fd ff
+			02,04	Grab Switch and wind
+				Forces Enemy into exact position of claw (relative distance to middle of the screen)
+					SkelAction = #$80 --> M-$1B = #$01 --> Activates wind when WindDuration = #$00
+					WindDuration is stored in $7E1F3F = #$78 when M-$1B = #$01
+			02,06	Fall
+				Changes CDSkeleton and falls
+				Subaction changes when Enemy hits ground, until then it keeps falling and accelerating
+					CDSkeleton:
+					AFD079:
+					10 80 10
+					fd ff
+			02,08	Land
+				Lasts one frame
+					CDSkeleton:
+					AFD07E:
+					06 00 02
+					06 00 03
+					10 80 00
+					fd ff
+			02,0A	Idle
+				Stays idle until CD2 = #$00, then ends Action
+					CDSkeleton:
+					AFD002:
+					0f 00 00
+					0f 00 01
+					0f 00 00
+					0f 00 01
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 80 02	AFD023 --> Repeats animation
+					dc ff
+		04			Slide
+			04,00	Initial frame
+				Sets Armor
+				Sets Deflect
+				Sets Y-Vel, Y-Acc = #$00
+				Sets X-Vel, X-Acc = #$00
+					CDSkeleton:
+					AFD03C:
+					0b 00 00
+					0b 00 02
+					0b 00 04
+					0b 00 05
+					06 00 08
+					06 01 0a	AFD04B
+					10 80 09	AFD04E
+					02 00 20
+					80 09 fd
+					ff
+			04,02	Lean back
+				Follows countdown routine until SkelAction <> #$00, then moves to Subaction 04
+			04,04	Slide
+				Play SE
+			04,06	Idle
+				Disables Armor
+				Disables Deflect
+				Loads the Idle skeleton with #$1E CD2, but finishes Subaction in the next frame
+					CDSkeleton:
+					AFD002:
+					0f 00 00
+					0f 00 01
+					0f 00 00
+					0f 00 01
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 80 02	AFD023 --> Repeats animation
+					dc ff
+		06			Jump
+			06,00	Initial frame
+				Disables Armor
+				Sets Y-Acc,Y-Vel
+				Sets X-Vel based on distance with MMX
+				Sets same CDSkeleton as 02,00 (Skeleton for Chill Penguin jumping)
+					CDSkeleton:
+					AFD060:
+					10 00 00
+					05 00 02
+					05 00 03
+					05 00 0d
+					05 01 0e	AFD06C --> Change Subaction
+					07 80 0f	AFD06F
+					02 00 10
+					80 0f fd
+					ff
+			06,02	Prepare
+				Continues CDSkeleton
+				Changes Subaction when SkelAction = #$01
+			06,04	Jump
+				Checks colission in every frame
+				Changes Subaction when Y-Vel is negative
+			06,06	Fall
+				Subaction changes when Enemy hits ground, until then it keeps falling and accelerating
+					CDSkeleton:
+					AFD079:
+					10 80 10
+					fd ff
+		08			Breath and Statues
+			08,00		Initial frame
+				Checks for empty EnemyShot data, doesn't do anything with it
+				Loads CDSkeleton and changes Subaction
+					CDSkeleton:
+					AFD028:
+					0b 00 00
+					0b 00 02
+					0b 00 04
+					0b 00 05	AFD031
+					05 01 07	AFD034	
+					06 80 06	AFD037
+					ee ff
+			08,02		Leaning back before ice breath
+				Idle until SkelAction = #$01
+			08,04		Breath
+					Play SE
+					Loads CD2
+					At SkelAction 80, spawns Breath. Repeats CDSkeleton until CD2 = #$00
+					Breath spawns, moves left and disappears.
+					CDSkeleton:
+					AFD0B1:
+					04 00 06
+					04 80 07	AFD0B4
+					fa ff
+			08,06		Ice statues spawn
+					Spawn Ice statues
+					Loads CD2
+					Keeps spawning breath until Countdown = #$00
+			08,08		Idle
+				Stays idle until CD2 = #$00, then ends Action
+					CDSkeleton:
+					AFD002:
+					0f 00 00
+					0f 00 01
+					0f 00 00
+					0f 00 01
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 00 02
+					07 00 00
+					07 80 02	AFD023 --> Repeats animation
+					dc ff
+		0A			Taking damage
+
+		At the end of each action, it changes action based on a table in $86C45B + 1B RNG:
+			After Action 00		00 02 02 04 04 04 04 04 04 04 06 06 08 08 08 08
+			After Action 02		00 00 02 04 04 06 06 06 06 06 06 06 08 08 08 08
+			After Action 04		00 00 00 00 02 02 04 06 06 08 08 08 08 08 08 08
+			After Action 06		00 00 00 00 00 00 00 02 02 02 02 04 04 06 08 08
+			After Action 08		00 00 00 00 02 02 02 02 02 02 02 04 04 06 06 08
+			After getting hit, it reads the table as in after Action 00
+			The table can be read as a probability chart:
+			After Action\Prob of next Action	00		02		04		06		08		0A
+			00									01/10	02/10	07/10	02/10	04/10	00/10
+			02									02/10	01/10	02/10	07/10	04/10	00/10
+			04									04/10	02/10	01/10	02/10	07/10	00/10
+			06									07/10	04/10	02/10	01/10	02/10	00/10
+			08									04/10	07/10	02/10	02/10	01/10	00/10
+			0A									Same as 
