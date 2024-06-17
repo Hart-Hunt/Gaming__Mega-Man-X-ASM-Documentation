@@ -1,0 +1,188 @@
+
+.---------------------.
+|EnemyData Breakpoints|
+'---------------------'
+
+	8094D9 A6 D1       LDX $D1       [0000D1] A:0137 X:0008 Y:004C S:013C D:0000 DB:86 nvMXdizc V:232 H:256 F:51
+	8094DB FC E3 94    JSR ($94E3,X) [8094E5] A:0137 X:0002 Y:004C S:013C D:0000 DB:86 nvMXdizc V:232 H:261 F:51													Main root routine
+																																						
+		[...]																																			
+		809A9A 20 ED D1    JSR $D1ED     [80D1ED] A:1009 X:0004 Y:004C S:013A D:0000 DB:86 nvMXdiZc V:234 H:205 F:51									
+
+			[...]																																		
+			80D25B 20 EA D4    JSR $D4EA     [80D4EA] A:1928 X:0000 Y:0027 S:0135 D:18F8 DB:86 nvMXdiZC V:247 H:282 F:51											|Root Enemy check
+
+				80D4EA C2 20       REP #$20               A:1928 X:0000 Y:0027 S:0133 D:18F8 DB:86 nvMXdiZC V:247 H:292 F:51							
+				80D4EC A9 68 0E    LDA #$0E68             A:1928 X:0000 Y:0027 S:0133 D:18F8 DB:86 nvmXdiZC V:247 H:297 F:51							
+				80D4EF 5B          TCD                    A:0E68 X:0000 Y:0027 S:0133 D:18F8 DB:86 nvmXdizC V:247 H:301 F:51							
+				80D4F0 E2 30       SEP #$30               A:0E68 X:0000 Y:0027 S:0133 D:0E68 DB:86 nvmXdizC V:247 H:304 F:51							
+				80D4F2 A5 00       LDA $00       [000E68] A:0E68 X:0000 Y:0027 S:0133 D:0E68 DB:86 nvMXdizC V:247 H:309 F:51										|Skip if there's no enemy
+				80D4F4 F0 03       BEQ $0003     [80D4F9] A:0E01 X:0000 Y:0027 S:0133 D:0E68 DB:86 nvMXdizC V:247 H:315 F:51										|
+				80D4F6 20 30 D5    JSR $D530     [80D530] A:0E01 X:0000 Y:0027 S:0133 D:0E68 DB:86 nvMXdizC V:247 H:318 F:51			|Break start				JSR: $80D530 --> Main enemy routine
+
+					80D530 C2 20       REP #$20               A:0E01 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvMXdizC V:247 H:327 F:51									A:2B
+					80D532 A5 05       LDA $05       [000E6D] A:0E01 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvmXdizC V:247 H:332 F:51									|Update E-X-pos-old
+					80D534 85 22       STA $22       [000E8A] A:1ED0 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvmXdizC V:248 H:  0 F:51									|
+					80D536 A5 08       LDA $08       [000E70] A:1ED0 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvmXdizC V:248 H:  9 F:51									|
+					80D538 85 24       STA $24       [000E8C] A:01AC X:0000 Y:0027 S:0131 D:0E68 DB:86 nvmXdizC V:248 H: 17 F:51									|Update E-Y-pos-old
+					80D53A E2 20       SEP #$20               A:01AC X:0000 Y:0027 S:0131 D:0E68 DB:86 nvmXdizC V:248 H: 26 F:51									A:1B
+					80D53C A9 80       LDA #$80               A:01AC X:0000 Y:0027 S:0131 D:0E68 DB:86 nvMXdizC V:248 H: 30 F:51									|Reset bit #$80 in $0E ??
+					80D53E 14 0E       TRB $0E       [000E76] A:0180 X:0000 Y:0027 S:0131 D:0E68 DB:86 NvMXdizC V:248 H: 33 F:51									|
+					80D540 A5 0A       LDA $0A       [000E72] A:0180 X:0000 Y:0027 S:0131 D:0E68 DB:86 NvMXdizC V:248 H: 43 F:51									Load E-ID
+					80D542 0A          ASL A                  A:0102 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvMXdizC V:248 H: 50 F:51
+					80D543 AA          TAX                    A:0104 X:0000 Y:0027 S:0131 D:0E68 DB:86 nvMXdizc V:248 H: 53 F:51
+					80D544 7C DD F8    JMP ($F8DD,X) [80F8E1] A:0104 X:0004 Y:0027 S:0131 D:0E68 DB:86 nvMXdizc V:248 H: 56 F:51									JMP ($F8DD,E-ID*2)	Jump to Chill Penguin's routine
+
+					[...]
+					XXXXXX 60          RTS
+
+				80D4F9 C2 21       REP #$21               A:0E68 X:0002 Y:0027 S:0133 D:0E68 DB:86 nvMXdizc V:249 H: 43 F:51			|Break finish				|Check for next enemy in memory. If there's no more enemies, return
+				80D4FB 7B          TDC                    A:0E68 X:0002 Y:0027 S:0133 D:0E68 DB:86 nvmXdizc V:249 H: 48 F:51										|
+				80D4FC 69 40 00    ADC #$0040             A:0E68 X:0002 Y:0027 S:0133 D:0E68 DB:86 nvmXdizc V:249 H: 51 F:51										|
+				80D4FF C9 28 12    CMP #$1228             A:0EA8 X:0002 Y:0027 S:0133 D:0E68 DB:86 nvmXdizc V:249 H: 55 F:51	
+				[...] Repeats for all EnemyData
+				80D502 90 EB       BCC $00EB     [80D4EF] A:1228 X:0002 Y:0027 S:0133 D:0E68 DB:86 NvmXdizc V:249 H: 60 F:51										|
+				80D504 E2 30       SEP #$30               A:1228 X:0002 Y:0027 S:0133 D:11E8 DB:86 nvmXdiZC V:250 H:295 F:51										|
+				80D506 60          RTS                    A:1228 X:0002 Y:0027 S:0133 D:11E8 DB:86 nvMXdiZC V:250 H:299 F:51			|Break finish for all EnemyData
+
+
+
+.---------------------.
+|EnemyShot Breakpoints|
+'---------------------'
+
+	8094D9 A6 D1       LDX $D1       [0000D1] A:0137 X:0004 Y:0057 S:013C D:0000 DB:86 nvMXdizc V:232 H:253 F:36
+	8094DB FC E3 94    JSR ($94E3,X) [8094E5] A:0137 X:0002 Y:0057 S:013C D:0000 DB:86 nvMXdizc V:232 H:258 F:36
+
+		[...]
+		809A9A 20 ED D1    JSR $D1ED     [80D1ED] A:FCD3 X:0004 Y:0057 S:013A D:0000 DB:86 nvMXdiZc V:234 H:201 F:36
+
+			[...]
+			80D241 20 8D D4    JSR $D48D     [80D48D] A:0E18 X:0000 Y:00CC S:0135 D:0DF8 DB:86 nvMXdiZC V:243 H:270 F:36											Root EnemyShot routine
+
+				80D48D C2 20       REP #$20               A:0E18 X:0000 Y:00CC S:0133 D:0DF8 DB:86 nvMXdiZC V:243 H:280 F:36
+				80D48F A9 28 14    LDA #$1428             A:0E18 X:0000 Y:00CC S:0133 D:0DF8 DB:86 nvmXdiZC V:243 H:284 F:36										D = EnemyShot1
+				80D492 5B          TCD                    A:1428 X:0000 Y:00CC S:0133 D:0DF8 DB:86 nvmXdizC V:243 H:289 F:36
+				80D493 E2 30       SEP #$30               A:1428 X:0000 Y:00CC S:0133 D:1428 DB:86 nvmXdizC V:243 H:292 F:36
+				80D495 A5 00       LDA $00       [001428] A:1428 X:0000 Y:00CC S:0133 D:1428 DB:86 nvMXdizC V:243 H:296 F:36										Branch if ES-Exist = #$00
+				80D497 F0 03       BEQ $0003     [80D49C] A:1401 X:0000 Y:00CC S:0133 D:1428 DB:86 nvMXdizC V:243 H:303 F:36
+				80D499 20 D3 D4    JSR $D4D3     [80D4D3] A:1401 X:0000 Y:00CC S:0133 D:1428 DB:86 nvMXdizC V:243 H:306 F:36				|Break Start			Main EnemyShot routine
+
+					80D4D3 C2 20       REP #$20               A:1401 X:0000 Y:00CC S:0131 D:1428 DB:86 nvMXdizC V:243 H:316 F:36									A:2B
+					80D4D5 A5 05       LDA $05       [00142D] A:1401 X:0000 Y:00CC S:0131 D:1428 DB:86 nvmXdizC V:243 H:320 F:36									|Update ES-X-Pos-Old, ES-Y-Pos-Old
+					80D4D7 85 22       STA $22       [00144A] A:1EB6 X:0000 Y:00CC S:0131 D:1428 DB:86 nvmXdizC V:243 H:328 F:36									|
+					80D4D9 A5 08       LDA $08       [001430] A:1EB6 X:0000 Y:00CC S:0131 D:1428 DB:86 nvmXdizC V:243 H:336 F:36									|
+					80D4DB 85 24       STA $24       [00144C] A:01AA X:0000 Y:00CC S:0131 D:1428 DB:86 nvmXdizC V:244 H:  5 F:36									|
+					80D4DD E2 20       SEP #$20               A:01AA X:0000 Y:00CC S:0131 D:1428 DB:86 nvmXdizC V:244 H: 13 F:36									A:1B
+					80D4DF A9 80       LDA #$80               A:01AA X:0000 Y:00CC S:0131 D:1428 DB:86 nvMXdizC V:244 H: 18 F:36									|Reset bit #$80 in $0E ??
+					80D4E1 14 0E       TRB $0E       [001436] A:0180 X:0000 Y:00CC S:0131 D:1428 DB:86 NvMXdizC V:244 H: 21 F:36									|
+					80D4E3 A5 0A       LDA $0A       [001432] A:0180 X:0000 Y:00CC S:0131 D:1428 DB:86 NvMXdiZC V:244 H: 31 F:36									Load ES-ID
+					80D4E5 0A          ASL A                  A:0106 X:0000 Y:00CC S:0131 D:1428 DB:86 nvMXdizC V:244 H: 37 F:36									
+					80D4E6 AA          TAX                    A:010C X:0000 Y:00CC S:0131 D:1428 DB:86 nvMXdizc V:244 H: 40 F:36									
+					80D4E7 7C 7D F7    JMP ($F77D,X) [80F789] A:010C X:000C Y:00CC S:0131 D:1428 DB:86 nvMXdizc V:244 H: 43 F:36									JMP ($80F77D,ES-ID*2)	Jump to the specific ES routine
+
+					[...]
+					XXXXXX 60          RTS
+
+				80D49C C2 21       REP #$21               A:1428 X:0000 Y:0002 S:0133 D:1428 DB:86 nvMXdizc V:248 H: 51 F:36				|Break finish for first EnemyShot
+				80D49E 7B          TDC                    A:1428 X:0000 Y:0002 S:0133 D:1428 DB:86 nvmXdizc V:248 H: 55 F:36
+				80D49F 69 40 00    ADC #$0040             A:1428 X:0000 Y:0002 S:0133 D:1428 DB:86 nvmXdizc V:248 H: 58 F:36
+				80D4A2 C9 28 16    CMP #$1628             A:1468 X:0000 Y:0002 S:0133 D:1428 DB:86 nvmXdizc V:248 H: 63 F:36
+				80D4A5 90 EB       BCC $00EB     [80D492] A:1468 X:0000 Y:0002 S:0133 D:1428 DB:86 NvmXdizc V:248 H: 67 F:36
+				80D492 5B          TCD                    A:1468 X:0000 Y:0002 S:0133 D:1428 DB:86 NvmXdizc V:248 H: 72 F:36
+				80D493 E2 30       SEP #$30               A:1468 X:0000 Y:0002 S:0133 D:1468 DB:86 nvmXdizc V:248 H: 75 F:36										D = Next enemy ID to check
+				[...] Repeats for all EnemyShot Data
+				80D4A5 90 EB       BCC $00EB     [80D492] A:1628 X:0000 Y:0002 S:0133 D:15E8 DB:86 nvmXdiZC V:249 H: 13 F:36
+				80D4A7 E2 30       SEP #$30               A:1628 X:0000 Y:0002 S:0133 D:15E8 DB:86 nvmXdiZC V:249 H: 16 F:36
+				80D4A9 60          RTS                    A:1628 X:0000 Y:0002 S:0133 D:15E8 DB:86 nvMXdiZC V:249 H: 20 F:36				|Break finish for all EnemyShots
+
+
+
+.--------------------.
+|MiscData Breakpoints|
+'--------------------'
+
+	8094D9 A6 D1       LDX $D1       [0000D1] A:0137 X:0004 Y:0057 S:013C D:0000 DB:86 nvMXdizc V:232 H:253 F:36
+	8094DB FC E3 94    JSR ($94E3,X) [8094E5] A:0137 X:0002 Y:0057 S:013C D:0000 DB:86 nvMXdizc V:232 H:258 F:36
+
+		[...]
+		809A9A 20 ED D1    JSR $D1ED     [80D1ED] A:FCD3 X:0004 Y:0057 S:013A D:0000 DB:86 nvMXdiZc V:234 H:201 F:36
+
+			[...]
+			80D24E 20 DE D2    JSR $D2DE     [80D2DE] A:1628 X:0000 Y:0002 S:0135 D:15E8 DB:86 nvMXdiZC V:249 H: 41 F:36											Root MiscData routine
+
+				80D2DE C2 20       REP #$20               A:1628 X:0000 Y:0002 S:0133 D:15E8 DB:86 nvMXdiZC V:249 H: 51 F:36
+				80D2E0 A9 28 16    LDA #$1628             A:1628 X:0000 Y:0002 S:0133 D:15E8 DB:86 nvmXdiZC V:249 H: 56 F:36
+				80D2E3 5B          TCD                    A:1628 X:0000 Y:0002 S:0133 D:15E8 DB:86 nvmXdizC V:249 H: 60 F:36
+				80D2E4 E2 30       SEP #$30               A:1628 X:0000 Y:0002 S:0133 D:1628 DB:86 nvmXdizC V:249 H: 63 F:36
+				80D2E6 A5 00       LDA $00       [001628] A:1628 X:0000 Y:0002 S:0133 D:1628 DB:86 nvMXdizC V:249 H: 68 F:36
+				80D2E8 F0 03       BEQ $0003     [80D2ED] A:1601 X:0000 Y:0002 S:0133 D:1628 DB:86 nvMXdizC V:249 H: 74 F:36
+				80D2EA 20 2E D3    JSR $D32E     [80D32E] A:1601 X:0000 Y:0002 S:0133 D:1628 DB:86 nvMXdizC V:249 H: 77 F:36				|Break Start
+
+					80D32E C2 20       REP #$20               A:1601 X:0000 Y:0002 S:0131 D:1628 DB:86 nvMXdizC V:249 H: 87 F:36									A:2B
+					80D330 A5 05       LDA $05       [00162D] A:1601 X:0000 Y:0002 S:0131 D:1628 DB:86 nvmXdizC V:249 H: 92 F:36									|Update M-X-Pos-Old and M-Y-Pos-Old
+					80D332 85 22       STA $22       [00164A] A:1E80 X:0000 Y:0002 S:0131 D:1628 DB:86 nvmXdizC V:249 H:100 F:36									|
+					80D334 A5 08       LDA $08       [001630] A:1E80 X:0000 Y:0002 S:0131 D:1628 DB:86 nvmXdizC V:249 H:109 F:36									|
+					80D336 85 24       STA $24       [00164C] A:011C X:0000 Y:0002 S:0131 D:1628 DB:86 nvmXdizC V:249 H:117 F:36									|
+					80D338 E2 20       SEP #$20               A:011C X:0000 Y:0002 S:0131 D:1628 DB:86 nvmXdizC V:249 H:126 F:36									A:1B
+					80D33A A9 80       LDA #$80               A:011C X:0000 Y:0002 S:0131 D:1628 DB:86 nvMXdizC V:249 H:130 F:36									|Reset bit #$80 in $0E ??
+					80D33C 14 0E       TRB $0E       [001636] A:0180 X:0000 Y:0002 S:0131 D:1628 DB:86 NvMXdizC V:249 H:143 F:36									|
+					80D33E A5 0A       LDA $0A       [001632] A:0180 X:0000 Y:0002 S:0131 D:1628 DB:86 NvMXdizC V:249 H:153 F:36									Load M-ID
+					80D340 0A          ASL A                  A:0112 X:0000 Y:0002 S:0131 D:1628 DB:86 nvMXdizC V:249 H:160 F:36									
+					80D341 AA          TAX                    A:0124 X:0000 Y:0002 S:0131 D:1628 DB:86 nvMXdizc V:249 H:163 F:36									
+					80D342 7C 20 F3    JMP ($F320,X) [80F344] A:0124 X:0024 Y:0002 S:0131 D:1628 DB:86 nvMXdizc V:249 H:166 F:36									JMP ($80F344,M-ID*2)
+
+					[...]
+					XXXXXX 60          RTS
+
+				80D2ED AD 16 1F    LDA $1F16     [861F16] A:1628 X:0000 Y:0027 S:0133 D:1628 DB:86 nvMXdizc V:250 H:105 F:36				Break finish for first MiscData
+				80D2F0 D0 29       BNE $0029     [80D31B] A:1600 X:0000 Y:0027 S:0133 D:1628 DB:86 nvMXdiZc V:250 H:111 F:36
+				80D2F2 C2 21       REP #$21               A:1600 X:0000 Y:0027 S:0133 D:1628 DB:86 nvMXdiZc V:250 H:114 F:36
+				80D2F4 7B          TDC                    A:1600 X:0000 Y:0027 S:0133 D:1628 DB:86 nvmXdiZc V:250 H:119 F:36
+				80D2F5 69 30 00    ADC #$0030             A:1628 X:0000 Y:0027 S:0133 D:1628 DB:86 nvmXdizc V:250 H:122 F:36
+				80D2F8 C9 28 19    CMP #$1928             A:1658 X:0000 Y:0027 S:0133 D:1628 DB:86 nvmXdizc V:250 H:126 F:36
+				80D2FB 90 E6       BCC $00E6     [80D2E3] A:1658 X:0000 Y:0027 S:0133 D:1628 DB:86 NvmXdizc V:250 H:131 F:36
+				80D2E3 5B          TCD                    A:1658 X:0000 Y:0027 S:0133 D:1628 DB:86 NvmXdizc V:250 H:145 F:36
+				80D2E4 E2 30       SEP #$30               A:1658 X:0000 Y:0027 S:0133 D:1658 DB:86 nvmXdizc V:250 H:148 F:36
+				[...] Repeats for all MiscData
+				80D2FB 90 E6       BCC $00E6     [80D2E3] A:1928 X:0000 Y:0027 S:0133 D:18F8 DB:86 nvmXdiZC V:252 H:214 F:36
+				80D2FD E2 30       SEP #$30               A:1928 X:0000 Y:0027 S:0133 D:18F8 DB:86 nvmXdiZC V:252 H:217 F:36
+				80D2FF 60          RTS                    A:1928 X:0000 Y:0027 S:0133 D:18F8 DB:86 nvMXdiZC V:252 H:221 F:36				|Break finish for all MiscData
+
+
+
+.-----------------------.
+|MMXShotData Breakpoints|
+'-----------------------'
+
+	8094D9 A6 D1       LDX $D1       [0000D1] A:0137 X:0004 Y:0057 S:013C D:0000 DB:86 nvMXdizc V:232 H:253 F:36
+	8094DB FC E3 94    JSR ($94E3,X) [8094E5] A:0137 X:0002 Y:0057 S:013C D:0000 DB:86 nvMXdizc V:232 H:258 F:36
+
+		[...]
+		809A9A 20 ED D1    JSR $D1ED     [80D1ED] A:FCD3 X:0004 Y:0057 S:013A D:0000 DB:86 nvMXdiZc V:234 H:201 F:36
+
+			[...]
+			80D227 20 DD D3    JSR $D3DD     [80D3DD] A:8062 X:0000 Y:00AE S:0135 D:0000 DB:86 nvMXdiZc V:242 H: 27 F:24
+
+				80D3DD C2 20       REP #$20               A:8062 X:0000 Y:00AE S:0133 D:0000 DB:86 nvMXdiZc V:242 H: 37 F:24
+				80D3DF A9 28 12    LDA #$1228             A:8062 X:0000 Y:00AE S:0133 D:0000 DB:86 nvmXdiZc V:242 H: 42 F:24
+				80D3E2 5B          TCD                    A:1228 X:0000 Y:00AE S:0133 D:0000 DB:86 nvmXdizc V:242 H: 46 F:24
+				80D3E3 E2 30       SEP #$30               A:1228 X:0000 Y:00AE S:0133 D:1228 DB:86 nvmXdizc V:242 H: 49 F:24
+				80D3E5 A5 00       LDA $00       [001228] A:1228 X:0000 Y:00AE S:0133 D:1228 DB:86 nvMXdizc V:242 H: 54 F:24
+				80D3E7 F0 03       BEQ $0003     [80D3EC] A:1200 X:0000 Y:00AE S:0133 D:1228 DB:86 nvMXdiZc V:242 H: 60 F:24
+				80D3E9 20 23 D4    JSR $D423     [80D423] A:1201 X:0000 Y:00AE S:0133 D:1228 DB:86 nvMXdizc V:243 H:108 F:18				|Break Start																		|Break Start
+
+
+
+				80D3EC C2 21       REP #$21               A:1200 X:0000 Y:00AE S:0133 D:1228 DB:86 nvMXdiZc V:242 H: 65 F:24				|Break finish for first MMXShotData
+				80D3EE 7B          TDC                    A:1200 X:0000 Y:00AE S:0133 D:1228 DB:86 nvmXdiZc V:242 H: 69 F:24
+				80D3EF 69 40 00    ADC #$0040             A:1228 X:0000 Y:00AE S:0133 D:1228 DB:86 nvmXdizc V:242 H: 72 F:24
+				80D3F2 C9 28 14    CMP #$1428             A:1268 X:0000 Y:00AE S:0133 D:1228 DB:86 nvmXdizc V:242 H: 77 F:24
+				80D3F5 90 EB       BCC $00EB     [80D3E2] A:1268 X:0000 Y:00AE S:0133 D:1228 DB:86 NvmXdizc V:242 H: 81 F:24
+				80D3E2 5B          TCD                    A:1268 X:0000 Y:00AE S:0133 D:1228 DB:86 NvmXdizc V:242 H: 86 F:24
+				80D3E3 E2 30       SEP #$30               A:1268 X:0000 Y:00AE S:0133 D:1268 DB:86 nvmXdizc V:242 H: 89 F:24
+				[...] Repeats for all MMXShotData
+				80D3F5 90 EB       BCC $00EB     [80D3E2] A:1428 X:0000 Y:00AE S:0133 D:13E8 DB:86 nvmXdiZC V:243 H: 27 F:24
+				80D3F7 E2 30       SEP #$30               A:1428 X:0000 Y:00AE S:0133 D:13E8 DB:86 nvmXdiZC V:243 H: 30 F:24
+				80D3F9 60          RTS                    A:1428 X:0000 Y:00AE S:0133 D:13E8 DB:86 nvMXdiZC V:243 H: 34 F:24				|Brak finish for all MMXShotData
+

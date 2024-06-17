@@ -1,0 +1,137 @@
+JSL:
+
+Offset		Specific			Description
+
+8088A2							Play Sound Effect (A = Sound Effect ID) (Stereo with |X-Distance|)
+8088CD							Play Sound Effect (A = Sound Effect ID) (Mono)
+8087A2							Pause game A number of frames
+81B516		Chill Penguin		Main routine
+81BC85		Breath/Statue		Main routine
+81C433		Launch Octopus		Main routine
+828000							Update LayerPalettes (X = Used for Pointer to Write Table, Y = Used for Pointers to Load and Write Tables)
+828195							Update X-Pos, Y-Pos, X-Vel, Y-Vel
+8281E8							Update X-Pos, Y-Pos, Y-Vel
+82820A											Update X-Pos, Y-Pos
+8282B9							X = First empty MiscData
+8282D3							X = First empty OtherData
+82823E							Update X-Pos
+82827D							State = #$02, Normalize Boss Variables for intro animation
+828358							X = First empty EnemyShot,Z=1
+83B144		Armored Armadillo	Main routine
+83B93B		ES-ID = 04			Main Routine
+848EEA							Decrease CDSkel, Continue Skeleton
+848F07							New Countdown Routine ($16, A)
+8490A0							Checks tile from current Data in D, offset E-$29 tiles. A = Tile Colission, Y = Tile ID
+84A003							MMX-State, MMX Substate, TakingItem = #$00
+84A096							Document
+84A316							Set Effect: Shake Screen Horizontal. A = Duration of shake.
+84A338							Set Effect: Shake Screen Vertical. A = Duration of shake.
+84ACA5							Update Facing (40 bit)
+849086							Load A (2B) with RNG value
+8491BE							Check for colissions, adjust position, update Contact
+849B43							Updates CurrMMXShotData,CurrMMXShotID. Loads routine for MMXShot hitting enemy, Sets V flag if MMXShot deals damage. Sets A = #$01 if MMXShotData hits Enemy
+849B03							Various general checks
+849C0E							Something to do with sprites?
+849F19							Jumping2 = #$08, JustHit = #$08, MMX-State = #$16, MMX-Substate = #$00
+878A7E		Booomer Kuwanger	Main Routine
+889BE1		Spark Mandrill		Main routine					
+					
+
+					
+JSR:
+
+Offset		Specific			Description
+
+80D4D3							Main EnemyShot routine					
+80D530							Main Enemy routine
+81BF16		Chill Penguin		If SkelAction is not positive, Spawn Breath
+81BF5C		Chill Penguin		Spawn Ice Statue with ES-X-Pos = E-X-Pos + $0000
+81C019		Chill Penguin		Changes Action from table in $86C45B, with 1B RNG value					
+83B9C8		Armored Armadillo	Armored Armadillo Custom Skeleton Load
+83BB38		Armored Armadillo	Spawn Debris
+83BAAA		Armored Armadillo	Decrease E-CDKnockback, Knocks Enemy back 02 pixels if Enemy is hit
+83BA20		Armored Armadillo	If MMXShotData doesn't exist, Z=1, Else Z=0
+84916A							X = Tile Pointer for Tilemap in RAM, Y = Scene ID
+8495C4							Checks E-Colission, ends jump if Enemy hits ground, if that happens A = #$01
+8790B1		Boomer Kuwanger		Boomer Kuwanger Custom Skeleton Load
+8790C1		Boomer Kuwanger		Load E-TelePos based on MMX-X-Pos and RNG(00,03)
+879129		Boomer Kuwanger		If (E-BoomOut ORA E-GrabMMX ORA StageEndAction ORA BossBeatInv) = #$00, If |X-Distance| < #$0028 Then A = E-Air AND #$04, Else A = #$00
+879131		Boomer Kuwanger		If (E-BoomOut ORA E-GrabMMX ORA StageEndAction ORA BossBeatInv) = #$00, If |X-Distance| < $0000 Then [Document], Else A = #$00
+					
+
+JSR,X:					
+
+Offset		Specific			Description
+
+81B6F3,X	Chill Penguin		X = E-Action . Main Chill Penguin routine.
+84961C,X						X = Colission*2 . Action to make with object when touching the colission				
+
+
+
+JMP:
+
+Offset		Specific			Description
+
+88A362		Spark Mandrill		Changes Action from table in $86CFDB, with 2B RNG value
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
